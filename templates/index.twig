@@ -1,7 +1,41 @@
 {% extends "_layouts/main" %}
 
+{% set setlist = craft.categories.group('songs').slug('setlist') %}
+{% set wishlist = craft.categories.group('songs').slug('wishlist') %}
+{% set members = craft.entries.section('members') %}
 
 {% block content %}
 
+	{% if members.count() > 0 %}
+		<h4>
+			Members: 
+			{% for member in members %}
+				{{ member.memberName }}
+			{% endfor %}
+		</h4>
+	{% endif %}
+
+	<div class="row">
+		<div class="col-sm-6">
+			<h5>Setlist</h5>
+			{% if setlist.count() > 0 %}
+				<ul>
+					{% for song in setlist.one().children %}
+						<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+		<div class="col-sm-6">
+			<h5>Wishlist</h5>
+			{% if wishlist.count() > 0 %}
+				<ul>
+					{% for song in wishlist.one().children %}
+						<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		</div>
+	</div>
 
 {% endblock %}
