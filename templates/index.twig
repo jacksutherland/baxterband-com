@@ -10,10 +10,12 @@
 		<h4>
 			Members: 
 			{% for member in members %}
-				{{ member.memberName }}
+				{{ member.memberName }}{% if loop.index < members.count() %}, {% endif %}
 			{% endfor %}
 		</h4>
 	{% endif %}
+
+	<h4><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist</a></h4>
 
 	<div class="row">
 		<div class="col-sm-6">
