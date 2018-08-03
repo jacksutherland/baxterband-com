@@ -53,7 +53,7 @@ footer {
     color: #FFF;
     text-shadow: 0 0 2px #000;
     font-size: 90px;
-    opacity: 0.65; }
+    opacity: 0.5; }
   .hero .hero-image {
     position: absolute;
     z-index: 10;
@@ -66,6 +66,39 @@ footer {
     height: 700px;
     width: 100%;
     border-radius: 30px; }
+
+.smoke {
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  margin: 0 0 0 -200px;
+  width: 400px;
+  height: 400px;
+  background: url(/images/smoke.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-animation: smoking 10s linear;
+  animation: smoking 10s linear; }
+
+@-webkit-keyframes smoking {
+  0% {
+    top: 1000px;
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  100% {
+    top: -400px;
+    opacity: 1; } }
+
+@keyframes smoking {
+  0% {
+    top: 1000px;
+    opacity: 0; }
+  25% {
+    opacity: 1; }
+  100% {
+    top: -400px;
+    opacity: 1; } }
 
 /*** MEDIA QUERIES ***/
 /* Tablets (>=768px)*/
