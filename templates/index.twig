@@ -6,38 +6,51 @@
 
 {% block content %}
 
-	{% if members.count() > 0 %}
-		<h4>
-			Members: 
-			{% for member in members %}
-				{{ member.memberName }}{% if loop.index < members.count() %}, {% endif %}
+	<div class="hero">
+		{# <h1>
+			{% for word in siteName | split(' ') %}
+				<span>{{ word }}</span>
 			{% endfor %}
-		</h4>
-	{% endif %}
-
-	<h4><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist</a></h4>
-
-	<div class="row">
-		<div class="col-sm-6">
-			<h5>Setlist</h5>
-			{% if setlist.count() > 0 %}
-				<ul>
-					{% for song in setlist.one().children %}
-						<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-		</div>
-		<div class="col-sm-6">
-			<h5>Wishlist</h5>
-			{% if wishlist.count() > 0 %}
-				<ul>
-					{% for song in wishlist.one().children %}
-						<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-		</div>
+		</h1> #}
+		<h1>{{ siteName | replace(" ", "<br>") | raw }}</h1>
+		<div class="hero-image"></div>
 	</div>
 
+	<div class="container">
+
+		{% if members.count() > 0 %}
+			<h2>
+				Members: 
+				{% for member in members | reverse %}
+					{{ member.memberName }} ({{ member.instruments }}){% if loop.index < members.count() %}, {% endif %}
+				{% endfor %}
+			</h2>
+		{% endif %}
+
+		<h3><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h3>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<h5>Setlist</h5>
+				{% if setlist.count() > 0 %}
+					<ul>
+						{% for song in setlist.one().children %}
+							<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+			<div class="col-sm-6">
+				<h5>Wishlist</h5>
+				{% if wishlist.count() > 0 %}
+					<ul>
+						{% for song in wishlist.one().children %}
+							<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+
+	</div>
 {% endblock %}
