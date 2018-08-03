@@ -18,6 +18,11 @@
 
 	<div class="container">
 
+		<div class="band-bio">
+			<h2>{{ entry.bandHeader }}</h2>
+			<p>{{ entry.bandBio }}</p>
+		</div>
+
 		{% if members.count() > 0 %}
 			{# <h2>
 				Members: 
@@ -26,7 +31,18 @@
 				{% endfor %}
 			</h2> #}
 			<div class="row">
-				{% for member in members | reverse %}
+				{% for member in members %}
+					<div class="col-md-4">
+						<div class="band-member">
+							<div class="band-member-info">
+								<h5>{{ member.memberName }}</h5>
+								<h6>{{ member.instruments }}</h6>
+							</div>
+							<div class="band-member-cover"></div>
+							<div class="band-member-image" style="background-image:url({{ member.profilePicture.one().url }})"></div>
+						</div>
+					</div>
+				{% endfor %}
 			</div>
 		{% endif %}
 

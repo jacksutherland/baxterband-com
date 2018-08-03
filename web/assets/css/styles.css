@@ -8,26 +8,24 @@ body {
   padding: 0;
   background: linear-gradient(#000, #2C2F34);
   color: #FFF;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Hind Siliguri', sans-serif;
   font-size: 16px; }
 
 a {
   text-decoration: none; }
 
-h1, h2, h3, h4 {
-  margin: 0 0 30px 0;
-  color: #950914;
-  font-family: 'VT323', monospace; }
-
 h1 {
   top: 20px;
   left: 30px;
+  margin: 0 0 30px 0;
   font-size: 70px;
   text-transform: uppercase;
   font-family: 'Monoton', cursive; }
 
-h5, h6 {
-  margin: 0 0 10px 0; }
+h2 {
+  font-family: 'Acme', sans-serif;
+  margin: 70px 0 30px 0;
+  font-size: 2.5rem; }
 
 a, a:visited, a:hover {
   color: #2BB0EA; }
@@ -37,7 +35,7 @@ ul {
 
 footer {
   padding: 50px 0;
-  font-family: 'VT323', monospace;
+  font-family: 'Acme', sans-serif;
   background: #000; }
 
 .hero {
@@ -66,7 +64,41 @@ footer {
     background-size: cover;
     height: 700px;
     width: 100%;
-    border-radius: 30px; }
+    border-radius: 10px; }
+
+.band-bio {
+  text-align: center;
+  margin: 0 auto;
+  width: 75%; }
+
+.band-member {
+  position: relative;
+  height: 400px;
+  margin: 50px 0;
+  box-shadow: 0 0 5px #000; }
+  .band-member .band-member-cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 40;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)); }
+  .band-member .band-member-image {
+    background-size: cover;
+    background-position: center 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 30; }
+  .band-member .band-member-info {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    z-index: 50; }
+    .band-member .band-member-info h5 {
+      margin: 0; }
+    .band-member .band-member-info h6 {
+      margin: 0;
+      font-size: 18px; }
 
 .smoke {
   position: absolute;
