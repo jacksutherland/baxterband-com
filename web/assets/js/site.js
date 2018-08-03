@@ -10,7 +10,7 @@ function startFire()
   var numberOfSparks = browserWidth < 700 ? 30 : 30;
   for(i = 0; i < numberOfSparks; i++)
   {
-    var smokeDelay = randomNumber(0, 10000);
+    var smokeDelay = randomNumber(0, 15000);
     setTimeout(function()
     {
       var smokePos = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
