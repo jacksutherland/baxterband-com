@@ -8,7 +8,6 @@ function startFire()
   var browserWidth = $(window).width();
   var smoke = $("#smoke");
   var numberOfSparks = browserWidth < 700 ? 25 : 35;
-  console.log(browserWidth);
   for(i = 0; i < numberOfSparks; i++)
   {
     var smokeDelay = randomNumber(1000, 10000);
