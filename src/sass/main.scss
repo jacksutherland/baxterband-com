@@ -46,6 +46,7 @@ ul {
 footer {
 	padding: 50px 0;
 	font-family: 'VT323', monospace;
+	background: #000;
 }
 
 .hero {
@@ -67,8 +68,6 @@ footer {
 	.hero-image {
 		position: absolute;
 		z-index: 10;
-		// -webkit-animation: heroblur 20s infinite;
-		// animation: heroblur 20s infinite;
 		-webkit-filter: blur(2px) grayscale(100%);
 	   	filter: blur(2px) grayscale(100%);
 		background: url(/images/dkiser5.jpg);

@@ -19,12 +19,15 @@
 	<div class="container">
 
 		{% if members.count() > 0 %}
-			<h2>
+			{# <h2>
 				Members: 
 				{% for member in members | reverse %}
 					{{ member.memberName }} ({{ member.instruments }}){% if loop.index < members.count() %}, {% endif %}
 				{% endfor %}
-			</h2>
+			</h2> #}
+			<div class="row">
+				{% for member in members | reverse %}
+			</div>
 		{% endif %}
 
 		<h3><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h3>

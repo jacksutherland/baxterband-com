@@ -37,7 +37,8 @@ ul {
 
 footer {
   padding: 50px 0;
-  font-family: 'VT323', monospace; }
+  font-family: 'VT323', monospace;
+  background: #000; }
 
 .hero {
   position: relative;
