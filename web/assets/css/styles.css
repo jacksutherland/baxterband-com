@@ -27,6 +27,14 @@ h2 {
   margin: 70px 0 30px 0;
   font-size: 2.5rem; }
 
+h5 {
+  font-family: 'Acme', sans-serif;
+  font-size: 1.4rem;
+  margin: 20px 0 10px 0; }
+
+h6 {
+  font-size: 0.9rem; }
+
 a, a:visited, a:hover {
   color: #2BB0EA; }
 
@@ -66,6 +74,11 @@ footer {
     width: 100%;
     border-radius: 10px; }
 
+.section-style1 {
+  margin: 50px 0 0 0;
+  padding: 5px 0 50px 0;
+  background: #262626; }
+
 .band-bio {
   text-align: center;
   margin: 0 auto;
@@ -97,8 +110,7 @@ footer {
     .band-member .band-member-info h5 {
       margin: 0; }
     .band-member .band-member-info h6 {
-      margin: 0;
-      font-size: 18px; }
+      margin: 0; }
 
 .smoke {
   position: absolute;
@@ -112,12 +124,12 @@ footer {
   background: url(/images/smoke.png);
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-animation: smoking 10s linear;
-  animation: smoking 10s linear; }
+  -webkit-animation: smoking 20s linear;
+  animation: smoking 20s linear; }
 
 @-webkit-keyframes smoking {
   0% {
-    top: 1000px;
+    top: 2200px;
     opacity: 0; }
   25% {
     opacity: 1; }
@@ -127,7 +139,7 @@ footer {
 
 @keyframes smoking {
   0% {
-    top: 1000px;
+    top: 2200px;
     opacity: 0; }
   25% {
     opacity: 1; }

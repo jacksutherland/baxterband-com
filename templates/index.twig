@@ -24,12 +24,6 @@
 		</div>
 
 		{% if members.count() > 0 %}
-			{# <h2>
-				Members: 
-				{% for member in members | reverse %}
-					{{ member.memberName }} ({{ member.instruments }}){% if loop.index < members.count() %}, {% endif %}
-				{% endfor %}
-			</h2> #}
 			<div class="row">
 				{% for member in members %}
 					<div class="col-md-4">
@@ -46,30 +40,39 @@
 			</div>
 		{% endif %}
 
-		<h3><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h3>
+	</div>
 
-		<div class="row">
-			<div class="col-sm-6">
-				<h5>Setlist</h5>
-				{% if setlist.count() > 0 %}
-					<ul>
-						{% for song in setlist.one().children %}
-							<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
-						{% endfor %}
-					</ul>
-				{% endif %}
-			</div>
-			<div class="col-sm-6">
-				<h5>Wishlist</h5>
-				{% if wishlist.count() > 0 %}
-					<ul>
-						{% for song in wishlist.one().children %}
-							<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
-						{% endfor %}
-					</ul>
-				{% endif %}
+	<div class="section-style1">
+
+		<div class="container">
+			
+			<h2>Songs</h2>
+
+			<h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<h5>Setlist</h5>
+					{% if setlist.count() > 0 %}
+						<ul>
+							{% for song in setlist.one().children %}
+								<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</div>
+				<div class="col-sm-6">
+					<h5>Wishlist</h5>
+					{% if wishlist.count() > 0 %}
+						<ul>
+							{% for song in wishlist.one().children %}
+								<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
+							{% endfor %}
+						</ul>
+					{% endif %}
+				</div>
 			</div>
 		</div>
-
 	</div>
+
 {% endblock %}
