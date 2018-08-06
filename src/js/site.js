@@ -9,7 +9,7 @@ function startFire()
   var win = $(window);
   var browserWidth = win.width();
   var smoke = $("#smoke");
-  var numberOfSparks = browserWidth < 700 ? 20 : 50;
+  var numberOfSparks = browserWidth < 700 ? 15 : 50;
   for(i = 0; i < numberOfSparks; i++)
   {
     var smokeDelay = randomNumber(0, 30000);
