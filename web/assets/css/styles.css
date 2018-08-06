@@ -1,7 +1,9 @@
 html {
   background: #000;
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden; }
 
 body {
   margin: 0;
@@ -10,6 +12,7 @@ body {
   color: #FFF;
   font-family: 'Hind Siliguri', sans-serif;
   font-size: 1.1rem;
+  max-width: 100%;
   overflow-x: hidden; }
 
 a {
