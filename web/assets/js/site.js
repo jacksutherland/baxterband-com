@@ -1,21 +1,25 @@
 function randomNumber(min, max)
 {
-    return Math.random() * (max - min) + min;
+    var rand = Math.random() * (max - min) + min;
+    return Math.round(rand);
 }
 
 function startFire()
 {
-  var browserWidth = $(window).width();
+  var win = $(window);
+  var browserWidth = win.width();
   var smoke = $("#smoke");
-  var numberOfSparks = browserWidth < 700 ? 30 : 30;
+  var numberOfSparks = browserWidth < 700 ? 45 : 60;
   for(i = 0; i < numberOfSparks; i++)
   {
-    var smokeDelay = randomNumber(0, 15000);
+    var smokeDelay = randomNumber(0, 30000);
     setTimeout(function()
     {
-      var smokePos = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
+      var smokeLeft = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
+      var smokeTop = win.scrollTop() + win.height()
       var newSmoke = smoke.clone();
-      newSmoke.css("left", smokePos);
+      console.log("smoke pos " + smokeLeft + " " + smokeTop);
+      newSmoke.css({ "left": smokeLeft, "top": smokeTop }).addClass("smoke" + randomNumber(1, 3));
       $("body").append(newSmoke);
     }, smokeDelay);  
   }
