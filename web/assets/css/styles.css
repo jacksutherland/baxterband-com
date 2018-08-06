@@ -172,8 +172,7 @@ footer {
   .hero h1 {
     /* Shadows are visible under slightly transparent text color */
     animation: letterfocus 15s steps(1) infinite;
-    -webkit-animation: letterfocus 15s steps(1) infinite;
-    color: #e3e3e3; }
+    -webkit-animation: letterfocus 15s steps(1) infinite; }
   .hero .hero-image:before {
     -webkit-animation-duration: 3s;
     animation-duration: 3s;
