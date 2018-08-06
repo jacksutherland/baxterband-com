@@ -4,19 +4,26 @@
 {% set wishlist = craft.categories.group('songs').slug('wishlist') %}
 {% set members = craft.entries.section('members') %}
 
+{% block header %}
+	<header>
+        <div id="main-menu" class="container">
+            <a href="#" class="d-none d-sm-inline"><h1>{{ siteName }}</h1></a>
+            <a href="#about">ABOUT</a>
+            <a href="#shows">SHOWS</a>
+            <a href="#songs">SONGS</a>
+            <a href="#contact">CONTACT</a>
+        </div>
+    </header>
+{% endblock %}
+
 {% block content %}
 
 	<div class="hero">
-		{# <h1>
-			{% for word in siteName | split(' ') %}
-				<span>{{ word }}</span>
-			{% endfor %}
-		</h1> #}
 		<h1>{{ siteName | replace(" ", "<br>") | raw }}</h1>
 		<div class="hero-image"></div>
 	</div>
 
-	<div class="container">
+	<div id="about" class="container">
 
 		<div class="band-bio">
 			<h2>{{ entry.bandHeader }}</h2>
@@ -44,9 +51,12 @@
 
 	<div class="section-style1">
 
-		<div class="container">
+		<div id="songs" class="container">
 			
-			<h2>Songs</h2>
+			<h2>{{ entry.songsHeader }}</h2>
+			{% if entry.songsText %}
+				<p>{{ entry.songsText }}</p>
+			{% endif %}
 
 			<h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5>
 

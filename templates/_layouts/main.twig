@@ -24,13 +24,48 @@
 
     <body>
 
-        {# <header>
-            <div class="container">
-                <h1>{{ siteName }}</h1>
-            </div>
-        </header> #}
+        {% block header %} {% endblock %}
 
         {% block content %} {% endblock %}
+
+        <div id="contact" class="ux-form">
+            <div class="container">
+                <h2>{{ contactForm.contactHeader }}</h2>
+                {% if contactForm.contactText %}
+                    <p>sadfsdf{{ contactForm.contactText }}</p>
+                {% endif %}
+                <form>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="First Name *">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Last Name *">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" placeholder="Venue Name and Location">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" placeholder="Date(s) Interested">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <textarea placeholder="Message"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit">Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <footer>
             <div class="container">

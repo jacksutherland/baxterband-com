@@ -1,6 +1,7 @@
+$white: #FFF;
 $black: #000;
 $red: #d91f26;
-
+$section-gray: #262626;
 
 html {
 	background: #000;
@@ -13,7 +14,7 @@ html {
 
 body {
 	margin: 0;
-	padding: 0;
+	padding: 0 0 0 0;
 	background: linear-gradient(#000, #2C2F34);
 	color: #FFF;
 	font-family: 'Hind Siliguri', sans-serif;
@@ -59,6 +60,57 @@ ul {
 	margin: 0 0 30px 0;
 }
 
+header {
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 0;
+    text-align: right;
+
+    &.at-top {
+        border-bottom: none;
+        background-color: rgba(0,0,0,0);
+    }
+    &.not-at-top {
+        border-bottom: solid 1px #262626;
+        background: rgba(0,0,0,0.8);
+        animation: fadeInHeader 0.5s linear;
+        -webkit-animation: fadeInHeader 0.5s linear;
+    }
+
+    h1 {
+        font-size: 1.35rem;
+        margin: 0;
+        display: inline;
+        vertical-align: middle;
+    }
+    a, a:visited {
+        color: $white !important;
+        font-size: 0.95rem;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+}
+@keyframes fadeInHeader {
+  0% {
+    background-color: rgba(0, 0, 0, 0)
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+@-webkit-keyframes fadeInHeader {
+  0% {
+    background-color: rgba(0, 0, 0, 0)
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
 footer {
 	padding: 50px 0;
 	font-family: 'Acme', sans-serif;
@@ -68,7 +120,36 @@ footer {
 .section-style1 {
 	margin: 50px 0 0 0;
 	padding: 5px 0 50px 0;
-	background: #262626;
+	background: $section-gray;
+}
+
+.ux-form {
+    margin: 0 0 0 0;
+    padding: 1px 0 50px 0;
+    background: $black;
+    border-bottom: solid 1px $section-gray;
+    input, textarea {
+        background: transparent;
+        color: $white;
+        border: solid 1px $section-gray;
+        padding: 10px 20px;
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+    textarea {
+        height: 200px;
+    }
+    button {
+        background: $section-gray;
+        border: solid 1px lighten($section-gray, 6%);
+        color: $white;
+        padding: 10px 40px;
+        margin: 0 0 20px 0;
+        &:hover {
+            background: lighten($section-gray, 2%);
+            cursor: pointer;
+        }
+    }
 }
 
 .band-bio {
@@ -531,22 +612,6 @@ footer {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*** MEDIA QUERIES ***/
 
 @media (min-width: 1200px) {
@@ -568,6 +633,12 @@ footer {
 }
 
 @media (max-width: 767px) {
+    header {
+        text-align: center;
+        a:first-child {
+            margin-left: 0;
+        }
+    }
 	.hero {
 		height: 400px;
 		margin: 0;
