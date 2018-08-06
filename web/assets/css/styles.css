@@ -9,7 +9,8 @@ body {
   background: linear-gradient(#000, #2C2F34);
   color: #FFF;
   font-family: 'Hind Siliguri', sans-serif;
-  font-size: 1.1rem; }
+  font-size: 1.1rem;
+  overflow-x: hidden; }
 
 a {
   text-decoration: none; }
