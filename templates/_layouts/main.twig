@@ -28,9 +28,9 @@
 
         {% block content %} {% endblock %}
 
-        <div id="contact" class="ux-form">
+        <div class="ux-form">
             <div class="container">
-                <h2>{{ contactForm.contactHeader }}</h2>
+                <h2 id="contact">{{ contactForm.contactHeader }}</h2>
                 {% if contactForm.contactText %}
                     <p>{{ contactForm.contactText }}</p>
                 {% endif %}
