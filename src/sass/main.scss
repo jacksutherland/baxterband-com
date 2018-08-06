@@ -278,119 +278,121 @@ footer {
 
 }
 
-// MOVIE EFFECTS
-.hero {
+// MOVIE EFFECTS tablets and desktop only
+@media (min-width: 768px) {
+    .hero {
 
-	-webkit-animation-duration: 2s;
-    animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-name: jumpy;
-    animation-name: jumpy;
-    -webkit-animation-timing-function: linear;
-    animation-timing-function: linear;
-    content: "";
-    visibility: visible;
-    z-index: 4;
+    	-webkit-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: jumpy;
+        animation-name: jumpy;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear;
+        content: "";
+        visibility: visible;
+        z-index: 4;
 
-	h1 {
-	    /* Shadows are visible under slightly transparent text color */
-	    animation: letterfocus 15s steps(1) infinite;
-	    -webkit-animation: letterfocus 15s steps(1) infinite;
-	    //color: rgba(227, 227, 227, 1);
+    	h1 {
+    	    /* Shadows are visible under slightly transparent text color */
+    	    animation: letterfocus 15s steps(1) infinite;
+    	    -webkit-animation: letterfocus 15s steps(1) infinite;
+    	    //color: rgba(227, 227, 227, 1);
 
-	  //   &:before {
-			// animation: speckles 1.3s 4s steps(1) infinite;
-		 //    -webkit-animation: speckles 1s 4s steps(1) infinite;
-		 //    color: rgba(255,255,255,0.3);
-		 //    content: "~";
-		 //    font-size: 150px;    /* old */
-		 //    font-size: 15vm;   /* IE9 */
-		 //    font-size: 15vmin;
-		 //    text-shadow: 0 0 30px #fff;
-		 //    visibility: hidden;
-		 //    z-index: 5;
-	  //   }
-	    // &:after {
-	    // 	-webkit-animation: speckles 6s 2s steps(1) infinite;
-		   //  animation: speckles 6s 2s steps(1) infinite;
-		   //  color: rgba(105,105,105,0.3);
-		   //  content: "  .";
-		   //  font-size: 150px;    /* old */
-		   //  font-size: 15vm;   /* IE9 */
-		   //  font-size: 15vmin;
-		   //  text-shadow: 0 0 30px #fff;
-		   //  visibility: hidden;
-		   //  z-index: 5;
-		   //  margin-top: -100px;
-	    // }
-	}
+    	  //   &:before {
+    			// animation: speckles 1.3s 4s steps(1) infinite;
+    		 //    -webkit-animation: speckles 1s 4s steps(1) infinite;
+    		 //    color: rgba(255,255,255,0.3);
+    		 //    content: "~";
+    		 //    font-size: 150px;    /* old */
+    		 //    font-size: 15vm;   /* IE9 */
+    		 //    font-size: 15vmin;
+    		 //    text-shadow: 0 0 30px #fff;
+    		 //    visibility: hidden;
+    		 //    z-index: 5;
+    	  //   }
+    	    // &:after {
+    	    // 	-webkit-animation: speckles 6s 2s steps(1) infinite;
+    		   //  animation: speckles 6s 2s steps(1) infinite;
+    		   //  color: rgba(105,105,105,0.3);
+    		   //  content: "  .";
+    		   //  font-size: 150px;    /* old */
+    		   //  font-size: 15vm;   /* IE9 */
+    		   //  font-size: 15vmin;
+    		   //  text-shadow: 0 0 30px #fff;
+    		   //  visibility: hidden;
+    		   //  z-index: 5;
+    		   //  margin-top: -100px;
+    	    // }
+    	}
 
-	.hero-image {
-		&:before {
-			-webkit-animation-duration: 3s;
-		    animation-duration: 3s;
-		    -webkit-animation-iteration-count: infinite;
-		    animation-iteration-count: infinite;
-		    -webkit-animation-name: movingstripe2;
-		    animation-name: movingstripe;
-		    border-left: solid 2px rgba(85,85,85,0.5);
-		    border-right: solid 2px rgba(85,85,85,0.5);
-		    content: "";
-		    height: 100%;
-		    left: 50%;
-		    padding: 2px;
-		    position: absolute;
-		    width: 400px;    /* old */
-		    width: 40vm;   /* IE9 */
-		    width: 40vmin;
-		    z-index: 4;
-		}
-	}
-	
-	&:before {
-	    -webkit-animation-duration: 4s;
-	    animation-duration: 4s;
-	    -webkit-animation-iteration-count: infinite;
-	    animation-iteration-count: infinite;
-	    -webkit-animation-name: movingstripe;
-	    animation-name: movingstripe;
-	    border-left: solid 3px rgba(85,85,85,0.4);
-	    border-right: solid 2px rgba(85,85,85,0.4);
-	    -webkit-box-shadow: 0 0 10px rgba(85,85,85,0.5);
-	    box-shadow: 0 0 10px rgba(85,85,85,0.5);
-	    content: "";
-	    height: 100%;
-	    left: -300px;
-	    padding: 2px;
-	    position: absolute;
-	    width: 500px;    /* old */
-	    width: 500vm;   /* IE9 */
-	    width: 50vmin;
-	    z-index: 2;
-	}
+    	.hero-image {
+    		&:before {
+    			-webkit-animation-duration: 3s;
+    		    animation-duration: 3s;
+    		    -webkit-animation-iteration-count: infinite;
+    		    animation-iteration-count: infinite;
+    		    -webkit-animation-name: movingstripe2;
+    		    animation-name: movingstripe;
+    		    border-left: solid 2px rgba(85,85,85,0.5);
+    		    border-right: solid 2px rgba(85,85,85,0.5);
+    		    content: "";
+    		    height: 100%;
+    		    left: 50%;
+    		    padding: 2px;
+    		    position: absolute;
+    		    width: 400px;    /* old */
+    		    width: 40vm;   /* IE9 */
+    		    width: 40vmin;
+    		    z-index: 4;
+    		}
+    	}
+    	
+    	&:before {
+    	    -webkit-animation-duration: 4s;
+    	    animation-duration: 4s;
+    	    -webkit-animation-iteration-count: infinite;
+    	    animation-iteration-count: infinite;
+    	    -webkit-animation-name: movingstripe;
+    	    animation-name: movingstripe;
+    	    border-left: solid 3px rgba(85,85,85,0.4);
+    	    border-right: solid 2px rgba(85,85,85,0.4);
+    	    -webkit-box-shadow: 0 0 10px rgba(85,85,85,0.5);
+    	    box-shadow: 0 0 10px rgba(85,85,85,0.5);
+    	    content: "";
+    	    height: 100%;
+    	    left: -300px;
+    	    padding: 2px;
+    	    position: absolute;
+    	    width: 500px;    /* old */
+    	    width: 500vm;   /* IE9 */
+    	    width: 50vmin;
+    	    z-index: 2;
+    	}
 
-	&:after {
-		-webkit-animation-duration: 4s;
-	    animation-duration: 4s;
-	    -webkit-animation-iteration-count: infinite;
-	    animation-iteration-count: infinite;
-	    -webkit-animation-name: vignette;
-	    animation-name: vignette;
-	    -webkit-animation-timing-function: ease-in-out;
-	    animation-timing-function: ease-in-out;
-	    content: "";
-	    height: 100%;
-	    left: 0;
-	    position: fixed;
-	    top: 0;
-	    -ms-transform-origin: 50% 100%;
-	    -webkit-transform-origin: 50% 100%;
-	    transform-origin: 50% 100%;
-	    width: 100%;
-	    visibility: visible;
-	    z-index: 5;
-	}
+    	&:after {
+    		-webkit-animation-duration: 4s;
+    	    animation-duration: 4s;
+    	    -webkit-animation-iteration-count: infinite;
+    	    animation-iteration-count: infinite;
+    	    -webkit-animation-name: vignette;
+    	    animation-name: vignette;
+    	    -webkit-animation-timing-function: ease-in-out;
+    	    animation-timing-function: ease-in-out;
+    	    content: "";
+    	    height: 100%;
+    	    left: 0;
+    	    position: fixed;
+    	    top: 0;
+    	    -ms-transform-origin: 50% 100%;
+    	    -webkit-transform-origin: 50% 100%;
+    	    transform-origin: 50% 100%;
+    	    width: 100%;
+    	    visibility: visible;
+    	    z-index: 5;
+    	}
+    }
 }
 
 @keyframes jumpy {
