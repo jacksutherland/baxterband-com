@@ -15,7 +15,8 @@ function startFire()
     var smokeDelay = randomNumber(0, 30000);
     setTimeout(function()
     {
-      var smokeLeft = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
+      //var smokeLeft = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
+      var smokeLeft = (browserWidth < 700 ? 50 : randomNumber(25, 75)) + "%";
       var smokeTop = win.scrollTop() + win.height()
       var newSmoke = smoke.clone();
       console.log("smoke pos " + smokeLeft + " " + smokeTop);
