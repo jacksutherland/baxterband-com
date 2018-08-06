@@ -173,7 +173,7 @@ footer {
     /* Shadows are visible under slightly transparent text color */
     animation: letterfocus 15s steps(1) infinite;
     -webkit-animation: letterfocus 15s steps(1) infinite;
-    color: rgba(227, 227, 227, 0.8); }
+    color: #e3e3e3; }
   .hero .hero-image:before {
     -webkit-animation-duration: 3s;
     animation-duration: 3s;
