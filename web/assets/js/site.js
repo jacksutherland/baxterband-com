@@ -46,6 +46,53 @@ function checkWinPos(isOnScroll)
   }
 }
 
+function contactForm()
+{
+  $("#contact-form").submit(function()
+  {
+    var frm = $(this);
+    var error = "";
+
+    frm.find(".info").removeClass("is-error").text("");
+
+    if($.trim(frm.find("[name=first]").val()) == "")
+    {
+      error = "First name is required";
+    }
+    else if($.trim(frm.find("[name=last]").val()) == "")
+    {
+      error = "Last name is required";
+    }
+    else if($.trim(frm.find("[name=phone]").val()) == "" && !frm.find("[name=email]").val().includes("@"))
+    {
+      error = "A valid phone number of email address is required";
+    }
+
+    if (error == "")
+    {
+      $.post("/php/mailer.php", frm.serialize()).done(function(data)
+      {
+        //console.log("done " + data + " " + (data == "success"));
+        if(data == "success")
+        {
+          frm[0].reset();
+          frm.find(".info").text("Message Sent. We will be in touch. Thank you.");
+        }
+        else
+        {
+          frm.find(".info").addClass("is-error").text("Error encountered. Please call us at 704-996-3439.");
+        }
+      });
+    }
+    else
+    {
+      frm.find(".info").addClass("is-error").text(error);
+    }
+
+    return false;
+  });
+}
+
 $(function()
 {
   win = $(window);
@@ -53,6 +100,7 @@ $(function()
 
   startFire();
   checkWinPos();
+  contactForm();
 
   win.scroll(function()
   {

@@ -32,35 +32,43 @@
             <div class="container">
                 <h2>{{ contactForm.contactHeader }}</h2>
                 {% if contactForm.contactText %}
-                    <p>sadfsdf{{ contactForm.contactText }}</p>
+                    <p>{{ contactForm.contactText }}</p>
                 {% endif %}
-                <form>
+                <form id="contact-form">
+                    <input type="hidden" name="soulgem">
                     <div class="row">
                         <div class="col-sm-6">
-                            <input type="text" placeholder="First Name *">
+                            <input type="text" placeholder="First Name *" name="first">
                         </div>
                         <div class="col-sm-6">
-                            <input type="text" placeholder="Last Name *">
+                            <input type="text" placeholder="Last Name *" name="last">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Phone" name="phone">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Email" name="email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Venue Name and Location" name="venue">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Date(s) Interested" name="dates">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" placeholder="Venue Name and Location">
+                            <textarea placeholder="Message" name="message"></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="text" placeholder="Date(s) Interested">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <textarea placeholder="Message"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit">Send</button>
+                            <button type="submit">Send</button> 
+                            <span class="info"></span>
                         </div>
                     </div>
                 </form>

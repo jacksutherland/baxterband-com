@@ -150,6 +150,12 @@ footer {
             cursor: pointer;
         }
     }
+    .info {
+        margin-left: 10px;
+        &.is-error {
+            color: red;
+        }
+    }
 }
 
 .band-bio {

@@ -119,6 +119,10 @@ footer {
     .ux-form button:hover {
       background: #2b2b2b;
       cursor: pointer; }
+  .ux-form .info {
+    margin-left: 10px; }
+    .ux-form .info.is-error {
+      color: red; }
 
 .band-bio {
   text-align: center;
