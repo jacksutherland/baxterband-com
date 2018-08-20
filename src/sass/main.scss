@@ -2,6 +2,7 @@ $white: #FFF;
 $black: #000;
 $red: #d91f26;
 $section-gray: #262626;
+$thin-border: solid 1px #262626;
 
 html {
 	background: #000;
@@ -74,7 +75,7 @@ header {
         background-color: rgba(0,0,0,0);
     }
     &.not-at-top {
-        border-bottom: solid 1px #262626;
+        border-bottom: $thin-border;
         background: rgba(0,0,0,0.8);
         animation: fadeInHeader 0.5s linear;
         -webkit-animation: fadeInHeader 0.5s linear;
@@ -200,6 +201,47 @@ footer {
 		}
 	}
 
+}
+
+
+/*** SHOWS ***/
+
+#shows {
+    border-top: $thin-border;
+    margin: 40px 0 70px 0;
+    h2 {
+        margin: 60px 0 50px 0;
+    }
+    .show {
+        margin: 0 0 50px 0;
+        .venue {
+            color: lighten($section-gray, 30%);
+        }
+        h5 {
+            margin: 10px 0;
+        }
+    }
+}
+
+.date-box {
+    border: 2px solid $section-gray;
+    height: 100%;
+    margin: 0 0 20px 0;
+    .month {
+        background: $section-gray;
+        padding: 5px 0;
+    }
+    .date {
+        font-size: 2rem;
+        line-height: 2rem;
+        margin: 10px 0 2px 0;
+        font-family: 'Acme', sans-serif;
+    }
+    .weekday {
+        color: lighten($section-gray, 20%);
+        font-weight: bold;
+        margin: 0 0 5px 0;
+    }
 }
 
 
@@ -662,6 +704,14 @@ footer {
 			border-radius: 0;
 		}
 	}
+    #shows {
+        .show {
+            margin: 0 0 50px 0;
+        }
+    }
+    .date-box {
+        height: auto;
+    }
 }
 
 @media (max-width: 480px) {

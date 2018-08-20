@@ -3,13 +3,14 @@
 {% set setlist = craft.categories.group('songs').slug('setlist') %}
 {% set wishlist = craft.categories.group('songs').slug('wishlist') %}
 {% set members = craft.entries.section('members') %}
+{% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
 
 {% block header %}
 	<header>
         <div id="main-menu" class="container">
             <a href="#" class="d-none d-sm-inline"><h1>{{ siteName }}</h1></a>
             <a href="#about">ABOUT</a>
-            {# <a href="#shows">SHOWS</a> #}
+            <a href="#shows">SHOWS</a>
             <a href="#songs">SONGS</a>
             <a href="#contact">CONTACT</a>
         </div>
@@ -47,6 +48,34 @@
 			</div>
 		{% endif %}
 
+	</div>
+
+	<div id="shows">
+		<div class="container">
+			<h2 class="text-center">Upcoming Shows</h2>
+			{% for show in shows  if show.showDate >= now %}
+				<div class="show">
+					<div class="row">
+						
+						<div class="col-md-4 col-lg-3 text-center">
+							<div class="date-box">
+								<div class="month">{{ show.showDate | date('mm Y') }}</div>
+								<div class="date">{{ show.showDate | date('d') }}</div>
+								<div class="weekday">{{ show.showDate | date('l') }}</div>
+							</div>
+						</div>
+						<div class="col-md-8 col-lg-9">
+							<a class="venue" target="_blank" href="https://www.google.com/maps/place/{{ show.venueAddress }}">
+								<i class="fas fa-map-marker-alt"></i> 
+								{{ show.venueName }}
+							</a>
+							<h5>{{ show.title }}</h5>
+							<p>{{ show.showDetails }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 	</div>
 
 	<div class="section-style1">
