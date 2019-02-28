@@ -53,6 +53,7 @@
 	<div id="shows">
 		<div class="container">
 			<h2 class="text-center">Upcoming Shows</h2>
+			<p class="text-center">We are currently booking for Summer 2019. Please <a  href="#contact">contact us soon</a> if you're interested in us performing at your event.</p>
 			{% for show in shows  if show.showDate >= now %}
 				<div class="show">
 					<div class="row">
@@ -81,6 +82,10 @@
 	<div class="section-style1">
 
 		<div id="songs" class="container">
+
+			<div class="mt-5">
+				<iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/596280891&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+			</div>
 			
 			<h2>{{ entry.songsHeader }}</h2>
 			{% if entry.songsText %}
