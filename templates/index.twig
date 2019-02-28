@@ -51,9 +51,10 @@
 	</div>
 
 	<div id="shows">
+		{#
 		<div class="container">
 			<h2 class="text-center">Upcoming Shows</h2>
-			<p class="text-center">We are currently booking for Summer 2019. Please <a  href="#contact">contact us soon</a> if you're interested in us performing at your event.</p>
+			<p class="text-center">We are currently booking shows for Summer 2019. Please <a  href="#contact">contact us soon</a> if you're interested in us performing at your event.</p>
 			{% for show in shows  if show.showDate >= now %}
 				<div class="show">
 					<div class="row">
@@ -76,7 +77,7 @@
 					</div>
 				</div>
 			{% endfor %}
-		</div>
+		</div#}
 	</div>
 
 	<div class="section-style1">
