@@ -97,7 +97,7 @@
 
 			<div class="row">
 				<div class="col-sm-6">
-					<h5>90's to 2000's Setlist</h5>
+					<h5>{{ setlist90s.one().title }}</h5>
 					{% if setlist90s.count() > 0 %}
 						<ul>
 							{% for song in setlist90s.one().children %}
@@ -107,7 +107,7 @@
 					{% endif %}
 				</div>
 				<div class="col-sm-6">
-					<h5>70's to 80's Setlist</h5>
+					<h5>{{ setlist80s.one().title }}</h5>
 					{% if setlist80s.count() > 0 %}
 						<ul>
 							{% for song in setlist80s.one().children %}
