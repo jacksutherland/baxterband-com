@@ -1,7 +1,7 @@
 {% extends "_layouts/main" %}
 
-{% set setlist = craft.categories.group('songs').slug('setlist') %}
-{% set wishlist = craft.categories.group('songs').slug('wishlist') %}
+{% set setlist90s = craft.categories.group('songs').slug('setlist90s') %}
+{% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
 {% set members = craft.entries.section('members') %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
 
@@ -97,20 +97,20 @@
 
 			<div class="row">
 				<div class="col-sm-6">
-					<h5>Setlist</h5>
-					{% if setlist.count() > 0 %}
+					<h5>90's to 2000's Setlist</h5>
+					{% if setlist90s.count() > 0 %}
 						<ul>
-							{% for song in setlist.one().children %}
+							{% for song in setlist90s.one().children %}
 								<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
 							{% endfor %}
 						</ul>
 					{% endif %}
 				</div>
 				<div class="col-sm-6">
-					<h5>Wishlist</h5>
-					{% if wishlist.count() > 0 %}
+					<h5>70's to 80's Setlist</h5>
+					{% if setlist80s.count() > 0 %}
 						<ul>
-							{% for song in wishlist.one().children %}
+							{% for song in setlist80s.one().children %}
 								<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
 							{% endfor %}
 						</ul>
