@@ -2,7 +2,7 @@
 
 {% set setlist90s = craft.categories.group('songs').slug('setlist90s') %}
 {% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
-{% set members = craft.entries.section('members') %}
+{% set members = craft.entries.section('members').order('postDate') %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
 
 {% block header %}
