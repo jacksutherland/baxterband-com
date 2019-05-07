@@ -20,7 +20,7 @@ function startFire()
       //var smokeLeft = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
       var smokeLeft = (browserWidth < 700 ? 50 : randomNumber(25, 75)) + "%";
       var smokeTop = win.scrollTop() + win.height();
-      console.log(smokeTop);
+      //console.log(smokeTop);
       if(smokeTop < 2200)
       {
         var newSmoke = smoke.clone();
