@@ -92,6 +92,16 @@ header {
         font-size: 0.95rem;
         margin-left: 10px;
         vertical-align: middle;
+        &:hover {
+            i {
+                opacity: 1;
+            }
+        }
+        i {
+            font-size: 1.10rem;
+            opacity: 0.83;
+            transition: opacity 0.5s;
+        }
     }
 
 }
@@ -116,6 +126,21 @@ footer {
 	padding: 50px 0;
 	font-family: 'Acme', sans-serif;
 	background: #000;
+    text-align: center;
+    a {
+        &:hover {
+            i {
+                opacity: 1;
+            }
+        }
+        i {
+            color: #FFF;
+            font-size: 1.40rem;
+            margin: 20px 5px;
+            opacity: 0.83;
+            transition: opacity 0.5s;
+        }
+    }
 }
 
 .section-style1 {

@@ -107,7 +107,7 @@ $(function()
     checkWinPos(true);
   });
 
-  $("#main-menu a").click(function(e)
+  $("#main-menu a.jump-link").click(function(e)
   {
     e.preventDefault();
     var jump = $(this).attr('href');

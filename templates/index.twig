@@ -4,15 +4,18 @@
 {% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
 {% set members = craft.entries.section('members').order('postDate') %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
+{% set videos = craft.entries().section('videos').all() %}
 
 {% block header %}
 	<header>
         <div id="main-menu" class="container">
-            <a href="#" class="d-none d-sm-inline"><h1>{{ siteName }}</h1></a>
-            <a href="#about">ABOUT</a>
-            <a href="#shows">SHOWS</a>
-            <a href="#songs">SONGS</a>
-            <a href="#contact">CONTACT</a>
+            <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a>
+            <a href="#about" class="jump-link">ABOUT</a>
+            {# <a href="#shows" class="jump-link">SHOWS</a> #}
+            <a href="#music" class="jump-link">MUSIC</a>
+            <a href="#contact" class="jump-link">CONTACT</a>
+            <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/jacksutherland" target="_blank"><i class="fab fa-facebook"></i></a>
         </div>
     </header>
 {% endblock %}
@@ -51,8 +54,8 @@
 
 	</div>
 
-	<div id="shows">
-		{#
+	{#<div id="shows">
+		
 		<div class="container">
 			<h2 class="text-center">Upcoming Shows</h2>
 			<p class="text-center">We are currently booking shows for Summer 2019. Please <a  href="#contact">contact us soon</a> if you're interested in us performing at your event.</p>
@@ -78,15 +81,34 @@
 					</div>
 				</div>
 			{% endfor %}
-		</div#}
-	</div>
+		</div
+	</div>#}
 
 	<div class="section-style1">
 
-		<div id="songs" class="container">
+		<div id="music" class="container">
+
+			{% set vidlen = videos | length %}
+			{% if vidlen > 0 %}
+				<div class="row">
+					{% for video in videos %}
+						<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
+							<div class="mt-5">
+								<div class="embed-responsive embed-responsive-16by9">
+								  {{ video.youtubeEmbedCode | raw }}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
 
 			<div class="mt-5">
-				<iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/582457401&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+				<div class="row">
+					<div class="col-12 col-lg-8 col-xl-12 m-auto">
+						<iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/582457401&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+					</div>
+				</div>
 			</div>
 			
 			<h2>{{ entry.songsHeader }}</h2>
