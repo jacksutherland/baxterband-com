@@ -1,3 +1,5 @@
+{% set resourceVersion = '1.1' %}
+
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +21,7 @@
         <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
 
         {# CSS #}
-        <link href="/assets/css/styles.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/styles.css?v={{ resourceVersion }}" rel="stylesheet" type="text/css" />
     </head>
 
     <body>
@@ -90,7 +92,7 @@
         {# JS #}
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-        <script src="/assets/js/site.js"></script>
+        <script src="/assets/js/site.js?v={{ resourceVersion }}"></script>
     </body>
 
 </html>
