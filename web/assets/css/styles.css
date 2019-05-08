@@ -516,8 +516,8 @@ footer {
       bottom: 10px;
       left: 10px;
       margin-left: 0;
-      height: 80px;
-      width: 80px; }
+      height: 100px;
+      width: 100px; }
     .hero .hero-image {
       -webkit-filter: blur(1px) grayscale(100%);
       filter: blur(1px) grayscale(100%);
