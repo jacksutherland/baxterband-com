@@ -251,17 +251,14 @@ footer {
   position: relative;
   height: 700px;
   margin: 20px; }
-  .hero h1 {
-    margin: 0;
+  .hero .logo {
     position: absolute;
+    top: 10px;
+    left: 10px;
     z-index: 20;
-    top: auto;
-    bottom: 30px;
-    left: 50px;
-    color: #FFF;
-    text-shadow: 0 0 2px #000;
-    font-size: 90px;
-    opacity: 0.5; }
+    opacity: 0.65;
+    height: 200px;
+    width: 200px; }
   .hero .hero-image {
     position: absolute;
     z-index: 10;
@@ -288,10 +285,6 @@ footer {
     content: "";
     visibility: visible;
     z-index: 4; }
-    .hero h1 {
-      /* Shadows are visible under slightly transparent text color */
-      animation: letterfocus 15s steps(1) infinite;
-      -webkit-animation: letterfocus 15s steps(1) infinite; }
     .hero .hero-image:before {
       -webkit-animation-duration: 3s;
       animation-duration: 3s;
@@ -518,10 +511,15 @@ footer {
   .hero {
     height: 400px;
     margin: 0; }
-    .hero h1 {
-      font-size: 50px;
-      left: 25px;
-      bottom: 15px; }
+    .hero .logo {
+      top: auto;
+      bottom: 10px;
+      left: 10px;
+      margin-left: 0;
+      opacity: 0.45;
+      height: 120px;
+      width: 120px;
+      opacity: 0.75; }
     .hero .hero-image {
       -webkit-filter: blur(1px) grayscale(100%);
       filter: blur(1px) grayscale(100%);

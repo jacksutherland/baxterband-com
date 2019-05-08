@@ -9,7 +9,8 @@
 {% block header %}
 	<header>
         <div id="main-menu" class="container">
-            <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a>
+            {# <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a> #}
+            <a href="#" class="jump-link">HOME</a>
             <a href="#about" class="jump-link">ABOUT</a>
             {# <a href="#shows" class="jump-link">SHOWS</a> #}
             <a href="#music" class="jump-link">MUSIC</a>
@@ -24,7 +25,8 @@
 
 	<div class="hero">
 		{# <h1>{{ siteName | replace(" ", "<br>") | raw }}</h1> #}
-		<h1>{{ siteName }}</h1>
+		{# <h1>{{ siteName }}</h1> #}
+		<img class="logo" src="/images/logo-sign-small.png" alt="">
 		<div class="hero-image"></div>
 	</div>
 

@@ -317,18 +317,27 @@ footer {
 	position: relative;
 	height: 700px;
 	margin: 20px;
-	h1 {
-		margin: 0;
-		position: absolute;
-		z-index: 20;
-		top: auto;
-		bottom: 30px;
-    	left: 50px;
-		color: #FFF;
-		text-shadow: 0 0 2px #000;
-    	font-size: 90px;
-    	opacity: 0.5;
-	}
+	// h1 {
+	// 	margin: 0;
+	// 	position: absolute;
+	// 	z-index: 20;
+	// 	top: auto;
+	// 	bottom: 30px;
+ //    	left: 50px;
+	// 	color: #FFF;
+	// 	text-shadow: 0 0 2px #000;
+ //    	font-size: 90px;
+ //    	opacity: 0.5;
+	// }
+    .logo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 20;
+        opacity: 0.65;
+        height: 200px;
+        width: 200px;
+    }
 	.hero-image {
 		position: absolute;
 		z-index: 10;
@@ -361,38 +370,40 @@ footer {
         visibility: visible;
         z-index: 4;
 
-    	h1 {
-    	    /* Shadows are visible under slightly transparent text color */
-    	    animation: letterfocus 15s steps(1) infinite;
-    	    -webkit-animation: letterfocus 15s steps(1) infinite;
-    	    //color: rgba(227, 227, 227, 1);
 
-    	  //   &:before {
-    			// animation: speckles 1.3s 4s steps(1) infinite;
-    		 //    -webkit-animation: speckles 1s 4s steps(1) infinite;
-    		 //    color: rgba(255,255,255,0.3);
-    		 //    content: "~";
-    		 //    font-size: 150px;    /* old */
-    		 //    font-size: 15vm;   /* IE9 */
-    		 //    font-size: 15vmin;
-    		 //    text-shadow: 0 0 30px #fff;
-    		 //    visibility: hidden;
-    		 //    z-index: 5;
-    	  //   }
-    	    // &:after {
-    	    // 	-webkit-animation: speckles 6s 2s steps(1) infinite;
-    		   //  animation: speckles 6s 2s steps(1) infinite;
-    		   //  color: rgba(105,105,105,0.3);
-    		   //  content: "  .";
-    		   //  font-size: 150px;    /* old */
-    		   //  font-size: 15vm;   /* IE9 */
-    		   //  font-size: 15vmin;
-    		   //  text-shadow: 0 0 30px #fff;
-    		   //  visibility: hidden;
-    		   //  z-index: 5;
-    		   //  margin-top: -100px;
-    	    // }
-    	}
+
+    	// h1 {
+    	//     /* Shadows are visible under slightly transparent text color */
+    	//     animation: letterfocus 15s steps(1) infinite;
+    	//     -webkit-animation: letterfocus 15s steps(1) infinite;
+    	//     //color: rgba(227, 227, 227, 1);
+
+    	//   //   &:before {
+    	// 		// animation: speckles 1.3s 4s steps(1) infinite;
+    	// 	 //    -webkit-animation: speckles 1s 4s steps(1) infinite;
+    	// 	 //    color: rgba(255,255,255,0.3);
+    	// 	 //    content: "~";
+    	// 	 //    font-size: 150px;    /* old */
+    	// 	 //    font-size: 15vm;   /* IE9 */
+    	// 	 //    font-size: 15vmin;
+    	// 	 //    text-shadow: 0 0 30px #fff;
+    	// 	 //    visibility: hidden;
+    	// 	 //    z-index: 5;
+    	//   //   }
+    	//     // &:after {
+    	//     // 	-webkit-animation: speckles 6s 2s steps(1) infinite;
+    	// 	   //  animation: speckles 6s 2s steps(1) infinite;
+    	// 	   //  color: rgba(105,105,105,0.3);
+    	// 	   //  content: "  .";
+    	// 	   //  font-size: 150px;    /* old */
+    	// 	   //  font-size: 15vm;   /* IE9 */
+    	// 	   //  font-size: 15vmin;
+    	// 	   //  text-shadow: 0 0 30px #fff;
+    	// 	   //  visibility: hidden;
+    	// 	   //  z-index: 5;
+    	// 	   //  margin-top: -100px;
+    	//     // }
+    	// }
 
     	.hero-image {
     		&:before {
@@ -717,11 +728,21 @@ footer {
 	.hero {
 		height: 400px;
 		margin: 0;
-		h1 {
-	    	font-size: 50px;
-	    	left: 25px;
-	    	bottom: 15px;
-		}
+		// h1 {
+	 //    	font-size: 50px;
+	 //    	left: 25px;
+	 //    	bottom: 15px;
+		// }
+        .logo {
+            top: auto;
+            bottom: 10px;
+            left: 10px;
+            margin-left: 0;
+            opacity: 0.45;
+            height: 120px;
+            width: 120px;
+            opacity: 0.75;
+        }
 		.hero-image {
 			-webkit-filter: blur(1px) grayscale(100%);
 		   	filter: blur(1px) grayscale(100%);
