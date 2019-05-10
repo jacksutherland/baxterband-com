@@ -17,7 +17,8 @@ $msg .= $_POST["message"] . "\n";
 //$msg = wordwrap($msg,70);
 
 // send email
-mail("jack@jacksutherland.com", "Band Contact", $msg, 'From: "Sonic Chaos" <no-reply@jacksutherland.com>');
+mail("jack@jacksutherland.com", "Band Contact", $msg, 'From: "Exit 85" <no-reply@exiteightyfive.com>');
+mail("maxer28@yahoo.com", "Band Contact", $msg, 'From: "Exit 85" <no-reply@exiteightyfive.com>');
 
 echo "success";
 
