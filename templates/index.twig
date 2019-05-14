@@ -59,7 +59,7 @@
 	<div id="shows">
 		
 		<div class="container">
-			<h2 class="text-center">Upcoming Shows</h2>
+			<h2 class="text-center">{{ events.showsTitle }}</h2>
 			<p class="text-center mb-5">{{ events.eventText | replace({'contact us': '<a  href="#contact">contact us soon</a>'}) | raw }}</p>
 			{# {% for show in shows  if show.showDate >= now %} #}
 			{% for show in shows %}
@@ -74,10 +74,12 @@
 							</div>
 						</div>
 						<div class="col-md-8 col-lg-9">
-							<a class="venue" target="_blank" href="https://www.google.com/maps/place/{{ show.venueAddress }}">
-								<i class="fas fa-map-marker-alt"></i> 
-								{{ show.venueName }}
-							</a>
+							{% if show.venueName | length %}
+								<a class="venue" target="_blank" href="https://www.google.com/maps/place/{{ show.venueAddress }}">
+									<i class="fas fa-map-marker-alt"></i> 
+									{{ show.venueName }}
+								</a>
+							{% endif %}
 							{% if show.showLink | length %}
 								<a href="{{ show.showLink }}" target="_blank" class="show-link"><h5>{{ show.title }}</h5></a>
 							{% else %}
