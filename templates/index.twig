@@ -78,7 +78,11 @@
 								<i class="fas fa-map-marker-alt"></i> 
 								{{ show.venueName }}
 							</a>
-							<h5>{{ show.title }}</h5>
+							{% if show.showLink | length %}
+								<a href="{{ show.showLink }}" target="_blank" class="show-link"><h5>{{ show.title }}</h5></a>
+							{% else %}
+								<h5>{{ show.title }}</h5>
+							{% endif %}
 							<p>{{ show.showDetails }}</p>
 						</div>
 					</div>
