@@ -12,7 +12,7 @@
             {# <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a> #}
             <a href="#" class="jump-link">HOME</a>
             <a href="#about" class="jump-link">ABOUT</a>
-            {# <a href="#shows" class="jump-link">SHOWS</a> #}
+            <a href="#shows" class="jump-link">SHOWS</a>
             <a href="#music" class="jump-link">MUSIC</a>
             <a href="#contact" class="jump-link">CONTACT</a>
             <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -56,12 +56,13 @@
 
 	</div>
 
-	{#<div id="shows">
+	<div id="shows">
 		
 		<div class="container">
 			<h2 class="text-center">Upcoming Shows</h2>
-			<p class="text-center">We are currently booking shows for Summer 2019. Please <a  href="#contact">contact us soon</a> if you're interested in us performing at your event.</p>
-			{% for show in shows  if show.showDate >= now %}
+			<p class="text-center mb-5">{{ events.eventText | replace({'contact us': '<a  href="#contact">contact us soon</a>'}) | raw }}</p>
+			{# {% for show in shows  if show.showDate >= now %} #}
+			{% for show in shows %}
 				<div class="show">
 					<div class="row">
 						
@@ -84,7 +85,7 @@
 				</div>
 			{% endfor %}
 		</div
-	</div>#}
+	</div>
 
 	<div class="section-style1">
 

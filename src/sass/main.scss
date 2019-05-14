@@ -725,6 +725,9 @@ footer {
         a:first-child {
             margin-left: 0;
         }
+        a, a:visited {
+            margin-left: 5px;
+        }
     }
 	.hero {
 		height: 400px;

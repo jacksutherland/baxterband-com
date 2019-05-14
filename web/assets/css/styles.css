@@ -508,6 +508,8 @@ footer {
     text-align: center; }
     header a:first-child {
       margin-left: 0; }
+    header a, header a:visited {
+      margin-left: 5px; }
   .hero {
     height: 400px;
     margin: 0; }
