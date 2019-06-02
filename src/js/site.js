@@ -127,12 +127,15 @@ $(function()
       if ($("#" + rockstar.attr("id") + ":hover").length>0)
       {
         rockstar.find(".band-member-bio").slideDown();
+        rockstar.find(".band-member-image").addClass("fadeout-image");
       }
     }, 250);
   },
   function()
   {
-    $(this).find(".band-member-bio").slideUp();
+    var rockstar = $(this);
+    rockstar.find(".band-member-bio").slideUp();
+    rockstar.find(".band-member-image").removeClass("fadeout-image");
   });
 
 });

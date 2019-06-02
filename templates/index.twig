@@ -111,6 +111,9 @@
 							<div class="band-member-info">
 								<h5>{{ member.memberName }}</h5>
 								<h6>{{ member.instruments }}</h6>
+								{% if member.memberLink | length %}
+									<h6><a href="{{ member.memberLink }}" target="_blank">{{ member.memberLink }}</a></h6>
+								{% endif %}
 								{% if member.memberBio | length %}
 									<div class="band-member-bio">
 										{{ member.memberBio }}
