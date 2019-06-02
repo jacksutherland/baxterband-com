@@ -121,7 +121,14 @@ $(function()
 
   $(".band-member").hover(function()
   {
-    $(this).find(".band-member-bio").slideDown();
+    var rockstar = $(this);
+    setTimeout(function()
+    {
+      if ($("#" + rockstar.attr("id") + ":hover").length>0)
+      {
+        rockstar.find(".band-member-bio").slideDown();
+      }
+    }, 500);
   },
   function()
   {
