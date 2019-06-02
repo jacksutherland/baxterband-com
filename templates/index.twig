@@ -106,11 +106,16 @@
 		{% if members.count() > 0 %}
 			<div class="row">
 				{% for member in members.all() %}
-					<div class="col-md-6 m-auto">
-						<div class="band-member">
+					<div class="col-lg-6 m-auto">
+						<div id="band-member-{{ member.slug }}" class="band-member">
 							<div class="band-member-info">
 								<h5>{{ member.memberName }}</h5>
 								<h6>{{ member.instruments }}</h6>
+								{% if member.memberBio | length %}
+									<div class="band-member-bio">
+										{{ member.memberBio }}
+									</div>
+								{% endif %}
 							</div>
 							<div class="band-member-cover"></div>
 							<div class="band-member-image" style="background-image:url({{ member.profilePicture.one().url }})"></div>

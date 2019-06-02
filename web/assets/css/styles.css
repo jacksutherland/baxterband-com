@@ -143,7 +143,16 @@ footer {
   position: relative;
   height: 450px;
   margin: 50px 0;
-  box-shadow: 0 0 5px #000; }
+  box-shadow: 0 0 5px #000;
+  cursor: url(/images/cursors/cap.cur), default; }
+  .band-member#band-member-david-kiser {
+    cursor: url(/images/cursors/cap.cur), default; }
+  .band-member#band-member-rob-stewart {
+    cursor: url(/images/cursors/hulk.cur), default; }
+  .band-member#band-member-warlock {
+    cursor: url(/images/cursors/ironman.cur), default; }
+  .band-member#band-member-greg-thompson {
+    cursor: url(/images/cursors/thor.cur), default; }
   .band-member .band-member-cover {
     position: absolute;
     width: 100%;
@@ -166,6 +175,13 @@ footer {
       margin: 0; }
     .band-member .band-member-info h6 {
       margin: 0; }
+    .band-member .band-member-info .band-member-bio {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #FFF;
+      padding: 20px;
+      margin: 10px 20px 0 0;
+      border-radius: 3px; }
 
 /*** ABOUT ***/
 #about {
@@ -277,7 +293,7 @@ footer {
     z-index: 200;
     color: #FFF;
     padding: 20px 50px 20px 0;
-    bottom: 40px;
+    bottom: 100px;
     width: 100%; }
     .hero .news-ticker .news-ticker-content {
       width: 75%;

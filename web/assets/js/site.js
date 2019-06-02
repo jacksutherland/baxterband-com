@@ -119,4 +119,13 @@ $(function()
     ga('send', 'pageview');
   });
 
+  $(".band-member").hover(function()
+  {
+    $(this).find(".band-member-bio").slideDown();
+  },
+  function()
+  {
+    $(this).find(".band-member-bio").slideUp();
+  });
+
 });

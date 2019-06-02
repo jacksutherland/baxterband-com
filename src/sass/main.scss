@@ -201,6 +201,19 @@ footer {
 	height: 450px;
 	margin: 50px 0;
 	box-shadow: 0 0 5px #000;
+    cursor: url(/images/cursors/cap.cur), default;
+    &#band-member-david-kiser {
+        cursor: url(/images/cursors/cap.cur), default;
+    }
+    &#band-member-rob-stewart {
+        cursor: url(/images/cursors/hulk.cur), default;
+    }
+    &#band-member-warlock {
+        cursor: url(/images/cursors/ironman.cur), default;
+    }
+    &#band-member-greg-thompson {
+        cursor: url(/images/cursors/thor.cur), default;
+    }
 	.band-member-cover {
 		position: absolute;
 		width: 100%;
@@ -230,6 +243,14 @@ footer {
 		h6 {
 			margin: 0;
 		}
+        .band-member-bio {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: $white;
+            padding: 20px;
+            margin:10px 20px 0 0;
+            border-radius: 3px;
+        }
 	}
 
 }
@@ -363,7 +384,7 @@ footer {
         z-index: 200;
         color: $white;
         padding: 20px 50px 20px 0;
-        bottom: 40px;
+        bottom: 100px;
         width: 100%;
         .news-ticker-content { 
             width: 75%;
