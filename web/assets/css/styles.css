@@ -169,7 +169,7 @@ footer {
     opacity: 1;
     transition: opacity 0.5s; }
     .band-member .band-member-image.fadeout-image {
-      opacity: 0.35; }
+      opacity: 0.25; }
   .band-member .band-member-info {
     position: absolute;
     bottom: 20px;
