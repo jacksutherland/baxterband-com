@@ -177,7 +177,7 @@ footer {
       margin: 0; }
     .band-member .band-member-info .band-member-bio {
       display: none;
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.15);
       color: #FFF;
       padding: 20px;
       margin: 10px 20px 0 0;
