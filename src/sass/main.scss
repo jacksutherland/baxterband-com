@@ -3,6 +3,7 @@ $black: #000;
 $red: #d91f26;
 $section-gray: #262626;
 $thin-border: solid 1px #262626;
+$link-color: #6db76b;
 
 html {
 	background: #000;
@@ -31,15 +32,15 @@ a {
 
 
 
-h1 { 
-	top: 20px;
-	left: 30px;
-	margin: 0 0 30px 0;
-    font-size: 70px;
-    text-transform: uppercase;
-    font-family: 'Monoton', cursive;
-}
-h2 {
+// h1 { 
+// 	top: 20px;
+// 	left: 30px;
+// 	margin: 0 0 30px 0;
+//     font-size: 70px;
+//     text-transform: uppercase;
+//     font-family: 'Monoton', cursive;
+// }
+h1, h2 {
 	font-family: 'Acme', sans-serif;
 	margin: 70px 0 30px 0;
 	font-size: 2.75rem;
@@ -55,7 +56,7 @@ h6 {
 
 a, a:visited, a:hover {
 	//color: #2BB0EA;
-    color: #6db76b;
+    color: $link-color;
 }
 
 ul {
@@ -64,7 +65,7 @@ ul {
 
 header {
     position: fixed;
-    z-index: 200;
+    z-index: 300;
     top: 0;
     left: 0;
     right: 0;
@@ -144,6 +145,10 @@ footer {
     }
 }
 
+.embed-responsive {
+    z-index: 200;
+}
+
 .section-style1 {
 	margin: 50px 0 0 0;
 	padding: 5px 0 50px 0;
@@ -188,7 +193,7 @@ footer {
 .band-bio {
 	text-align: center;
 	margin: 0 auto;
-	width: 75%;
+	width: 100%;
 }
 
 .band-member {
@@ -230,11 +235,20 @@ footer {
 }
 
 
+/*** ABOUT ***/
+
+#about {
+    padding: 0 0 80px 0;
+}
+
 /*** SHOWS ***/
 
 #shows {
     border-top: $thin-border;
-    margin: 40px 0 70px 0;
+    border-bottom: $thin-border;
+    //margin: 40px 0 70px 0;
+    margin: 0;
+    padding: 0 0 30px 0;
     h2 {
         margin: 60px 0 50px 0;
     }
@@ -253,12 +267,13 @@ footer {
 }
 
 .date-box {
-    border: 2px solid $section-gray;
+    border: 2px solid $black; //$section-gray;
     height: 100%;
     margin: 0 0 20px 0;
     .month {
-        background: $section-gray;
+        background: $black; //$section-gray;
         padding: 5px 0;
+        margin-bottom: 10px;
     }
     .date {
         font-size: 2rem;
@@ -269,7 +284,7 @@ footer {
     .weekday {
         color: lighten($section-gray, 20%);
         font-weight: bold;
-        margin: 0 0 5px 0;
+        //margin: 0 0 5px 0;
     }
 }
 
@@ -321,18 +336,6 @@ footer {
 	position: relative;
 	height: 700px;
 	margin: 20px;
-	// h1 {
-	// 	margin: 0;
-	// 	position: absolute;
-	// 	z-index: 20;
-	// 	top: auto;
-	// 	bottom: 30px;
- //    	left: 50px;
-	// 	color: #FFF;
-	// 	text-shadow: 0 0 2px #000;
- //    	font-size: 90px;
- //    	opacity: 0.5;
-	// }
     .logo {
         position: absolute;
         top: 10px;
@@ -355,11 +358,44 @@ footer {
 		width: 100%;
 		border-radius: 10px;
 	}
+    .news-ticker {
+        position: absolute;
+        z-index: 200;
+        color: $white;
+        padding: 20px 50px 20px 0;
+        bottom: 40px;
+        width: 100%;
+        .news-ticker-content { 
+            width: 75%;
+            margin: 0 auto;
+            font-family: 'Trade Winds', cursive;
+            font-size: 1.75rem;
+            text-align: center;
+            // animation: newsfadein 10s;
+            transform: rotate(0.5deg);
+            opacity: 0.6;
+            background: $black;
+            text-shadow: 2px 2px 3px $black;
+            border-radius: 3px;
+        }
+    }
 
 }
 
+
+
+// @keyframes newsfadein {
+//     0% { opacity: 0; }
+//     20% { opacity: 0; }
+//     100%   { opacity: 0.6; }
+// }
+
+
 // MOVIE EFFECTS tablets and desktop only
 @media (min-width: 768px) {
+    .band-bio {
+        width: 75%;
+    }
     .hero {
 
     	-webkit-animation-duration: 2s;
@@ -373,41 +409,6 @@ footer {
         content: "";
         visibility: visible;
         z-index: 4;
-
-
-
-    	// h1 {
-    	//     /* Shadows are visible under slightly transparent text color */
-    	//     animation: letterfocus 15s steps(1) infinite;
-    	//     -webkit-animation: letterfocus 15s steps(1) infinite;
-    	//     //color: rgba(227, 227, 227, 1);
-
-    	//   //   &:before {
-    	// 		// animation: speckles 1.3s 4s steps(1) infinite;
-    	// 	 //    -webkit-animation: speckles 1s 4s steps(1) infinite;
-    	// 	 //    color: rgba(255,255,255,0.3);
-    	// 	 //    content: "~";
-    	// 	 //    font-size: 150px;    /* old */
-    	// 	 //    font-size: 15vm;   /* IE9 */
-    	// 	 //    font-size: 15vmin;
-    	// 	 //    text-shadow: 0 0 30px #fff;
-    	// 	 //    visibility: hidden;
-    	// 	 //    z-index: 5;
-    	//   //   }
-    	//     // &:after {
-    	//     // 	-webkit-animation: speckles 6s 2s steps(1) infinite;
-    	// 	   //  animation: speckles 6s 2s steps(1) infinite;
-    	// 	   //  color: rgba(105,105,105,0.3);
-    	// 	   //  content: "  .";
-    	// 	   //  font-size: 150px;    /* old */
-    	// 	   //  font-size: 15vm;   /* IE9 */
-    	// 	   //  font-size: 15vmin;
-    	// 	   //  text-shadow: 0 0 30px #fff;
-    	// 	   //  visibility: hidden;
-    	// 	   //  z-index: 5;
-    	// 	   //  margin-top: -100px;
-    	//     // }
-    	// }
 
     	.hero-image {
     		&:before {
@@ -732,6 +733,9 @@ footer {
             margin-left: 5px;
         }
     }
+        .news-ticker {
+            display: none;
+        }
 	.hero {
 		height: 400px;
 		margin: 0;

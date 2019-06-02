@@ -13,6 +13,7 @@
             <a href="#" class="jump-link">HOME</a>
             <a href="#about" class="jump-link">ABOUT</a>
             <a href="#shows" class="jump-link">SHOWS</a>
+            <a href="#members" class="jump-link">BAND</a>
             <a href="#music" class="jump-link">MUSIC</a>
             <a href="#contact" class="jump-link">CONTACT</a>
             <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank"><i class="fab fa-youtube"></i></a>
@@ -28,35 +29,41 @@
 		{# <h1>{{ siteName }}</h1> #}
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
 		<div class="hero-image"></div>
-	</div>
-
-	<div id="about" class="container">
-
-		<div class="band-bio">
-			<h2>{{ entry.bandHeader }}</h2>
-			<p>{{ entry.bandBio }}</p>
-		</div>
-
-		{% if members.count() > 0 %}
-			<div class="row">
-				{% for member in members %}
-					<div class="col-md-6 m-auto">
-						<div class="band-member">
-							<div class="band-member-info">
-								<h5>{{ member.memberName }}</h5>
-								<h6>{{ member.instruments }}</h6>
-							</div>
-							<div class="band-member-cover"></div>
-							<div class="band-member-image" style="background-image:url({{ member.profilePicture.one().url }})"></div>
-						</div>
+		
+		{% if entry.newsHtml | length %}
+			<div class="news-ticker">
+				<div class="container">
+					<div class="news-ticker-content">
+						{{ entry.newsHtml | raw }}
 					</div>
-				{% endfor %}
+				</div>
 			</div>
 		{% endif %}
 
 	</div>
 
-	<div id="shows">
+	<div id="about" class="container">
+		<div class="band-bio">
+			<h1>{{ entry.bandHeader }}</h1>
+			<p>{{ entry.bandBio }}</p>
+		</div>
+		{% set vidlen = videos | length %}
+		{% if vidlen > 0 %}
+			<div class="row">
+				{% for video in videos %}
+					<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
+						<div class="mt-5">
+							<div class="embed-responsive embed-responsive-16by9">
+							  {{ video.youtubeEmbedCode | raw }}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+
+	<div id="shows" class="section-style1">
 		
 		<div class="container">
 			<h2 class="text-center">{{ events.showsTitle }}</h2>
@@ -65,7 +72,6 @@
 			{% for show in shows %}
 				<div class="show">
 					<div class="row">
-						
 						<div class="col-md-4 col-lg-3 text-center">
 							<div class="date-box">
 								<div class="month">{{ show.showDate | date('mm Y') }}</div>
@@ -90,40 +96,65 @@
 					</div>
 				</div>
 			{% endfor %}
-		</div
+		</div>
+	</div>
+
+	<div id="members" class="container">
+
+		<h2>{{ entry.membersHeader }}</h2>
+
+		{% if members.count() > 0 %}
+			<div class="row">
+				{% for member in members %}
+					<div class="col-md-6 m-auto">
+						<div class="band-member">
+							<div class="band-member-info">
+								<h5>{{ member.memberName }}</h5>
+								<h6>{{ member.instruments }}</h6>
+							</div>
+							<div class="band-member-cover"></div>
+							<div class="band-member-image" style="background-image:url({{ member.profilePicture.one().url }})"></div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+
 	</div>
 
 	<div class="section-style1">
 
 		<div id="music" class="container">
 
-			{% set vidlen = videos | length %}
-			{% if vidlen > 0 %}
-				<div class="row">
-					{% for video in videos %}
-						<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
-							<div class="mt-5">
-								<div class="embed-responsive embed-responsive-16by9">
-								  {{ video.youtubeEmbedCode | raw }}
-								</div>
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			{% endif %}
-
-			<div class="mt-5">
-				<div class="row">
-					<div class="col-12 col-lg-8 col-xl-12 m-auto">
-						<iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/582457401&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
-					</div>
-				</div>
-			</div>
-			
 			<h2>{{ entry.songsHeader }}</h2>
 			{% if entry.songsText %}
 				<p>{{ entry.songsText }}</p>
 			{% endif %}
+
+			<div class="mt-5 mb-5">
+				<div class="row">
+					<div class="col-12 col-lg-8 col-xl-12 m-auto">
+
+						<iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/582457401&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+
+						{% set vidlen = videos | length %}
+						{% if vidlen > 0 %}
+							<div class="row">
+								{% for video in videos %}
+									<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
+										<div class="mt-5">
+											<div class="embed-responsive embed-responsive-16by9">
+											  {{ video.youtubeEmbedCode | raw }}
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
 
 			<h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5>
 
@@ -151,5 +182,6 @@
 			</div>
 		</div>
 	</div>
+	
 
 {% endblock %}
