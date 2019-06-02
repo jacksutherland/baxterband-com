@@ -128,7 +128,7 @@ $(function()
       {
         rockstar.find(".band-member-bio").slideDown();
       }
-    }, 500);
+    }, 250);
   },
   function()
   {
