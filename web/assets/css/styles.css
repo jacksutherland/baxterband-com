@@ -321,7 +321,7 @@ footer {
     animation-timing-function: linear;
     content: "";
     visibility: visible;
-    z-index: 4; }
+    z-index: 140; }
     .hero .hero-image:before {
       -webkit-animation-duration: 3s;
       animation-duration: 3s;
