@@ -2,7 +2,7 @@
 
 {% set setlist90s = craft.categories.group('songs').slug('setlist90s') %}
 {% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
-{% set members = craft.entries.section('members').order('postDate') %}
+{% set members = craft.entries.section('members').orderBy('postDate') %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
 {% set videos = craft.entries().section('videos').all() %}
 
@@ -105,7 +105,7 @@
 
 		{% if members.count() > 0 %}
 			<div class="row">
-				{% for member in members %}
+				{% for member in members.all() %}
 					<div class="col-md-6 m-auto">
 						<div class="band-member">
 							<div class="band-member-info">
@@ -163,7 +163,7 @@
 					<h5>{{ setlist90s.one().title }}</h5>
 					{% if setlist90s.count() > 0 %}
 						<ul>
-							{% for song in setlist90s.one().children %}
+							{% for song in setlist90s.one().children.all() %}
 								<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
 							{% endfor %}
 						</ul>
@@ -173,7 +173,7 @@
 					<h5>{{ setlist80s.one().title }}</h5>
 					{% if setlist80s.count() > 0 %}
 						<ul>
-							{% for song in setlist80s.one().children %}
+							{% for song in setlist80s.one().children.all() %}
 								<li>{{ song.title }} <small><i>({{ song.songArtist }})</i></small></li>
 							{% endfor %}
 						</ul>

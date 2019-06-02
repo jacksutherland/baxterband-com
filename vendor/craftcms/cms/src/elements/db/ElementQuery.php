@@ -17,6 +17,7 @@ use craft\behaviors\ElementQueryBehavior;
 use craft\db\FixedOrderExpression;
 use craft\db\Query;
 use craft\db\QueryAbortedException;
+use craft\db\Table;
 use craft\errors\SiteNotFoundException;
 use craft\events\CancelableEvent;
 use craft\events\PopulateElementEvent;
@@ -88,7 +89,7 @@ class ElementQuery extends Query implements ElementQueryInterface
     /**
      * @var string|null The content table that will be joined by this query.
      */
-    public $contentTable = '{{%content}}';
+    public $contentTable = Table::CONTENT;
 
     /**
      * @var FieldInterface[]|null The fields that may be involved in this query.
@@ -143,6 +144,13 @@ class ElementQuery extends Query implements ElementQueryInterface
      * @used-by archived()
      */
     public $archived = false;
+
+    /**
+     * @var bool|null Whether to return trashed (soft-deleted) elements.
+     * If this is set to `null`, then both trashed and non-trashed elements will be returned.
+     * @used-by trashed()
+     */
+    public $trashed = false;
 
     /**
      * @var mixed When the resulting elements must have been created.
@@ -466,6 +474,11 @@ class ElementQuery extends Query implements ElementQueryInterface
     public function offsetExists($name): bool
     {
         if (is_numeric($name)) {
+            // Cached?
+            if (($cachedResult = $this->getCachedResult()) !== null) {
+                return $name < count($cachedResult);
+            }
+
             $offset = $this->offset;
             $limit = $this->limit;
 
@@ -548,10 +561,7 @@ class ElementQuery extends Query implements ElementQueryInterface
     // -------------------------------------------------------------------------
 
     /**
-     * Sets the [[$inReverse]] property.
-     *
-     * @param bool $value The property value
-     * @return static self reference
+     * @inheritdoc
      * @uses $inReverse
      */
     public function inReverse(bool $value = true)
@@ -660,6 +670,16 @@ class ElementQuery extends Query implements ElementQueryInterface
 
     /**
      * @inheritdoc
+     * @uses $trashed
+     */
+    public function trashed($value = true)
+    {
+        $this->trashed = $value;
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
      * @uses $dateCreated
      */
     public function dateCreated($value)
@@ -745,19 +765,6 @@ class ElementQuery extends Query implements ElementQueryInterface
     {
         Craft::$app->getDeprecator()->log('ElementQuery::localeEnabled()', 'The “localeEnabled” element query param has been deprecated. Use “enabledForSite” instead.');
         $this->enabledForSite = $value;
-        return $this;
-    }
-
-    /**
-     * Sets the [[$leaves]] property.
-     *
-     * @param bool $value The property value.
-     * @return static self reference
-     * @uses $leaves
-     */
-    public function leaves(bool $value = true)
-    {
-        $this->leaves = $value;
         return $this;
     }
 
@@ -890,6 +897,16 @@ class ElementQuery extends Query implements ElementQueryInterface
 
     /**
      * @inheritdoc
+     * @uses $leaves
+     */
+    public function leaves(bool $value = true)
+    {
+        $this->leaves = $value;
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
      * @uses $ancestorOf
      */
     public function ancestorOf($value)
@@ -978,6 +995,16 @@ class ElementQuery extends Query implements ElementQueryInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function anyStatus()
+    {
+        $this->status = null;
+        $this->enabledForSite = false;
+        return $this;
+    }
+
     // Query preparation/execution
     // -------------------------------------------------------------------------
 
@@ -1039,7 +1066,7 @@ class ElementQuery extends Query implements ElementQueryInterface
                 'elementsId' => 'elements.id',
                 'elementsSitesId' => 'elements_sites.id',
             ])
-            ->from(['elements' => '{{%elements}}'])
+            ->from(['elements' => Table::ELEMENTS])
             ->innerJoin('{{%elements_sites}} elements_sites', '[[elements_sites.elementId]] = [[elements.id]]')
             ->andWhere(['elements_sites.siteId' => $this->siteId])
             ->andWhere($this->where)
@@ -1077,6 +1104,16 @@ class ElementQuery extends Query implements ElementQueryInterface
             $this->_applyStatusParam($class);
         }
 
+        // todo: remove schema version condition after next beakpoint
+        $schemaVersion = Craft::$app->getProjectConfig()->get('system.schemaVersion');
+        if (version_compare($schemaVersion, '3.1.0', '>=')) {
+            if ($this->trashed === false) {
+                $this->subQuery->andWhere(['elements.dateDeleted' => null]);
+            } else if ($this->trashed === true) {
+                $this->subQuery->andWhere(['not', ['elements.dateDeleted' => null]]);
+            }
+        }
+
         if ($this->dateCreated) {
             $this->subQuery->andWhere(Db::parseDateParam('elements.dateCreated', $this->dateCreated));
         }
@@ -1094,7 +1131,7 @@ class ElementQuery extends Query implements ElementQueryInterface
         }
 
         if ($this->uri) {
-            $this->subQuery->andWhere(Db::parseParam('elements_sites.uri', $this->uri));
+            $this->subQuery->andWhere(Db::parseParam('elements_sites.uri', $this->uri, '=', true));
         }
 
         if ($this->enabledForSite) {
@@ -1186,6 +1223,14 @@ class ElementQuery extends Query implements ElementQueryInterface
         }
 
         return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function exists($db = null)
+    {
+        return ($this->getCachedResult() !== null) ?: parent::exists($db);
     }
 
     /**
@@ -1493,6 +1538,11 @@ class ElementQuery extends Query implements ElementQueryInterface
      */
     protected function customFields(): array
     {
+        // todo: remove this after the next breakpoint
+        if (Craft::$app->getUpdates()->getIsCraftDbMigrationNeeded()) {
+            return [];
+        }
+
         $contentService = Craft::$app->getContent();
         $originalFieldContext = $contentService->fieldContext;
         $contentService->fieldContext = 'global';
@@ -1572,6 +1622,7 @@ class ElementQuery extends Query implements ElementQueryInterface
      */
     private function _joinContentTable(string $class)
     {
+        /** @var ElementInterface|string $class */
         // Join in the content table on both queries
         $this->subQuery->innerJoin($this->contentTable . ' content', '[[content.elementId]] = [[elements.id]]');
         $this->subQuery->addSelect(['contentId' => 'content.id']);
@@ -1600,7 +1651,7 @@ class ElementQuery extends Query implements ElementQueryInterface
                 $handle = $field->handle;
 
                 // In theory all field handles will be accounted for on the ElementQueryBehavior, but just to be safe...
-                if (isset($fieldAttributes->$handle)) {
+                if ($handle !== 'owner' && isset($fieldAttributes->$handle)) {
                     $fieldAttributeValue = $fieldAttributes->$handle;
                 } else {
                     $fieldAttributeValue = null;
@@ -1645,7 +1696,7 @@ class ElementQuery extends Query implements ElementQueryInterface
         $condition = ['or'];
 
         foreach ($statuses as $status) {
-            $status = StringHelper::toLowerCase($status);
+            $status = strtolower($status);
             $statusCondition = $this->statusCondition($status);
 
             if ($statusCondition === false) {
@@ -1690,7 +1741,10 @@ class ElementQuery extends Query implements ElementQueryInterface
      */
     private function _shouldJoinStructureData(): bool
     {
-        return $this->withStructure || ($this->withStructure !== false && $this->structureId);
+        return (
+            !$this->trashed &&
+            ($this->withStructure || ($this->withStructure !== false && $this->structureId))
+        );
     }
 
     /**
@@ -1732,17 +1786,39 @@ class ElementQuery extends Query implements ElementQueryInterface
             ]);
 
         if ($this->structureId) {
-            $this->query
-                ->innerJoin('{{%structureelements}} structureelements', '[[structureelements.elementId]] = [[subquery.elementsId]]');
-            $this->subQuery
-                ->innerJoin('{{%structureelements}} structureelements', '[[structureelements.elementId]] = [[elements.id]]')
-                ->andWhere(['structureelements.structureId' => $this->structureId]);
+            $this->query->innerJoin('{{%structureelements}} structureelements', [
+                'and',
+                '[[structureelements.elementId]] = [[subquery.elementsId]]',
+                ['structureelements.structureId' => $this->structureId]
+            ]);
+            $this->subQuery->innerJoin('{{%structureelements}} structureelements', [
+                'and',
+                '[[structureelements.elementId]] = [[elements.id]]',
+                ['structureelements.structureId' => $this->structureId]
+            ]);
         } else {
             $this->query
                 ->addSelect(['structureelements.structureId'])
-                ->leftJoin('{{%structureelements}} structureelements', '[[structureelements.elementId]] = [[subquery.elementsId]]');
+                ->leftJoin('{{%structureelements}} structureelements', [
+                    'and',
+                    '[[structureelements.elementId]] = [[subquery.elementsId]]',
+                    '[[structureelements.structureId]] = [[subquery.structureId]]',
+                ]);
+            $existsQuery = (new Query())
+                ->from([Table::STRUCTURES])
+                ->where('[[id]] = [[structureelements.structureId]]');
+            // todo: remove schema version condition after next beakpoint
+            $schemaVersion = Craft::$app->getProjectConfig()->get('system.schemaVersion');
+            if (version_compare($schemaVersion, '3.1.0', '>=')) {
+                $existsQuery->andWhere(['dateDeleted' => null]);
+            }
             $this->subQuery
-                ->leftJoin('{{%structureelements}} structureelements', '[[structureelements.elementId]] = [[elements.id]]');
+                ->addSelect(['structureelements.structureId'])
+                ->leftJoin('{{%structureelements}} structureelements', [
+                    'and',
+                    '[[structureelements.elementId]] = [[elements.id]]',
+                    ['exists', $existsQuery],
+                ]);
         }
 
         if ($this->hasDescendants !== null) {
@@ -1842,7 +1918,7 @@ class ElementQuery extends Query implements ElementQueryInterface
 
             $this->subQuery->andWhere([
                 'and',
-                ['<', 'structureelements.rgt', $positionedBefore->lft],
+                ['<', 'structureelements.lft', $positionedBefore->lft],
                 ['structureelements.root' => $positionedBefore->root]
             ]);
         }
@@ -1883,6 +1959,7 @@ class ElementQuery extends Query implements ElementQueryInterface
                 ->id($this->$property)
                 ->siteId($this->siteId)
                 ->structureId($this->structureId)
+                ->anyStatus()
                 ->one();
 
             if ($this->$property === null) {
@@ -2007,8 +2084,7 @@ class ElementQuery extends Query implements ElementQueryInterface
             return;
         }
 
-        $orderBy = array_merge($this->orderBy);
-        $orderByColumns = array_keys($orderBy);
+        // Define the real column name mapping (e.g. `fieldHandle` => `field_fieldHandle`)
         $orderColumnMap = [];
 
         if (is_array($this->customFields)) {
@@ -2022,6 +2098,13 @@ class ElementQuery extends Query implements ElementQueryInterface
 
         // Prevent “1052 Column 'id' in order clause is ambiguous” MySQL error
         $orderColumnMap['id'] = 'elements.id';
+        $orderColumnMap['dateCreated'] = 'elements.dateCreated';
+        $orderColumnMap['dateUpdated'] = 'elements.dateUpdated';
+
+        // Rename orderBy keys based on the real column name mapping
+        // (yes this is awkward but we need to preserve the order of the keys!)
+        $orderBy = array_merge($this->orderBy);
+        $orderByColumns = array_keys($orderBy);
 
         foreach ($orderColumnMap as $orderValue => $columnName) {
             // Are we ordering by this column name?
@@ -2032,10 +2115,6 @@ class ElementQuery extends Query implements ElementQueryInterface
                 $orderByColumns[$pos] = $columnName;
                 $orderBy = array_combine($orderByColumns, $orderBy);
             }
-        }
-
-        if (empty($orderBy)) {
-            return;
         }
 
         if ($this->inReverse) {
@@ -2080,6 +2159,11 @@ class ElementQuery extends Query implements ElementQueryInterface
                 'elements_sites.uri',
                 'enabledForSite' => 'elements_sites.enabled',
             ]);
+
+            // If the query includes soft-deleted elements, include the date deleted
+            if ($this->trashed !== false) {
+                $select[] = 'elements.dateDeleted';
+            }
 
             // If the query already specifies any columns, merge those in too
             if (!empty($this->query->select)) {
@@ -2212,6 +2296,11 @@ class ElementQuery extends Query implements ElementQueryInterface
                     }
                 }
             }
+        }
+
+        if (array_key_exists('dateDeleted', $row)) {
+            $row['trashed'] = $row['dateDeleted'] !== null;
+            unset($row['dateDeleted']);
         }
 
         /** @var Element $element */

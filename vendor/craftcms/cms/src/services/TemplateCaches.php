@@ -11,6 +11,7 @@ use Craft;
 use craft\base\Element;
 use craft\base\ElementInterface;
 use craft\db\Query;
+use craft\db\Table;
 use craft\elements\db\ElementQuery;
 use craft\events\DeleteTemplateCachesEvent;
 use craft\helpers\DateTimeHelper;
@@ -46,27 +47,6 @@ class TemplateCaches extends Component
 
     // Properties
     // =========================================================================
-
-    /**
-     * The table that template caches are stored in.
-     *
-     * @var string
-     */
-    private static $_templateCachesTable = '{{%templatecaches}}';
-
-    /**
-     * The table that template cache-element relations are stored in.
-     *
-     * @var string
-     */
-    private static $_templateCacheElementsTable = '{{%templatecacheelements}}';
-
-    /**
-     * The table that queries used within template caches are stored in.
-     *
-     * @var string
-     */
-    private static $_templateCacheQueriesTable = '{{%templatecachequeries}}';
 
     /**
      * The duration (in seconds) between the times when Craft will delete any expired template caches.
@@ -139,6 +119,11 @@ class TemplateCaches extends Component
             return null;
         }
 
+        // Don't return anything if it's not a global request and it is a console request.
+        if (!$global && Craft::$app->getRequest()->getIsConsoleRequest()) {
+            return null;
+        }
+
         // Don't return anything if it's not a global request and the path > 255 characters.
         if (!$global && strlen($this->_getPath()) > 255) {
             return null;
@@ -150,7 +135,7 @@ class TemplateCaches extends Component
         /** @noinspection PhpUnhandledExceptionInspection */
         $query = (new Query())
             ->select(['body'])
-            ->from([self::$_templateCachesTable])
+            ->from([Table::TEMPLATECACHES])
             ->where([
                 'and',
                 [
@@ -279,6 +264,11 @@ class TemplateCaches extends Component
             return;
         }
 
+        // Don't return anything if it's not a global request and it's a console request.
+        if (!$global && Craft::$app->getRequest()->getIsConsoleRequest()) {
+            return;
+        }
+
         // If there are any transform generation URLs in the body, don't cache it.
         // stripslashes($body) in case the URL has been JS-encoded or something.
         if (StringHelper::contains(stripslashes($body), 'assets/generate-transform')) {
@@ -319,7 +309,7 @@ class TemplateCaches extends Component
         try {
             Craft::$app->getDb()->createCommand()
                 ->insert(
-                    self::$_templateCachesTable,
+                    Table::TEMPLATECACHES,
                     [
                         'cacheKey' => $key,
                         'siteId' => Craft::$app->getSites()->getCurrentSite()->id,
@@ -330,7 +320,7 @@ class TemplateCaches extends Component
                     false)
                 ->execute();
 
-            $cacheId = Craft::$app->getDb()->getLastInsertID(self::$_templateCachesTable);
+            $cacheId = Craft::$app->getDb()->getLastInsertID(Table::TEMPLATECACHES);
 
             // Tag it with any element queries that were executed within the cache
             if (!empty($this->_cachedQueries[$key])) {
@@ -343,7 +333,7 @@ class TemplateCaches extends Component
                     ];
                 }
                 Craft::$app->getDb()->createCommand()
-                    ->batchInsert(self::$_templateCacheQueriesTable, [
+                    ->batchInsert(Table::TEMPLATECACHEQUERIES, [
                         'cacheId',
                         'type',
                         'query'
@@ -362,7 +352,7 @@ class TemplateCaches extends Component
 
                 Craft::$app->getDb()->createCommand()
                     ->batchInsert(
-                        self::$_templateCacheElementsTable,
+                        Table::TEMPLATECACHEELEMENTS,
                         ['cacheId', 'elementId'],
                         $values,
                         false)
@@ -391,7 +381,7 @@ class TemplateCaches extends Component
             return false;
         }
 
-        if ($this->_deletedAllCaches || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedAllCaches) {
             return false;
         }
 
@@ -403,7 +393,7 @@ class TemplateCaches extends Component
         }
 
         $affectedRows = Craft::$app->getDb()->createCommand()
-            ->delete(self::$_templateCachesTable, ['id' => $cacheId])
+            ->delete(Table::TEMPLATECACHES, ['id' => $cacheId])
             ->execute();
 
         // Fire an 'afterDeleteCaches' event
@@ -424,13 +414,13 @@ class TemplateCaches extends Component
      */
     public function deleteCachesByElementType(string $elementType): bool
     {
-        if ($this->_deletedAllCaches || !empty($this->_deletedCachesByElementType[$elementType]) || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedAllCaches || !empty($this->_deletedCachesByElementType[$elementType]) === false) {
             return false;
         }
 
         $cacheIds = (new Query())
             ->select(['cacheId'])
-            ->from([self::$_templateCacheQueriesTable])
+            ->from([Table::TEMPLATECACHEQUERIES])
             ->where(['type' => $elementType])
             ->column();
 
@@ -447,11 +437,7 @@ class TemplateCaches extends Component
      */
     public function deleteCachesByElement($elements): bool
     {
-        if ($this->_deletedAllCaches || $this->_isTemplateCachingEnabled() === false) {
-            return false;
-        }
-
-        if (!$elements) {
+        if ($this->_deletedAllCaches || empty($elements)) {
             return false;
         }
 
@@ -485,16 +471,16 @@ class TemplateCaches extends Component
      */
     public function deleteCachesByElementId($elementId, bool $deleteQueryCaches = true): bool
     {
-        if ($this->_deletedAllCaches || $this->_isTemplateCachingEnabled() === false) {
-            return false;
-        }
-
-        if (!$elementId) {
+        if ($this->_deletedAllCaches || !$elementId) {
             return false;
         }
 
         // Check the query caches too?
-        if ($deleteQueryCaches && Craft::$app->getConfig()->getGeneral()->cacheElementQueries) {
+        if (
+            $deleteQueryCaches &&
+            $this->_isTemplateCachingEnabled() &&
+            Craft::$app->getConfig()->getGeneral()->cacheElementQueries
+        ) {
             if ($this->_deleteCachesIndex === null) {
                 Craft::$app->getResponse()->on(Response::EVENT_AFTER_PREPARE, [$this, 'handleResponse']);
                 $this->_deleteCachesIndex = [];
@@ -511,7 +497,7 @@ class TemplateCaches extends Component
         $cacheIds = (new Query())
             ->select(['cacheId'])
             ->distinct(true)
-            ->from([self::$_templateCacheElementsTable])
+            ->from([Table::TEMPLATECACHEELEMENTS])
             ->where(['elementId' => $elementId])
             ->column();
 
@@ -542,7 +528,7 @@ class TemplateCaches extends Component
      */
     public function deleteCachesByElementQuery(ElementQuery $query): bool
     {
-        if ($this->_deletedAllCaches || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedAllCaches) {
             return false;
         }
 
@@ -562,13 +548,13 @@ class TemplateCaches extends Component
      */
     public function deleteCachesByKey($key): bool
     {
-        if ($this->_deletedAllCaches || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedAllCaches) {
             return false;
         }
 
         $cacheIds = (new Query())
             ->select(['id'])
-            ->from([self::$_templateCachesTable])
+            ->from([Table::TEMPLATECACHES])
             ->where(['cacheKey' => $key])
             ->column();
 
@@ -582,18 +568,22 @@ class TemplateCaches extends Component
      */
     public function deleteExpiredCaches(): bool
     {
-        if ($this->_deletedAllCaches || $this->_deletedExpiredCaches || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedAllCaches || $this->_deletedExpiredCaches) {
             return false;
         }
 
         $cacheIds = (new Query())
             ->select(['id'])
-            ->from([self::$_templateCachesTable])
+            ->from([Table::TEMPLATECACHES])
             ->where(['<=', 'expiryDate', Db::prepareDateForDb(new \DateTime())])
             ->column();
 
         $success = $this->deleteCacheById($cacheIds);
+
+        // Don't do it again for a while
+        Craft::$app->getCache()->set('lastTemplateCacheCleanupDate', DateTimeHelper::currentTimeStamp(), self::$_lastCleanupDateCacheDuration);
         $this->_deletedExpiredCaches = true;
+
         return $success;
     }
 
@@ -605,19 +595,17 @@ class TemplateCaches extends Component
     public function deleteExpiredCachesIfOverdue(): bool
     {
         // Ignore if we've already done this once during the request
-        if ($this->_deletedExpiredCaches || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedExpiredCaches) {
             return false;
         }
 
         $lastCleanupDate = Craft::$app->getCache()->get('lastTemplateCacheCleanupDate');
 
         if ($lastCleanupDate === false || DateTimeHelper::currentTimeStamp() - $lastCleanupDate > self::$_lastCleanupDateCacheDuration) {
-            // Don't do it again for a while
-            Craft::$app->getCache()->set('lastTemplateCacheCleanupDate', DateTimeHelper::currentTimeStamp(), self::$_lastCleanupDateCacheDuration);
-
             return $this->deleteExpiredCaches();
         }
 
+        // Save ourselves some trouble if this gets called again in this request
         $this->_deletedExpiredCaches = true;
 
         return false;
@@ -630,13 +618,13 @@ class TemplateCaches extends Component
      */
     public function deleteAllCaches(): bool
     {
-        if ($this->_deletedAllCaches || $this->_isTemplateCachingEnabled() === false) {
+        if ($this->_deletedAllCaches) {
             return false;
         }
 
         $cacheIds = (new Query())
             ->select(['id'])
-            ->from([self::$_templateCachesTable])
+            ->from([Table::TEMPLATECACHES])
             ->column();
 
         $success = $this->deleteCacheById($cacheIds);

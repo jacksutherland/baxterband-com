@@ -58,12 +58,7 @@ switch ($this->dbDriver) {
 
 // Only run this requirement check if we're running in the context of Craft.
 if (class_exists('Craft')) {
-    $requirements[] = array(
-        'name' => 'Sensitive Craft folders should not be publicly accessible',
-        'mandatory' => false,
-        'condition' => $this->checkWebRoot(),
-        'memo' => $this->webRootFolderMessage,
-    );
+    $requirements[] = $this->webrootRequirement();
 }
 
 $requirements = array_merge($requirements, array(
@@ -71,112 +66,130 @@ $requirements = array_merge($requirements, array(
         'name' => 'Reflection extension',
         'mandatory' => true,
         'condition' => extension_loaded('reflection'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/class.reflectionextension.php">Reflection</a> extension is required.',
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/class.reflectionextension.php">Reflection</a> extension is required.',
     ),
     array(
         'name' => 'PCRE extension (with UTF-8 support)',
         'mandatory' => true,
         'condition' => extension_loaded('pcre') && preg_match('/./u', 'Ü') === 1,
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.pcre.php">PCRE</a> extension is required and it must be compiled to support UTF-8.',
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.pcre.php">PCRE</a> extension is required and it must be compiled to support UTF-8.',
     ),
     array(
         'name' => 'SPL extension',
         'mandatory' => true,
         'condition' => extension_loaded('SPL'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.spl.php">SPL</a> extension is required.'
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.spl.php">SPL</a> extension is required.'
     ),
     array(
         'name' => 'PDO extension',
         'mandatory' => true,
         'condition' => extension_loaded('pdo'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.pdo.php">PDO</a> extension is required.'
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.pdo.php">PDO</a> extension is required.'
     ),
     array(
         'name' => 'Multibyte String extension (with Function Overloading disabled)',
         'mandatory' => true,
         'condition' => extension_loaded('mbstring') && ini_get('mbstring.func_overload') == 0,
-        'memo' => 'Craft CMS requires the <a target="_blank" href="http://www.php.net/manual/en/book.mbstring.php">Multibyte String</a> extension with <a target="_blank" href="http://php.net/manual/en/mbstring.overload.php">Function Overloading</a> disabled in order to run.'
+        'memo' => 'Craft CMS requires the <a rel="noopener" target="_blank" href="http://www.php.net/manual/en/book.mbstring.php">Multibyte String</a> extension with <a rel="noopener" target="_blank" href="http://php.net/manual/en/mbstring.overload.php">Function Overloading</a> disabled in order to run.'
     ),
     array(
         'name' => 'GD extension or ImageMagick extension',
         'mandatory' => true,
         'condition' => extension_loaded('gd') || extension_loaded('imagick'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.image.php">GD</a> or <a target="_blank" href="http://php.net/manual/en/book.imagick.php">ImageMagick</a> extension is required, however ImageMagick is recommended as it adds animated GIF support, and preserves 8-bit and 24-bit PNGs during image transforms.'
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.image.php">GD</a> or <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.imagick.php">ImageMagick</a> extension is required, however ImageMagick is recommended as it adds animated GIF support, and preserves 8-bit and 24-bit PNGs during image transforms.'
     ),
     array(
         'name' => 'OpenSSL extension',
         'mandatory' => true,
         'condition' => extension_loaded('openssl'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.openssl.php">OpenSSL</a> extension is required.'
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.openssl.php">OpenSSL</a> extension is required.'
     ),
     array(
         'name' => 'cURL extension',
         'mandatory' => true,
         'condition' => extension_loaded('curl'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.curl.php">cURL</a> extension is required.',
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.curl.php">cURL</a> extension is required.',
     ),
     array(
-        'name' => 'ini_set calls',
+        'name' => 'ctype extension',
         'mandatory' => true,
-        'condition' => $this->checkIniSet(),
-        'memo' => $this->iniSetMessage,
+        'condition' => extension_loaded('ctype'),
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/book.ctype.php">ctype</a> extension is required.',
     ),
+    $this->iniSetRequirement(),
     array(
         'name' => 'Intl extension',
         'mandatory' => false,
         'condition' => $this->checkPhpExtensionVersion('intl', '1.0.2', '>='),
-        'memo' => 'The <a target="_blank" href="http://www.php.net/manual/en/book.intl.php">Intl</a> extension version 1.0.2 is highly '.
-            'recommended especially if you will be using any non-English languages for this Craft CMS installation.'
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://www.php.net/manual/en/book.intl.php">Intl</a> extension (version 1.0.2+) is recommended.'
     ),
     array(
         'name' => 'Fileinfo extension',
-        'mandatory' => false,
+        'mandatory' => true,
         'condition' => extension_loaded('fileinfo'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.fileinfo.php">Fileinfo</a> extension is recommended for more accurate '.
-            'mime-type detection for uploaded files. If it is not available a Craft CMS will fall back to determining the mime-type '.
-            'by the file extension.'
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.fileinfo.php">Fileinfo</a> extension required.'
     ),
     array(
         'name' => 'DOM extension',
         'mandatory' => true,
         'condition' => extension_loaded('dom'),
-        'memo' => 'The <a target="_blank" href="http://php.net/manual/en/book.dom.php">DOM</a> extension is required.',
+        'memo' => 'The <a rel="noopener" target="_blank" href="http://php.net/manual/en/book.dom.php">DOM</a> extension is required.',
     ),
     array(
         'name' => 'iconv extension',
-        'mandatory' => false,
+        'mandatory' => true,
         'condition' => function_exists('iconv'),
-        'memo' => '<a target="_blank" href="http://php.net/manual/en/book.iconv.php">iconv</a> is recommended for more robust character set conversion support.',
+        'memo' => '<a rel="noopener" target="_blank" href="http://php.net/manual/en/book.iconv.php">iconv</a> is required for more robust character set conversion support.',
     ),
-    array(
-        'name' => 'Max Upload File Size',
-        'mandatory' => false,
-        'condition' => true,
-        'memo' => 'upload_max_filesize is set to '.ini_get('upload_max_filesize').'.',
-    ),
-    array(
-        'name' => 'Max POST Size',
-        'mandatory' => false,
-        'condition' => true,
-        'memo' => 'post_max_size is set to '.ini_get('post_max_size').'.',
-    ),
-    array(
-        'name' => 'Memory Limit',
-        'mandatory' => false,
-        'condition' => $this->checkMemory(),
-        'memo' => $this->memoryMessage,
-    ),
+    $this->memoryLimitRequirement(),
+    $this->maxExecutionTimeRequirement(),
     array(
         'name' => 'password_hash()',
         'mandatory' => true,
         'condition' => function_exists('password_hash'),
-        'memo' => 'The <a target="_blank" href="https://secure.php.net/manual/en/function.password-hash.php">password_hash()</a> function is required so Craft can create secure passwords.',
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/function.password-hash.php">password_hash()</a> function is required so Craft can create secure passwords.',
     ),
     array(
         'name' => 'Zip extension',
         'mandatory' => true,
         'condition' => extension_loaded('zip'),
-        'memo' => 'The <a target="_blank" href="https://secure.php.net/manual/en/book.zip.php">zip</a> extension is required for zip and unzip operations.',
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/book.zip.php">zip</a> extension is required for zip and unzip operations.',
+    ),
+    array(
+        'name' => 'JSON extension',
+        'mandatory' => true,
+        'condition' => extension_loaded('json'),
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/book.json.php">JSON</a> extension is required for JSON encoding and decoding.',
+    ),
+    array(
+        'name' => 'proc_open()',
+        'mandatory' => false,
+        'condition' => function_exists('proc_open'),
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/function.proc-open.php">proc_open()</a> function is required for Plugin Store operations as well as sending emails.',
+    ),
+    array(
+        'name' => 'proc_get_status()',
+        'mandatory' => false,
+        'condition' => function_exists('proc_get_status'),
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/function.proc-get-status.php">proc_get_status()</a> function is required for Plugin Store operations as well as sending emails.',
+    ),
+    array(
+        'name' => 'proc_close()',
+        'mandatory' => false,
+        'condition' => function_exists('proc_close'),
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/function.proc-close.php">proc_close()</a> function is required for Plugin Store operations as well as sending emails.',
+    ),
+    array(
+        'name' => 'proc_terminate()',
+        'mandatory' => false,
+        'condition' => function_exists('proc_terminate'),
+        'memo' => 'The <a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/function.proc-terminate.php">proc_terminate()</a> function is required for Plugin Store operations as well as sending emails.',
+    ),
+    array(
+        'name' => 'allow_url_fopen',
+        'mandatory' => false,
+        'condition' => ini_get('allow_url_fopen'),
+        'memo' => '<a rel="noopener" target="_blank" href="https://secure.php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen">allow_url_fopen</a> must be enabled in your PHP configuration for Plugin Store and updating operations.',
     ),
 ));
 

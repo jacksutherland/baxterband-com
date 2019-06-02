@@ -7,11 +7,13 @@ class LitEmoji
     const MB_REGEX = '/(
     		     \x23\xE2\x83\xA3               # Digits
     		     [\x30-\x39]\xE2\x83\xA3
+    		   | \xE2[\x9C-\x9E][\x80-\xBF]     # Dingbats
     		   | \xF0\x9F[\x85-\x88][\xA6-\xBF] # Enclosed characters
     		   | \xF0\x9F[\x8C-\x97][\x80-\xBF] # Misc
     		   | \xF0\x9F\x98[\x80-\xBF]        # Smilies
     		   | \xF0\x9F\x99[\x80-\x8F]
     		   | \xF0\x9F\x9A[\x80-\xBF]        # Transport and map symbols
+    		   | \xF0\x9F[\xA4-\xA7][\x80-\xBF] # Supplementary symbols and pictographs
     		)/x';
 
     private static $shortcodes = [];
@@ -192,10 +194,14 @@ class LitEmoji
             return self::$shortcodes;
         }
 
+        $data = require(__DIR__ . '/shortcodes-array.php');
+
         // Skip excluded shortcodes
-        self::$shortcodes = array_filter(require(__DIR__ . '/shortcodes-array.php'), function($code) {
-            return !in_array($code, self::$excludedShortcodes);
-        }, ARRAY_FILTER_USE_KEY);
+        foreach ($data as $code => $codepoint) {
+            if (!in_array($code, self::$excludedShortcodes)) {
+                self::$shortcodes[$code] = $codepoint;
+            }
+        }
 
         return self::$shortcodes;
     }

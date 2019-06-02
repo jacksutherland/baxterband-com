@@ -81,7 +81,6 @@ class RecentEntries extends Widget
     {
         $rules = parent::rules();
         $rules[] = [['siteId', 'limit'], 'number', 'integerOnly' => true];
-
         return $rules;
     }
 
@@ -188,8 +187,7 @@ class RecentEntries extends Widget
         }
 
         $query = Entry::find();
-        $query->status(null);
-        $query->enabledForSite(false);
+        $query->anyStatus();
         $query->siteId($targetSiteId);
         $query->sectionId($targetSectionId);
         $query->editable(true);
