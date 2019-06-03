@@ -299,6 +299,7 @@ footer {
     width: 100%; }
     .hero .news-ticker .news-ticker-content {
       width: 75%;
+      padding: 10px;
       margin: 0 auto;
       font-family: 'Trade Winds', cursive;
       font-size: 1.75rem;
@@ -308,7 +309,7 @@ footer {
       background: #000;
       box-shadow: 2px 2px 5px #000;
       border: solid 2px #333;
-      border-top: solid 2px #555;
+      border-top: solid 2px #666;
       border-left: solid 2px #555; }
 
 @media (min-width: 768px) {
