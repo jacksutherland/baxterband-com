@@ -98,7 +98,7 @@ $(function()
   win = $(window);
   head = $("header");
 
-  startFire();
+  //startFire();
   checkWinPos();
   contactForm();
 
