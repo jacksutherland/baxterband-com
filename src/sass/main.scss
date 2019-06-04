@@ -255,6 +255,8 @@ footer {
             //padding: 20px;
             margin:10px 20px 0 0;
             border-radius: 2px;
+            font-size: .9rem;
+            line-height: 1.2rem;
         }
 	}
 
@@ -426,6 +428,15 @@ footer {
 @media (min-width: 768px) {
     .band-bio {
         width: 75%;
+    }
+    .band-member {
+        .band-member-info {
+            .band-member-bio {
+                font-size: 1rem;
+                line-height: 1.4rem;
+            }
+        }
+
     }
     .hero {
 

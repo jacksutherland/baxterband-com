@@ -183,7 +183,9 @@ footer {
       display: none;
       color: #FFF;
       margin: 10px 20px 0 0;
-      border-radius: 2px; }
+      border-radius: 2px;
+      font-size: .9rem;
+      line-height: 1.2rem; }
 
 /*** ABOUT ***/
 #about {
@@ -315,6 +317,9 @@ footer {
 @media (min-width: 768px) {
   .band-bio {
     width: 75%; }
+  .band-member .band-member-info .band-member-bio {
+    font-size: 1rem;
+    line-height: 1.4rem; }
   .hero {
     -webkit-animation-duration: 2s;
     animation-duration: 2s;
