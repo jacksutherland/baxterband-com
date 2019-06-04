@@ -19,11 +19,12 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, minimal-ui"/>
         <link rel="shortcut icon" href="favicon.ico" />
-        <title>{{ siteName }}</title>
+        <title>{{ seo.seoTitle }}</title>
+        <meta name="description" content="{{ seo.seoDescription }}">
 
         {# OG Tags #}
-        <meta property="og:title" content="Exit 85" />
-        <meta property="og:description" content="Exit 85 is a rock cover band by lifelong musicians with decades of experience. Based out of the Charlotte, NC and Fort Mill, SC areas, they are known for their great sound and precision performance of 80's and 90's rock classics." />
+        <meta property="og:title" content="{{ siteName }}" />
+        <meta property="og:description" content="{{ seo.seoDescription }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://exiteightyfive.com" />
         <meta property="og:image" content="http://exiteightyfive.com/images/kiser-landscape.jpg" />
@@ -32,8 +33,8 @@
         {# Twitter Tags #}
         <meta name="twitter:creator" content="@jacksutherland" />
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="Exit 85">
-        <meta name="twitter:description" content="Exit 85 is a rock cover band by lifelong musicians with decades of experience. Based out of the Charlotte, NC and Fort Mill, SC areas, they are known for their great sound and precision performance of 80's and 90's rock classics.">
+        <meta name="twitter:title" content="{{ siteName }}">
+        <meta name="twitter:description" content="{{ seo.seoDescription }}">
         <meta name="twitter:image" content="http://exiteightyfive.com/images/kiser-landscape.jpg">
 
         {# RESOURCES #}
