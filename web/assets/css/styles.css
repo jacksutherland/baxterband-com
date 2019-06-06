@@ -54,7 +54,7 @@ header {
       padding-top: 0; }
   header.not-at-top {
     border-bottom: solid 1px #262626;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.85);
     animation: fadeInHeader 0.5s linear;
     -webkit-animation: fadeInHeader 0.5s linear; }
     header.not-at-top .news-alert {
