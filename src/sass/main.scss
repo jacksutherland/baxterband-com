@@ -3,7 +3,8 @@ $black: #000;
 $red: #d91f26;
 $section-gray: #262626;
 $thin-border: solid 1px #262626;
-$link-color: #6db76b;
+$link-color: #6FB66E; //#6db76b;
+$green: #6FB66E;
 
 html {
 	background: #000;
@@ -29,8 +30,6 @@ body {
 a {
 	text-decoration: none;
 }
-
-
 
 // h1 { 
 // 	top: 20px;
@@ -78,9 +77,16 @@ header {
     }
     &.not-at-top {
         border-bottom: $thin-border;
-        background: rgba(0,0,0,0.8);
+        background: rgba(0,0,0,0.9);
         animation: fadeInHeader 0.5s linear;
         -webkit-animation: fadeInHeader 0.5s linear;
+        padding-top: 25px !important;
+        .news-alert {
+            display: none !important;
+        }
+    }
+    &.has-alert {
+        padding-top: 0;
     }
 
     h1 {
@@ -105,7 +111,41 @@ header {
             transition: opacity 0.5s;
         }
     }
-
+    .news-alert {
+        padding: 8px 0;
+        margin-bottom: 20px;
+        background-color: $section-gray;
+        //box-shadow: 0px 0px 8px 2px #000000;
+        overflow: hidden;
+        .news-alert-content {
+            font-family: 'Trade Winds', cursive;
+            font-size: 0.95rem;
+            color: $green;
+            text-align: center;
+            white-space: nowrap;
+            margin-left: 0;
+            animation: scrollAlert 2s ease-out;
+            -webkit-animation: scrollAlert 2s ease-out;
+            a {
+                color: $green !important;
+                text-decoration: underline;
+                margin: 0;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+@keyframes scrollAlert {
+    0%   { margin-left: 105%; }
+    50%  { margin-left: 105%; }
+    100% { margin-left: 0; }
+}
+@-webkit-keyframes scrollAlert {
+    0%   { margin-left: 105%; }
+    50%  { margin-left: 105%; }
+    100% { margin-left: 0; }
 }
 @keyframes fadeInHeader {
   0% {
@@ -364,6 +404,9 @@ footer {
 	position: relative;
 	height: 700px;
 	margin: 20px;
+    &.has-alert {
+        margin-top: 60px;
+    }
     .logo {
         position: absolute;
         top: 10px;

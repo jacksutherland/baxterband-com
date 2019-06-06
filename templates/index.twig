@@ -7,7 +7,14 @@
 {% set videos = craft.entries().section('videos').all() %}
 
 {% block header %}
-	<header>
+	<header{% if entry.newsHtml | length %} class="has-alert"{% endif %}>
+		{% if entry.newsHtml | length %}
+			<div class="news-alert d-none d-md-block">
+				<div class="news-alert-content">
+					{{ entry.newsHtml | raw }}
+				</div>
+			</div>
+		{% endif %}
         <div id="main-menu" class="container">
             {# <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a> #}
             <a href="#" class="jump-link">HOME</a>
@@ -24,13 +31,13 @@
 
 {% block content %}
 
-	<div class="hero">
+	<div class="hero{% if entry.newsHtml | length %} has-alert{% endif %}">
 		{# <h1>{{ siteName | replace(" ", "<br>") | raw }}</h1> #}
 		{# <h1>{{ siteName }}</h1> #}
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
 		<div class="hero-image"></div>
 		
-		{% if entry.newsHtml | length %}
+		{# {% if entry.newsHtml | length %}
 			<div class="news-ticker">
 				<div class="container">
 					<div class="news-ticker-content">
@@ -38,7 +45,7 @@
 					</div>
 				</div>
 			</div>
-		{% endif %}
+		{% endif %} #}
 
 	</div>
 
