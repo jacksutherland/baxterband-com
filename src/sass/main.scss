@@ -80,7 +80,7 @@ header {
     }
     &.not-at-top {
         border-bottom: $thin-border;
-        background: rgba(0,0,0,0.9);
+        background: rgba(0,0,0,0.8);
         animation: fadeInHeader 0.5s linear;
         -webkit-animation: fadeInHeader 0.5s linear;
         .news-alert {
