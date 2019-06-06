@@ -7,7 +7,7 @@
 {% set videos = craft.entries().section('videos').all() %}
 
 {% block header %}
-	<header{% if entry.newsHtml | length %} class="has-alert"{% endif %}>
+	<header class="at-top{% if entry.newsHtml | length %} has-alert{% endif %}">
 		{% if entry.newsHtml | length %}
 			<div class="news-alert d-none d-md-block">
 				<div class="news-alert-content">

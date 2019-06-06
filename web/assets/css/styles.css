@@ -50,16 +50,15 @@ header {
   header.at-top {
     border-bottom: none;
     background-color: rgba(0, 0, 0, 0); }
+    header.at-top.has-alert {
+      padding-top: 0; }
   header.not-at-top {
     border-bottom: solid 1px #262626;
     background: rgba(0, 0, 0, 0.9);
     animation: fadeInHeader 0.5s linear;
-    -webkit-animation: fadeInHeader 0.5s linear;
-    padding-top: 25px !important; }
+    -webkit-animation: fadeInHeader 0.5s linear; }
     header.not-at-top .news-alert {
       display: none !important; }
-  header.has-alert {
-    padding-top: 0; }
   header h1 {
     font-size: 1.35rem;
     margin: 0;
@@ -314,7 +313,7 @@ footer {
   height: 700px;
   margin: 20px; }
   .hero.has-alert {
-    margin-top: 60px; }
+    margin-top: 52px; }
   .hero .logo {
     position: absolute;
     top: 10px;
@@ -335,27 +334,6 @@ footer {
     height: 700px;
     width: 100%;
     border-radius: 10px; }
-  .hero .news-ticker {
-    position: absolute;
-    z-index: 200;
-    color: #FFF;
-    padding: 20px 50px 20px 0;
-    bottom: 100px;
-    width: 100%; }
-    .hero .news-ticker .news-ticker-content {
-      width: 75%;
-      padding: 10px;
-      margin: 0 auto;
-      font-family: 'Trade Winds', cursive;
-      font-size: 1.75rem;
-      text-align: center;
-      transform: rotate(0.5deg);
-      opacity: 0.6;
-      background: #000;
-      box-shadow: 2px 2px 5px #000;
-      border: solid 2px #333;
-      border-top: solid 2px #666;
-      border-left: solid 2px #555; }
 
 @media (min-width: 768px) {
   .band-bio {
@@ -595,16 +573,15 @@ footer {
 /*Phones (<768px)*/
 @media (max-width: 767px) {
   header {
-    text-align: center; }
+    text-align: center;
+    padding: 10px 0 !important; }
     header a:first-child {
       margin-left: 0; }
     header a, header a:visited {
       margin-left: 5px; }
-  .news-ticker {
-    display: none; }
   .hero {
     height: 400px;
-    margin: 0; }
+    margin: 0 !important; }
     .hero .logo {
       top: auto;
       bottom: 10px;
