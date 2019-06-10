@@ -4,7 +4,7 @@
 {% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
 {% set members = craft.entries.section('members').orderBy('postDate') %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
-{% set videos = craft.entries().section('videos').all() %}
+{% set videos = craft.entries().section('videos') %}
 
 {% block header %}
 	<header class="at-top{% if entry.newsHtml | length %} has-alert{% endif %}">
@@ -155,7 +155,7 @@
 						{% set vidlen = videos | length %}
 						{% if vidlen > 0 %}
 							<div class="row">
-								{% for video in videos %}
+								{% for video in videos.all() %}
 									<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 										<div class="mt-5">
 											<div class="embed-responsive embed-responsive-16by9">
