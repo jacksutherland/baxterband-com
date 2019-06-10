@@ -57,7 +57,7 @@
 		{% set vidlen = videos | length %}
 		{% if vidlen > 0 %}
 			<div class="row">
-				{% for video in videos | reverse | slice(0, 2) %}
+				{% for video in videos.isFeatured('1') %}
 					<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 						<div class="mt-5">
 							<div class="embed-responsive embed-responsive-16by9">
