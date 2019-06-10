@@ -4,7 +4,8 @@
 {% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
 {% set members = craft.entries.section('members').orderBy('postDate') %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
-{% set videos = craft.entries().section('videos') %}
+{% set featuredVideos = craft.entries().section('videos').isFeatured('1') %}
+{% set videos = craft.entries().section('videos').all() %}
 
 {% block header %}
 	<header class="at-top{% if entry.newsHtml | length %} has-alert{% endif %}">
@@ -54,10 +55,10 @@
 			<h1>{{ entry.bandHeader }}</h1>
 			<p>{{ entry.bandBio }}</p>
 		</div>
-		{% set vidlen = videos | length %}
+		{% set vidlen = featuredVideos | length %}
 		{% if vidlen > 0 %}
 			<div class="row">
-				{% for video in videos.isFeatured('1') %}
+				{% for video in featuredVideos.isFeatured('1') %}
 					<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 						<div class="mt-5">
 							<div class="embed-responsive embed-responsive-16by9">
@@ -155,7 +156,7 @@
 						{% set vidlen = videos | length %}
 						{% if vidlen > 0 %}
 							<div class="row">
-								{% for video in videos.all() %}
+								{% for video in videos %}
 									<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 										<div class="mt-5">
 											<div class="embed-responsive embed-responsive-16by9">
