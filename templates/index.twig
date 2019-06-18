@@ -10,8 +10,14 @@
 {% set featuredVideos = craft.categories.group('videos').isFeatured('1') %}
 
 {% block header %}
-	<header class="at-top{% if entry.newsHtml | length %} has-alert{% endif %}">
-		{% if entry.newsHtml | length %}
+	<header class="at-top{% if craft.request.getParam('src') is not null or entry.newsHtml | length %} has-alert{% endif %}">
+		{% if craft.request.getParam('src') is not null %}
+			<div class="news-alert d-none d-md-block">
+				<div class="news-alert-content">
+					<a href="#contact" class="jump-link">Book your venue, party or event today!</a>
+				</div>
+			</div>
+		{% elseif entry.newsHtml | length %}
 			<div class="news-alert d-none d-md-block">
 				<div class="news-alert-content">
 					{{ entry.newsHtml | raw }}
