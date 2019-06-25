@@ -308,6 +308,24 @@ footer {
     padding: 0 0 80px 0;
 }
 
+.cover-block {
+    height: 150px;
+    width: 100%;
+    margin: 15px 0;
+    background-color: lighten($section-gray, 3%);
+    display: table;
+    .cover-block-content {
+        width: 100%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        padding: 0 10px;
+        i {
+            color: lighten($section-gray, 50%);
+        }
+    }
+}
+
 /*** SHOWS ***/
 
 #shows {
