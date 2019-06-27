@@ -63,7 +63,7 @@
 			<h1>{{ entry.bandHeader }}</h1>
 			<p>{{ entry.bandBio }}</p>
 		</div>
-		{% set vidlen = featuredVideos | length %}
+		{# {% set vidlen = featuredVideos | length %}
 		{% if vidlen > 0 %}
 			<div class="row">
 				{% for video in featuredVideos %}
@@ -76,7 +76,7 @@
 					</div>
 				{% endfor %}
 			</div>
-		{% endif %}
+		{% endif %} #}
 	</div>
 
 	<div id="shows" class="section-style1">
@@ -155,7 +155,7 @@
 				<p>{{ entry.songsText }}</p>
 			{% endif %}
 
-			<div class="mt-5 mb-5">
+			{# <div class="mt-5 mb-5">
 				<div class="row">
 					<div class="col-12 col-lg-8 col-xl-12 m-auto">
 
@@ -178,7 +178,7 @@
 
 					</div>
 				</div>
-			</div>
+			</div> #}
 
 			<h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5>
 
@@ -193,10 +193,15 @@
 					{% for song in setlist90s.one().children.all() %}
 						<div class="col-sm-6 col-md-4 col-lg-3">
 							<div class="cover-block">
+								{% if song.songImage.count %}
+									<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
+								{% endif %}
 								<div class="cover-block-content">
-									{{ song.title }} 
-									<br />
-									<i>{{ song.songArtist }}</i>
+									<div class="cover-block-inner-content">
+										{{ song.title }} 
+										<br />
+										<i>{{ song.songArtist }}</i>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -210,10 +215,15 @@
 					{% for song in setlist80s.one().children.all() %}
 						<div class="col-sm-6 col-md-5 col-lg-3">
 							<div class="cover-block">
+								{% if song.songImage.count %}
+									<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
+								{% endif %}
 								<div class="cover-block-content">
-									{{ song.title }} 
-									<br />
-									<i>{{ song.songArtist }}</i>
+									<div class="cover-block-inner-content">
+										{{ song.title }} 
+										<br />
+										<i>{{ song.songArtist }}</i>
+									</div>
 								</div>
 							</div>
 						</div>

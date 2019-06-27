@@ -310,21 +310,72 @@ footer {
 
 .cover-block {
     height: 150px;
-    width: 100%;
     margin: 15px 0;
     background-color: lighten($section-gray, 3%);
-    display: table;
+    position: relative;
+    &:hover {
+        .cover-block-image {
+            opacity: 0.75;
+            -webkit-filter: grayscale(0%);
+            filter: grayscale(0%);
+        }
+        .cover-block-content {
+            height: auto;
+            top: unset;
+            bottom: 5px;
+            width: 90%;
+            left: 5%;
+            .cover-block-inner-content {
+                transform: scale(1.15);
+                vertical-align: bottom;
+                line-height: 1rem;
+                text-align: left;
+                text-shadow: -1px 1px #222;
+                i {
+                    text-align: right;
+                    text-shadow: 1px 1px #222;
+                    color: $white;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
+    .cover-block-image {
+        position: absolute;
+        top: 0; bottom: 0; left: 0; right: 0;
+        z-index: 10;
+        background-size: cover;
+        background-position: center;
+        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(100%);
+        opacity: 0.1;
+        -webkit-transition: opacity 0.5s, -webkit-filter 0.5s;
+        transition: opacity 0.5s, filter 0.5s;
+    }
     .cover-block-content {
+        position: absolute;
+        top: 0; left: 0;
         width: 100%;
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
-        padding: 0 10px;
-        i {
-            color: lighten($section-gray, 50%);
+        height: 100%;
+        z-index: 20;
+        display: table;
+        .cover-block-inner-content {
+            width: 100%;
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            padding: 0 10px;
+            font-size: 1.1rem;
+            transition: transform 0.25s ease-in-out;
+            cursor: default;
+            i {
+                color: lighten($section-gray, 50%);
+                display: block;
+            }
         }
     }
 }
+
 
 /*** SHOWS ***/
 
