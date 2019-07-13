@@ -107,6 +107,12 @@ $(function()
     checkWinPos(true);
   });
 
+  $(".cover-block").on('touchstart', function(){
+    $(this).addClass('hover');
+  }).on('touchstop', function(){
+    $(this).removeClass('hover');
+  });
+
   $("a.jump-link").click(function(e)
   {
     e.preventDefault();

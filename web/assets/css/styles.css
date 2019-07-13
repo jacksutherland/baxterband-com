@@ -236,23 +236,23 @@ footer {
   margin: 15px 0;
   background-color: #2e2e2e;
   position: relative; }
-  .cover-block:hover .cover-block-image {
+  .cover-block:hover .cover-block-image, .cover-block .hover .cover-block-image {
     opacity: 0.75;
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%); }
-  .cover-block:hover .cover-block-content {
+  .cover-block:hover .cover-block-content, .cover-block .hover .cover-block-content {
     height: auto;
     top: unset;
     bottom: 5px;
     width: 90%;
     left: 5%; }
-    .cover-block:hover .cover-block-content .cover-block-inner-content {
+    .cover-block:hover .cover-block-content .cover-block-inner-content, .cover-block .hover .cover-block-content .cover-block-inner-content {
       transform: scale(1.15);
       vertical-align: bottom;
       line-height: 1rem;
       text-align: left;
       text-shadow: -1px 1px #222; }
-      .cover-block:hover .cover-block-content .cover-block-inner-content i {
+      .cover-block:hover .cover-block-content .cover-block-inner-content i, .cover-block .hover .cover-block-content .cover-block-inner-content i {
         text-align: right;
         text-shadow: 1px 1px #222;
         color: #FFF;
