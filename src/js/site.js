@@ -107,11 +107,11 @@ $(function()
     checkWinPos(true);
   });
 
-  $(".cover-block").mousedown(function() {
-    $(this).addClass('hover');
-  }).mouseup(function() {
-    $(this).removeClass('hover');
-  });
+  // $(".cover-block").mousedown(function() {
+  //   $(this).addClass('hover');
+  // }).mouseup(function() {
+  //   $(this).removeClass('hover');
+  // });
 
   $("a.jump-link").click(function(e)
   {

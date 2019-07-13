@@ -313,7 +313,8 @@ footer {
     margin: 15px 0;
     background-color: lighten($section-gray, 3%);
     position: relative;
-    &:hover, &.hover {
+    // &:hover, &.hover {
+    &:hover {
         .cover-block-image {
             opacity: 0.75;
             -webkit-filter: grayscale(0%);
