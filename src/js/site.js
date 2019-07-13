@@ -107,9 +107,9 @@ $(function()
     checkWinPos(true);
   });
 
-  $(".cover-block").on('touchstart', function(){
+  $(".cover-block").mousedown(function() {
     $(this).addClass('hover');
-  }).on('touchstop', function(){
+  }).mouseup(function() {
     $(this).removeClass('hover');
   });
 
