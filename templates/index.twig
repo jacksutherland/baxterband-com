@@ -27,10 +27,12 @@
         <div id="main-menu" class="container">
             {# <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a> #}
             <a href="#" class="jump-link">HOME</a>
-            <a href="#about" class="jump-link">ABOUT</a>
+            <a href="#about" class="jump-link d-none d-md-inline">ABOUT</a>
             <a href="#shows" class="jump-link">SHOWS</a>
             <a href="#members" class="jump-link">BAND</a>
-            <a href="#music" class="jump-link">MUSIC</a>
+            <a href="#music" class="jump-link d-inline d-md-none">MUSIC</a>
+            <a href="#music" class="jump-link d-none d-md-inline">VIDEOS</a>
+            <a href="#songs" class="jump-link d-none d-md-inline">SONGS</a>
             <a href="#contact" class="jump-link">CONTACT</a>
             <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank"><i class="fab fa-youtube"></i></a>
             <a href="https://www.facebook.com/exiteightyfive" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -73,6 +75,11 @@
 							  {{ video.youtubeEmbedCode | raw }}
 							</div>
 						</div>
+						{% if video.description | length %}
+							<div class="video-description">
+								{{ video.description }}
+							</div>
+						{% endif %}
 					</div>
 				{% endfor %}
 			</div>
@@ -159,7 +166,7 @@
 				<div class="row">
 					<div class="col-12 col-lg-8 col-xl-12 m-auto">
 
-						<iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/582457401&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+						{# <iframe width="100%" height="200" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/582457401&color=%232bb0ea&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe> #}
 
 						{% set vidlen = videos | length %}
 						{% if vidlen > 0 %}
@@ -171,6 +178,11 @@
 											  {{ video.youtubeEmbedCode | raw }}
 											</div>
 										</div>
+										{% if video.description | length %}
+											<div class="video-description">
+												{{ video.description }}
+											</div>
+										{% endif %}
 									</div>
 								{% endfor %}
 							</div>
@@ -180,56 +192,60 @@
 				</div>
 			</div>
 
-			<h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5>
+			{# <h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5> #}
 
-			<h2>{{ entry.coversTitle }}</h2>
-			{% if entry.coversText %}
-				<p>{{ entry.coversText }}</p>
-			{% endif %}
+			<div id="songs">
 
-			{% if setlist90s.count() > 0 %}
-				<h5>{{ setlist90s.one().title }}</h5>
-				<div class="row">
-					{% for song in setlist90s.one().children.all() %}
-						<div class="col-sm-6 col-md-4 col-lg-3">
-							<div class="cover-block">
-								{% if song.songImage.count %}
-									<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
-								{% endif %}
-								<div class="cover-block-content">
-									<div class="cover-block-inner-content">
-										{{ song.title }} 
-										<br />
-										<i>{{ song.songArtist }}</i>
+				<h2>{{ entry.coversTitle }}</h2>
+				{% if entry.coversText %}
+					<p>{{ entry.coversText }}</p>
+				{% endif %}
+
+				{% if setlist90s.count() > 0 %}
+					<h5>{{ setlist90s.one().title }}</h5>
+					<div class="row">
+						{% for song in setlist90s.one().children.all() %}
+							<div class="col-sm-6 col-md-4 col-lg-3">
+								<div class="cover-block">
+									{% if song.songImage.count %}
+										<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
+									{% endif %}
+									<div class="cover-block-content">
+										<div class="cover-block-inner-content">
+											{{ song.title }} 
+											<br />
+											<i>{{ song.songArtist }}</i>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					{% endfor %}
-				</div>
-			{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
 
-			{% if setlist80s.count() > 0 %}
-				<h5>{{ setlist80s.one().title }}</h5>
-				<div class="row">
-					{% for song in setlist80s.one().children.all() %}
-						<div class="col-sm-6 col-md-4 col-lg-3">
-							<div class="cover-block">
-								{% if song.songImage.count %}
-									<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
-								{% endif %}
-								<div class="cover-block-content">
-									<div class="cover-block-inner-content">
-										{{ song.title }} 
-										<br />
-										<i>{{ song.songArtist }}</i>
+				{% if setlist80s.count() > 0 %}
+					<h5>{{ setlist80s.one().title }}</h5>
+					<div class="row">
+						{% for song in setlist80s.one().children.all() %}
+							<div class="col-sm-6 col-md-4 col-lg-3">
+								<div class="cover-block">
+									{% if song.songImage.count %}
+										<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
+									{% endif %}
+									<div class="cover-block-content">
+										<div class="cover-block-inner-content">
+											{{ song.title }} 
+											<br />
+											<i>{{ song.songArtist }}</i>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					{% endfor %}
-				</div>
-			{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+
+			</div>
 
 			
 			</div>

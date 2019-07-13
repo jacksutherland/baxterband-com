@@ -39,6 +39,12 @@ a, a:visited, a:hover {
 ul {
   margin: 0 0 30px 0; }
 
+.video-description {
+  text-align: center;
+  color: #595959;
+  font-size: 0.95rem;
+  margin-top: 10px; }
+
 header {
   position: fixed;
   z-index: 300;
