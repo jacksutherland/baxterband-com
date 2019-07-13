@@ -650,7 +650,7 @@ return [
     'New user group' => 'Új felhasználói csapat',
     'New volume' => 'Új kötet',
     'New widget' => 'Új minialkalmazás',
-    'New {class}' => 'Új {class}',
+    'New {type}' => 'Új {type}',
     'New {group} category' => 'Új {group} kategória',
     'New {section} entry' => 'Új {section} bejegyzés',
     'Next' => 'Következő',
@@ -1168,7 +1168,7 @@ return [
     'Your session will expire in {time}.' => 'A munkamenet lejár {time}.',
     'Your system isn’t set up to save content for the site “{site}”.' => 'A rendszere úgy van beállítva, hogy ne mentse a(z) {site} webhely tartalmát.',
     'You’re all up-to-date!' => 'Teljesen naprakész!',
-    'You’re running Craft {edition} with a Craft {licensedEdition} license.' => 'A Craft {edition} {licensedEdition} lincensz.',
+    'You’re running Craft {edition} with a Craft {licensedEdition} license.' => 'A Craft {edition} {licensedEdition} licensz.',
     'account_activation_body' => 'Hello {{user.friendlyName}},
 
 Köszönjük, hogy regsiztráltál, a felhasználói filókod aktiváláshoz kattints az alábbi linkre:

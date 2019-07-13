@@ -10,8 +10,8 @@
 {% set featuredVideos = craft.categories.group('videos').isFeatured('1') %}
 
 {% block header %}
-	<header class="at-top{% if craft.request.getParam('src') is not null or entry.newsHtml | length %} has-alert{% endif %}">
-		{% if craft.request.getParam('src') is not null %}
+	<header class="at-top{% if craft.app.request.getParam('src') is not null or entry.newsHtml | length %} has-alert{% endif %}">
+		{% if craft.app.request.getParam('src') is not null %}
 			<div class="news-alert d-none d-md-block">
 				<div class="news-alert-content">
 					<a href="#contact" class="jump-link">Book your venue, party or event today!</a>
@@ -66,7 +66,7 @@
 		{% set vidlen = featuredVideos | length %}
 		{% if vidlen > 0 %}
 			<div class="row">
-				{% for video in featuredVideos %}
+				{% for video in featuredVideos.all() %}
 					<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 						<div class="mt-5">
 							<div class="embed-responsive embed-responsive-16by9">
@@ -164,7 +164,7 @@
 						{% set vidlen = videos | length %}
 						{% if vidlen > 0 %}
 							<div class="row">
-								{% for video in videos %}
+								{% for video in videos.all() %}
 									<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 										<div class="mt-5">
 											<div class="embed-responsive embed-responsive-16by9">
