@@ -121,11 +121,13 @@ header {
     .news-alert {
         padding: 8px 0;
         margin-bottom: 20px;
-        background-color: $section-gray;
+        background-color: $black;
+        border-bottom: $thin-border;
         overflow: hidden;
         .news-alert-content {
-            font-family: 'Trade Winds', cursive;
-            font-size: 0.95rem;
+            //font-family: 'Trade Winds', cursive;
+            font-family: 'Acme', sans-serif;
+            font-size: 1rem;
             color: $green;
             text-align: center;
             white-space: nowrap;
@@ -133,11 +135,13 @@ header {
             animation: scrollAlert 2s ease-out;
             -webkit-animation: scrollAlert 2s ease-out;
             a {
+                font-size: 1rem;
                 color: $green !important;
-                text-decoration: underline;
+                text-decoration: none;
                 margin: 0;
                 &:hover {
                     opacity: 1;
+                    text-decoration: underline;
                 }
             }
         }
