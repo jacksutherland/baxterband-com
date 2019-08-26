@@ -89,7 +89,7 @@ header {
     overflow: hidden; }
     header .news-alert .news-alert-content {
       font-family: 'Acme', sans-serif;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #6FB66E;
       text-align: center;
       white-space: nowrap;
@@ -97,7 +97,7 @@ header {
       animation: scrollAlert 2s ease-out;
       -webkit-animation: scrollAlert 2s ease-out; }
       header .news-alert .news-alert-content a {
-        font-size: 1rem;
+        font-size: 1.05rem;
         color: #6FB66E !important;
         text-decoration: none;
         margin: 0; }

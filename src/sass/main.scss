@@ -127,7 +127,7 @@ header {
         .news-alert-content {
             //font-family: 'Trade Winds', cursive;
             font-family: 'Acme', sans-serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: $green;
             text-align: center;
             white-space: nowrap;
@@ -135,7 +135,7 @@ header {
             animation: scrollAlert 2s ease-out;
             -webkit-animation: scrollAlert 2s ease-out;
             a {
-                font-size: 1rem;
+                font-size: 1.05rem;
                 color: $green !important;
                 text-decoration: none;
                 margin: 0;
