@@ -120,6 +120,11 @@ $(function()
     var new_position = jump == "#" ? 0 : ($(jump).offset().top - 100);
     $('html, body').stop().animate({ scrollTop: new_position }, 500);
 
+
+      history.pushState({
+          id: 'homepage'
+      }, null, jump == "#" ? '/' : jump);
+
     var gaUrl = jump == "#" ? '/' : ('/' + jump); 
     ga('set', 'page', gaUrl);
     ga('send', 'pageview');
