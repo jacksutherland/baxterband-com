@@ -319,8 +319,7 @@ footer {
 
 .date-box {
   border: 2px solid #000;
-  height: 100%;
-  margin: 0 0 20px 0; }
+  height: 100%; }
   .date-box .month {
     background: #000;
     padding: 5px 0;
@@ -333,6 +332,15 @@ footer {
   .date-box .weekday {
     color: #595959;
     font-weight: bold; }
+  .date-box .facebook-event-link {
+    margin: 10px 0;
+    display: inline-block; }
+    .date-box .facebook-event-link:hover i, .date-box .facebook-event-link:hover svg {
+      color: #4469B0; }
+    .date-box .facebook-event-link i, .date-box .facebook-event-link svg {
+      font-size: 20px;
+      color: #595959;
+      transition: color 0.5s; }
 
 /*** SMOKE EFFECT ***/
 .smoke {
@@ -398,13 +406,18 @@ footer {
     z-index: 10;
     -webkit-filter: blur(2px) grayscale(100%);
     filter: blur(2px) grayscale(100%);
-    background: url(/images/dkiser5.jpg);
+    background-image: url(/images/dkiser5.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     height: 700px;
     width: 100%;
     border-radius: 10px; }
+    .hero .hero-image.hero-band {
+      background-image: url(/images/corkscrew1.jpg);
+      background-position: center top;
+      -webkit-filter: blur(0) grayscale(100%);
+      filter: blur(0) grayscale(100%); }
 
 @media (min-width: 768px) {
   .band-bio {
@@ -412,7 +425,7 @@ footer {
   .band-member .band-member-info .band-member-bio {
     font-size: 1rem;
     line-height: 1.4rem; }
-  .hero {
+  .hero.animated {
     -webkit-animation-duration: 2s;
     animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
@@ -424,7 +437,7 @@ footer {
     content: "";
     visibility: visible;
     z-index: 140; }
-    .hero .hero-image:before {
+    .hero.animated .hero-image:before {
       -webkit-animation-duration: 3s;
       animation-duration: 3s;
       -webkit-animation-iteration-count: infinite;
@@ -444,7 +457,7 @@ footer {
       /* IE9 */
       width: 40vmin;
       z-index: 4; }
-    .hero:before {
+    .hero.animated:before {
       -webkit-animation-duration: 4s;
       animation-duration: 4s;
       -webkit-animation-iteration-count: infinite;
@@ -466,7 +479,7 @@ footer {
       /* IE9 */
       width: 50vmin;
       z-index: 2; }
-    .hero:after {
+    .hero.animated:after {
       -webkit-animation-duration: 4s;
       animation-duration: 4s;
       -webkit-animation-iteration-count: infinite;

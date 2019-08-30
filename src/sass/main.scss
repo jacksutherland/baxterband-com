@@ -417,7 +417,7 @@ footer {
 .date-box {
     border: 2px solid $black; //$section-gray;
     height: 100%;
-    margin: 0 0 20px 0;
+    //margin: 0 0 20px 0;
     .month {
         background: $black; //$section-gray;
         padding: 5px 0;
@@ -433,6 +433,20 @@ footer {
         color: lighten($section-gray, 20%);
         font-weight: bold;
         //margin: 0 0 5px 0;
+    }
+    .facebook-event-link {
+        margin: 10px 0;
+        display: inline-block;
+        &:hover {
+            i, svg {
+                color: #4469B0;
+            }
+        }
+        i, svg {
+            font-size: 20px;
+            color: lighten($section-gray, 20%);
+            transition: color 0.5s;
+        }
     }
 }
 
@@ -497,11 +511,17 @@ footer {
         width: 150px;
     }
 	.hero-image {
+        &.hero-band {
+            background-image: url(/images/corkscrew1.jpg);
+            background-position: center top;
+            -webkit-filter: blur(0) grayscale(100%);
+            filter: blur(0) grayscale(100%);
+        }
 		position: absolute;
 		z-index: 10;
 		-webkit-filter: blur(2px) grayscale(100%);
 	   	filter: blur(2px) grayscale(100%);
-		background: url(/images/dkiser5.jpg);
+		background-image: url(/images/dkiser5.jpg);
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
@@ -509,42 +529,7 @@ footer {
 		width: 100%;
 		border-radius: 10px;
 	}
-    // .news-ticker {
-    //     position: absolute;
-    //     z-index: 200;
-    //     color: $white;
-    //     padding: 20px 50px 20px 0;
-    //     bottom: 100px;
-    //     width: 100%;
-    //     .news-ticker-content { 
-    //         width: 75%;
-    //         padding: 10px;
-    //         margin: 0 auto;
-    //         font-family: 'Trade Winds', cursive;
-    //         font-size: 1.75rem;
-    //         text-align: center;
-    //         // animation: newsfadein 10s;
-    //         transform: rotate(0.5deg);
-    //         opacity: 0.6;
-    //         background: $black;
-    //         // text-shadow: 2px 2px 3px $black;
-    //         // border-radius: 3px;
-    //         box-shadow: 2px 2px 5px #000;
-    //         border: solid 2px #333;
-    //         border-top: solid 2px #666;
-    //         border-left: solid 2px #555;
-    //     }
-    // }
-
 }
-
-
-
-// @keyframes newsfadein {
-//     0% { opacity: 0; }
-//     20% { opacity: 0; }
-//     100%   { opacity: 0.6; }
-// }
 
 
 // MOVIE EFFECTS tablets and desktop only
@@ -562,84 +547,86 @@ footer {
 
     }
     .hero {
+        &.animated {
+        	-webkit-animation-duration: 2s;
+            animation-duration: 2s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            -webkit-animation-name: jumpy;
+            animation-name: jumpy;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            content: "";
+            visibility: visible;
+            z-index: 140;
 
-    	-webkit-animation-duration: 2s;
-        animation-duration: 2s;
-        -webkit-animation-iteration-count: infinite;
-        animation-iteration-count: infinite;
-        -webkit-animation-name: jumpy;
-        animation-name: jumpy;
-        -webkit-animation-timing-function: linear;
-        animation-timing-function: linear;
-        content: "";
-        visibility: visible;
-        z-index: 140;
+        	.hero-image {
 
-    	.hero-image {
-    		&:before {
-    			-webkit-animation-duration: 3s;
-    		    animation-duration: 3s;
-    		    -webkit-animation-iteration-count: infinite;
-    		    animation-iteration-count: infinite;
-    		    -webkit-animation-name: movingstripe2;
-    		    animation-name: movingstripe;
-    		    border-left: solid 2px rgba(85,85,85,0.5);
-    		    border-right: solid 2px rgba(85,85,85,0.5);
-    		    content: "";
-    		    height: 100%;
-    		    left: 50%;
-    		    padding: 2px;
-    		    position: absolute;
-    		    width: 400px;    /* old */
-    		    width: 40vm;   /* IE9 */
-    		    width: 40vmin;
-    		    z-index: 4;
-    		}
-    	}
-    	
-    	&:before {
-    	    -webkit-animation-duration: 4s;
-    	    animation-duration: 4s;
-    	    -webkit-animation-iteration-count: infinite;
-    	    animation-iteration-count: infinite;
-    	    -webkit-animation-name: movingstripe;
-    	    animation-name: movingstripe;
-    	    border-left: solid 3px rgba(85,85,85,0.4);
-    	    border-right: solid 2px rgba(85,85,85,0.4);
-    	    -webkit-box-shadow: 0 0 10px rgba(85,85,85,0.5);
-    	    box-shadow: 0 0 10px rgba(85,85,85,0.5);
-    	    content: "";
-    	    height: 100%;
-    	    left: -300px;
-    	    padding: 2px;
-    	    position: absolute;
-    	    width: 500px;    /* old */
-    	    width: 500vm;   /* IE9 */
-    	    width: 50vmin;
-    	    z-index: 2;
-    	}
+        		&:before {
+        			-webkit-animation-duration: 3s;
+        		    animation-duration: 3s;
+        		    -webkit-animation-iteration-count: infinite;
+        		    animation-iteration-count: infinite;
+        		    -webkit-animation-name: movingstripe2;
+        		    animation-name: movingstripe;
+        		    border-left: solid 2px rgba(85,85,85,0.5);
+        		    border-right: solid 2px rgba(85,85,85,0.5);
+        		    content: "";
+        		    height: 100%;
+        		    left: 50%;
+        		    padding: 2px;
+        		    position: absolute;
+        		    width: 400px;    /* old */
+        		    width: 40vm;   /* IE9 */
+        		    width: 40vmin;
+        		    z-index: 4;
+        		}
+        	}
+        	
+        	&:before {
+        	    -webkit-animation-duration: 4s;
+        	    animation-duration: 4s;
+        	    -webkit-animation-iteration-count: infinite;
+        	    animation-iteration-count: infinite;
+        	    -webkit-animation-name: movingstripe;
+        	    animation-name: movingstripe;
+        	    border-left: solid 3px rgba(85,85,85,0.4);
+        	    border-right: solid 2px rgba(85,85,85,0.4);
+        	    -webkit-box-shadow: 0 0 10px rgba(85,85,85,0.5);
+        	    box-shadow: 0 0 10px rgba(85,85,85,0.5);
+        	    content: "";
+        	    height: 100%;
+        	    left: -300px;
+        	    padding: 2px;
+        	    position: absolute;
+        	    width: 500px;    /* old */
+        	    width: 500vm;   /* IE9 */
+        	    width: 50vmin;
+        	    z-index: 2;
+        	}
 
-    	&:after {
-    		-webkit-animation-duration: 4s;
-    	    animation-duration: 4s;
-    	    -webkit-animation-iteration-count: infinite;
-    	    animation-iteration-count: infinite;
-    	    -webkit-animation-name: vignette;
-    	    animation-name: vignette;
-    	    -webkit-animation-timing-function: ease-in-out;
-    	    animation-timing-function: ease-in-out;
-    	    content: "";
-    	    height: 100%;
-    	    left: 0;
-    	    position: fixed;
-    	    top: 0;
-    	    -ms-transform-origin: 50% 100%;
-    	    -webkit-transform-origin: 50% 100%;
-    	    transform-origin: 50% 100%;
-    	    width: 100%;
-    	    visibility: visible;
-    	    z-index: 5;
-    	}
+        	&:after {
+        		-webkit-animation-duration: 4s;
+        	    animation-duration: 4s;
+        	    -webkit-animation-iteration-count: infinite;
+        	    animation-iteration-count: infinite;
+        	    -webkit-animation-name: vignette;
+        	    animation-name: vignette;
+        	    -webkit-animation-timing-function: ease-in-out;
+        	    animation-timing-function: ease-in-out;
+        	    content: "";
+        	    height: 100%;
+        	    left: 0;
+        	    position: fixed;
+        	    top: 0;
+        	    -ms-transform-origin: 50% 100%;
+        	    -webkit-transform-origin: 50% 100%;
+        	    transform-origin: 50% 100%;
+        	    width: 100%;
+        	    visibility: visible;
+        	    z-index: 5;
+        	}
+        }
     }
 }
 

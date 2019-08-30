@@ -1,4 +1,11 @@
-{% set resourceVersion = '1.14' %}
+{% set resourceVersion = '1.15' %}
+{% if entry.section.handle == 'homepage' %}
+    {% set jumpLink = 'jump-link' %}
+    {% set navUrl = '' %}
+{% else %}
+    {% set jumpLink = '' %}
+    {% set navUrl = '/' %}
+{% endif %}
 
 <!DOCTYPE html>
 <html>
@@ -55,7 +62,36 @@
 
     <body>
 
-        {% block header %} {% endblock %}
+        <header class="at-top{% if craft.app.request.getParam('src') is not null or news.newsHtml | length %} has-alert{% endif %}">
+            {% if craft.app.request.getParam('src') is not null %}
+                <div class="news-alert d-none d-md-block">
+                    <div class="news-alert-content">
+                        <a href="{{ navUrl }}#contact" class="jump-link">Book your venue, party or event today!</a>
+                    </div>
+                </div>
+            {% elseif news.newsHtml | length %}
+                <div class="news-alert d-none d-md-block">
+                    <div class="news-alert-content">
+                        {{ news.newsHtml | raw }}
+                    </div>
+                </div>
+            {% endif %}
+            <div id="main-menu" class="container">
+                {# <a href="#" class="d-none d-sm-inline jump-link"><h1>{{ siteName }}</h1></a> #}
+                <a href="{% if jumpLink | length %}#{% else %}/{% endif %}" class="{{ jumpLink }}">HOME</a>
+                <a href="{{ navUrl }}#about" class="{{ jumpLink }} d-none d-md-inline">ABOUT</a>
+                <a href="{{ navUrl }}#shows" class="{{ jumpLink }}">SHOWS</a>
+                <a href="{{ navUrl }}#members" class="{{ jumpLink }}">BAND</a>
+                <a href="{{ navUrl }}#music" class="{{ jumpLink }} d-inline d-md-none">MUSIC</a>
+                <a href="{{ navUrl }}#music" class="{{ jumpLink }} d-none d-md-inline">VIDEOS</a>
+                <a href="{{ navUrl }}#songs" class="{{ jumpLink }} d-none d-md-inline">SONGS</a>
+                <a href="{{ navUrl }}#contact" class="{{ jumpLink }}">CONTACT</a>
+                <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/exiteightyfive" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+        </header>
+
+        {# {% block header %} {% endblock %} #}
 
         {% block content %} {% endblock %}
 

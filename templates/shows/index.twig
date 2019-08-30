@@ -1,0 +1,54 @@
+{% extends "_layouts/main" %}
+
+{% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
+
+{% block content %}
+
+	<div class="hero">
+		<img class="logo" src="/images/logo-sign-small.png" alt="">
+		<div class="hero-image hero-band"></div>
+		<h1>{{ entry.showsTitle }}</h1>
+	</div>
+
+	<div id="shows" class="section-style1">
+		
+		<div class="container">
+			<h2 class="text-left">{{ entry.showsTitle }}</h2>
+			<p class="text-left mb-5 mr-5">
+				{{ events.eventText | replace({'contact us': '<a  href="#contact">contact us soon</a>'}) | raw }}
+			</p>
+			{% for show in shows %}
+				<div class="show">
+					<div class="row">
+						<div class="col-md-4 col-lg-3 text-center">
+							<div class="date-box">
+								<div class="month">{{ show.showDate | date('mm Y') }}</div>
+								<div class="date">{{ show.showDate | date('d') }}</div>
+								<div class="weekday">{{ show.showDate | date('l') }} @ {{ show.showDate | date('h:ia') }}</div>
+								{% if show.facebookEventLink | length %}
+									<a href="{{ show.facebookEventLink }}" target="_blank" class="facebook-event-link"><i class="fab fa-facebook-square"></i></a>
+								{% endif %}
+							</div>
+						</div>
+						<div class="col-md-8 col-lg-9">
+							{% if show.venueName | length %}
+								<a class="venue" target="_blank" href="https://www.google.com/maps/place/{{ show.venueAddress }}">
+									<i class="fas fa-map-marker-alt"></i> 
+									{{ show.venueName }}
+								</a>
+							{% endif %}
+							{% if show.showLink | length %}
+								<a href="{{ show.showLink }}" target="_blank" class="show-link"><h5>{{ show.title }}</h5></a>
+							{% else %}
+								<h5>{{ show.title }}</h5>
+							{% endif %}
+							<p>{{ show.showDetails }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+	</div>
+
+{% endblock %}
