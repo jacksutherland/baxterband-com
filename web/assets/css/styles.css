@@ -417,7 +417,8 @@ footer {
       background-image: url(/images/corkscrew1.jpg);
       background-position: center top;
       -webkit-filter: blur(0) grayscale(100%);
-      filter: blur(0) grayscale(100%); }
+      filter: blur(0) grayscale(100%);
+      margin-top: -12px; }
 
 @media (min-width: 768px) {
   .band-bio {
