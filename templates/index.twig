@@ -6,7 +6,7 @@
 {# {% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %} #}
 {# {% set shows = craft.entries().section('shows').showDate('>=' ~ now|atom).orderBy('showDate asc').all() %} #}
 {% set showCount = craft.entries().section('shows').count() %}
-{% set numberOfShows = 10 %}
+{% set numberOfShows = 5 %}
 {% set shows = craft.entries().section('shows').orderBy('showDate asc').offset(showCount - numberOfShows).limit(numberOfShows).all() %}
 {# {% set featuredVideos = craft.entries().section('videos').isFeatured('1') %}
 {% set videos = craft.entries().section('videos').all() %} #}
