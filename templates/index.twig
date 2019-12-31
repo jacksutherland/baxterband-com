@@ -19,21 +19,8 @@
 
 {% block content %}
 	<div class="hero animated{% if entry.newsHtml | length %} has-alert{% endif %}">
-		{# <h1>{{ siteName | replace(" ", "<br>") | raw }}</h1> #}
-		{# <h1>{{ siteName }}</h1> #}
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
-		<div class="hero-image"></div>
-		
-		{# {% if entry.newsHtml | length %}
-			<div class="news-ticker">
-				<div class="container">
-					<div class="news-ticker-content">
-						{{ entry.newsHtml | raw }}
-					</div>
-				</div>
-			</div>
-		{% endif %} #}
-
+		<div class="hero-image" style="background-image: url({{ entry.hero.one().url }});"></div>
 	</div>
 
 	<div id="about" class="container">
