@@ -18,7 +18,7 @@
 {% endblock %} #}
 
 {% block content %}
-	<div class="hero{% if entry.heroGrayscale %} animated{% endif %}{% if news.newsHtml | length %} has-alert{% endif %}">
+	<div class="hero{% if entry.heroAnimated %} animated{% endif %}{% if news.newsHtml | length %} has-alert{% endif %}">
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
 		<div class="hero-image{% if entry.heroGrayscale %} hero-grayscale{% endif %}" style="background-image: url({{ entry.hero.one().url }});"></div>
 	</div>
