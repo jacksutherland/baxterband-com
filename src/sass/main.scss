@@ -121,7 +121,7 @@ header {
     .news-alert {
         padding: 8px 0;
         margin-bottom: 20px;
-        background-color: $section-gray;
+        background-color: $black; //$section-gray;
         border-bottom: $thin-border;
         overflow: hidden;
         .news-alert-content {
