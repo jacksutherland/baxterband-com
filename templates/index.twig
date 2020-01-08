@@ -56,7 +56,7 @@
 			<p class="text-left mb-5 mr-5">
 				{{ events.eventText | replace({'contact us': '<a  href="#contact">contact us soon</a>'}) | raw }}
 				<br><br>
-				<a href="/calendar"><i class="fas fa-calendar-alt"></i> View All Dates</a>
+				<a href="/calendar"><i class="fas fa-calendar-alt"></i> <span>View All Dates</span></a>
 			</p>
 			{% for show in shows %}
 				<div class="show">
@@ -88,7 +88,7 @@
 					</div>
 				</div>
 			{% endfor %}
-			<a href="/calendar"><i class="fas fa-calendar-alt"></i> View Our Entire Calendar</a>
+			<a itemprop="url" href="/calendar"><i class="fas fa-calendar-alt"></i> <span itemprop="name">View Our Entire Calendar</span></a>
 		</div>
 	</div>
 

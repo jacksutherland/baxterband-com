@@ -1,0 +1,15 @@
+{% extends "_layouts/main" %}
+
+{% block content %}
+
+	{% if entry.hero.count %}
+		<div class="hero">
+			<img class="logo" src="/images/logo-sign-small.png" alt="">
+			<div class="hero-image hero-band" style="background-image: url({{ entry.hero.one().url }});"></div>
+			
+		</div>
+	{% endif %}
+
+	
+
+{% endblock %}
