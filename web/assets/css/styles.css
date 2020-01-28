@@ -418,7 +418,7 @@ footer {
       background-image: url(/images/corkscrew1.jpg);
       background-position: center top;
       margin-top: -12px; }
-    .hero .hero-image:after {
+    .hero .hero-image.hero-darker:after {
       content: '';
       display: block;
       background: rgba(0, 0, 0, 0.3);
