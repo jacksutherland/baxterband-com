@@ -107,6 +107,7 @@ $(function()
     checkWinPos(true);
   });
 
+/*
   if(window.location.hash || win.scrollTop() > 50)
   {
     $(".sneaky").removeClass("sneaky");
@@ -123,6 +124,7 @@ $(function()
       }, (650 * sneakyCounter++));
     });
   }
+*/
 
   $("a.jump-link").click(function(e)
   {
