@@ -107,11 +107,22 @@ $(function()
     checkWinPos(true);
   });
 
-  // $(".cover-block").mousedown(function() {
-  //   $(this).addClass('hover');
-  // }).mouseup(function() {
-  //   $(this).removeClass('hover');
-  // });
+  if(window.location.hash || win.scrollTop() > 50)
+  {
+    $(".sneaky").removeClass("sneaky");
+  }
+  else
+  {
+    var sneakyCounter = 0;
+    $(".sneaky").each(function()
+    {
+      var sneaky = $(this);
+      setTimeout(function()
+      {
+        sneaky.addClass("sneaky-show");
+      }, (650 * sneakyCounter++));
+    });
+  }
 
   $("a.jump-link").click(function(e)
   {

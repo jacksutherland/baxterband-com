@@ -60,11 +60,16 @@ header {
       padding-top: 0; }
   header.not-at-top {
     border-bottom: solid 1px #262626;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(112, 182, 110, 0.95);
     animation: fadeInHeader 0.5s linear;
     -webkit-animation: fadeInHeader 0.5s linear; }
     header.not-at-top .news-alert {
       display: none !important; }
+    header.not-at-top a, header.not-at-top a:visited {
+      color: #262626 !important; }
+      header.not-at-top a:hover, header.not-at-top a:visited:hover {
+        color: #FFF !important;
+        text-decoration: none; }
   header h1 {
     font-size: 1.35rem;
     margin: 0;
@@ -74,9 +79,12 @@ header {
     color: #FFF !important;
     font-size: 0.95rem;
     margin-left: 10px;
-    vertical-align: middle; }
-    header a:hover i, header a:visited:hover i {
-      opacity: 1; }
+    vertical-align: middle;
+    font-weight: 600; }
+    header a:hover, header a:visited:hover {
+      text-decoration: underline; }
+      header a:hover i, header a:visited:hover i {
+        opacity: 1; }
     header a i, header a:visited i {
       font-size: 1.10rem;
       opacity: 0.83;
@@ -123,15 +131,15 @@ header {
 
 @keyframes fadeInHeader {
   0% {
-    background-color: rgba(0, 0, 0, 0); }
+    background: rgba(112, 182, 110, 0.95); }
   100% {
-    background-color: rgba(0, 0, 0, 0.7); } }
+    background: rgba(112, 182, 110, 0.95); } }
 
 @-webkit-keyframes fadeInHeader {
   0% {
-    background-color: rgba(0, 0, 0, 0); }
+    background: rgba(112, 182, 110, 0); }
   100% {
-    background-color: rgba(0, 0, 0, 0.7); } }
+    background: rgba(112, 182, 110, 0.95); } }
 
 footer {
   padding: 50px 0;
@@ -146,6 +154,55 @@ footer {
     margin: 20px 5px;
     opacity: 0.83;
     transition: opacity 0.5s; }
+
+.big-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-10deg);
+  filter: grayscale(1);
+  opacity: 0.04;
+  animation: bigLogo 2s ease-out;
+  -webkit-animation: bigLogo 2s ease-out; }
+
+@keyframes bigLogo {
+  0% {
+    opacity: 0.1; }
+  50% {
+    opacity: 0.1; }
+  100% {
+    opacity: 0.04; } }
+
+@-webkit-keyframes bigLogo {
+  0% {
+    opacity: 0.1; }
+  50% {
+    opacity: 0.1; }
+  100% {
+    opacity: 0.04; } }
+
+.sneaky {
+  opacity: 0; }
+  .sneaky.sneaky-show {
+    opacity: 1;
+    animation: sneakyShow 2s ease-out;
+    -webkit-animation: sneakyShow 2s ease-out; }
+
+@keyframes sneakyShow {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes sneakyShow {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 .embed-responsive {
   z-index: 200; }
@@ -683,6 +740,9 @@ footer {
       margin-left: 0; }
     header a, header a:visited {
       margin-left: 5px; }
+  .big-logo {
+    width: 70%;
+    height: auto; }
   .hero {
     height: 400px;
     margin: 0 !important; }
