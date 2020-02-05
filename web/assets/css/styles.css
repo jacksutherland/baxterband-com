@@ -54,22 +54,18 @@ header {
   padding: 25px 0;
   text-align: right; }
   header.at-top {
-    border-bottom: none;
     background-color: rgba(0, 0, 0, 0); }
     header.at-top.has-alert {
       padding-top: 0; }
   header.not-at-top {
-    border-bottom: solid 1px #262626;
-    background: rgba(112, 182, 110, 0.95);
-    animation: fadeInHeader 0.5s linear;
-    -webkit-animation: fadeInHeader 0.5s linear; }
+    box-shadow: 0 0 3px #000;
+    background: rgba(38, 38, 38, 0.95);
+    animation: fadeInHeader 0.25s linear;
+    -webkit-animation: fadeInHeader 0.25s linear; }
     header.not-at-top .news-alert {
       display: none !important; }
-    header.not-at-top a, header.not-at-top a:visited {
-      color: #262626 !important; }
-      header.not-at-top a:hover, header.not-at-top a:visited:hover {
-        color: #FFF !important;
-        text-decoration: none; }
+    header.not-at-top a:hover, header.not-at-top a:visited:hover {
+      text-decoration: none; }
   header h1 {
     font-size: 1.35rem;
     margin: 0;
@@ -131,15 +127,15 @@ header {
 
 @keyframes fadeInHeader {
   0% {
-    background: rgba(112, 182, 110, 0.95); }
+    background: rgba(38, 38, 38, 0); }
   100% {
-    background: rgba(112, 182, 110, 0.95); } }
+    background: rgba(38, 38, 38, 0.95); } }
 
 @-webkit-keyframes fadeInHeader {
   0% {
-    background: rgba(112, 182, 110, 0); }
+    background: rgba(38, 38, 38, 0); }
   100% {
-    background: rgba(112, 182, 110, 0.95); } }
+    background: rgba(38, 38, 38, 0.95); } }
 
 footer {
   padding: 50px 0;
