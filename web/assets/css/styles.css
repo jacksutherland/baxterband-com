@@ -64,8 +64,11 @@ header {
     -webkit-animation: fadeInHeader 0.25s linear; }
     header.not-at-top .news-alert {
       display: none !important; }
-    header.not-at-top a:hover, header.not-at-top a:visited:hover {
-      text-decoration: none; }
+    header.not-at-top a, header.not-at-top a:visited {
+      transition: color 0.25s; }
+      header.not-at-top a:hover, header.not-at-top a:visited:hover {
+        color: #6FB66E !important;
+        text-decoration: none; }
   header h1 {
     font-size: 1.35rem;
     margin: 0;

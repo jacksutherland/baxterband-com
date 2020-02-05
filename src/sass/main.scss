@@ -98,8 +98,9 @@ header {
         }
         a, a:visited {
             //color: $section-gray !important;
+            transition: color 0.25s;
             &:hover {
-                //color: $white !important;
+                color: $green !important;
                 text-decoration: none;
             }
         }
