@@ -1,6 +1,6 @@
 {% extends "_layouts/main" %}
 
-{% set shows = craft.entries().section('shows').orderBy('showDate asc').all() %}
+{% set shows = craft.entries().section('shows').orderBy('showDate desc').all() %}
 
 {% block content %}
 
