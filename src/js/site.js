@@ -109,8 +109,10 @@ function goToSection(section, path, animate)
 
 function sendPageView(path)
 {
-  ga('set', 'page', path);
-  ga('send', 'pageview');
+  //ga('set', 'page', path);
+  //ga('send', 'pageview');
+
+  gtag('config', 'UA-139848868-1', {'page_path': path});
 
   //console.log("GA: " + typeof(ga) + " " + path)
 }
