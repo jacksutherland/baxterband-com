@@ -110,7 +110,9 @@ function goToSection(section, path, animate)
 function sendPageView(path)
 {
   ga('set', 'page', path);
-  ga('send', 'pageview');
+  ga('send', 'pageview', path);
+
+  console.log("GA: " + typeof(ga) + " " + path)
 }
 
 $(function()
