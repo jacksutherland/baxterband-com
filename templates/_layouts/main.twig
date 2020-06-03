@@ -1,5 +1,5 @@
-{% set resourceVersion = '1.20' %}
-{% if entry.section.handle == 'homepage' %}
+{% set resourceVersion = '1.30' %}
+{% if entry is not defined or entry.section.handle == 'homepage' %}
     {% set jumpLink = 'jump-link' %}
     {% set navUrl = '' %}
 {% else %}
@@ -60,7 +60,7 @@
         <link href="/assets/css/styles.css?v={{ resourceVersion }}" rel="stylesheet" type="text/css" />
     </head>
 
-    <body>
+    <body{% if entry is defined %} id="{{ entry.slug }}"{% endif %}>
 
         <header class="at-top{% if craft.app.request.getParam('src') is not null or news.newsHtml | length %} has-alert{% endif %}">
             {% if craft.app.request.getParam('src') is not null %}
@@ -77,14 +77,14 @@
                 </div>
             {% endif %}
             <div id="main-menu" class="container" itemscope itemtype="http://schema.org/SiteNavigationElement">
-                <a href="{% if jumpLink | length %}#{% else %}/{% endif %}" class="{{ jumpLink }}">HOME</a>
-                <a itemprop="url" href="{{ navUrl }}#about" class="{{ jumpLink }} d-none d-md-inline"><span itemprop="name">ABOUT</span></a>
-                <a itemprop="url" href="{{ navUrl }}#shows" class="{{ jumpLink }}"><span itemprop="name">SHOWS</span></a>
-                <a itemprop="url" href="{{ navUrl }}#members" class="{{ jumpLink }}"><span itemprop="name">BAND</span></a>
-                <a itemprop="url" href="{{ navUrl }}#music" class="{{ jumpLink }} d-inline d-md-none"><span itemprop="name">MUSIC</span></a>
-                <a itemprop="url" href="{{ navUrl }}#music" class="{{ jumpLink }} d-none d-md-inline"><span itemprop="name">VIDEOS</span></a>
-                <a itemprop="url" href="{{ navUrl }}#songs" class="{{ jumpLink }} d-none d-md-inline"><span itemprop="name">SONGS</span></a>
-                <a itemprop="url" href="{{ navUrl }}#contact" class="{{ jumpLink }}"><span itemprop="name">CONTACT</span></a>
+                <a href="/" class="{{ jumpLink }}">HOME</a>
+                <a itemprop="url" href="/sections/about" class="{{ jumpLink }} d-none d-md-inline" data-section="#about"><span itemprop="name">ABOUT</span></a>
+                <a itemprop="url" href="/sections/shows" class="{{ jumpLink }}" data-section="#shows"><span itemprop="name">SHOWS</span></a>
+                <a itemprop="url" href="/sections/members" class="{{ jumpLink }}" data-section="#members"><span itemprop="name">BAND</span></a>
+                <a itemprop="url" href="/sections/music" class="{{ jumpLink }} d-inline d-md-none" data-section="#music"><span itemprop="name">MUSIC</span></a>
+                <a itemprop="url" href="/sections/music" class="{{ jumpLink }} d-none d-md-inline" data-section="#music"><span itemprop="name">VIDEOS</span></a>
+                <a itemprop="url" href="/sections/songs" class="{{ jumpLink }} d-none d-md-inline" data-section="#songs"><span itemprop="name">SONGS</span></a>
+                <a itemprop="url" href="/sections/contact" class="{{ jumpLink }}" data-section="#contact"><span itemprop="name">CONTACT</span></a>
                 <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.facebook.com/exiteightyfive" target="_blank"><i class="fab fa-facebook"></i></a>
             </div>
@@ -94,7 +94,7 @@
 
         {% block content %} {% endblock %}
 
-        <div class="ux-form">
+        <section class="ux-form">
             <div class="container">
                 <h2 id="contact">{{ contactForm.contactHeader }}</h2>
                 {% if contactForm.contactText %}
@@ -139,7 +139,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </section>
 
         <footer>
             <div class="container">

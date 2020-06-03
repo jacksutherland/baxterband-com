@@ -93,14 +93,54 @@ function contactForm()
   });
 }
 
+function goToSection(section, path, animate)
+{
+  var scrollTop = path == "/" ? 0 : ($(section).offset().top - 100);
+
+  if(animate)
+  {
+    $('html, body').stop().animate({ scrollTop: scrollTop }, 500);
+  }
+  else
+  {
+    $('html, body').scrollTop(scrollTop);
+  }
+}
+
+function sendPageView(path)
+{
+  ga('set', 'page', path);
+  ga('send', 'pageview');
+}
+
 $(function()
 {
   win = $(window);
   head = $("header");
 
-  //startFire();
   checkWinPos();
   contactForm();
+
+  if(document.getElementsByTagName("body")[0].id == "homepage")
+  {
+    startFire();
+  }
+
+  if(window.location.pathname.indexOf("/sections/") !== -1)
+  {
+    var path = window.location.pathname;
+
+    if(path[path.length -1] == "/")
+    {
+      path = path.substring(0, path.length - 1);
+    }
+
+    var link = $('a[href="' + path + '"]');
+    var section = link.data("section");
+
+    goToSection(section, path);
+  }
+
 
   win.scroll(function()
   {
@@ -126,21 +166,27 @@ $(function()
   }
 */
 
+  window.onpopstate = function(event)
+  {
+    if(event.state != null && event.state.section != null && event.state.path != null)
+    {
+      goToSection(event.state.section, event.state.path);
+      sendPageView(event.state.path);
+    }
+  }
+
   $("a.jump-link").click(function(e)
   {
     e.preventDefault();
-    var jump = $(this).attr('href');
-    var new_position = jump == "#" ? 0 : ($(jump).offset().top - 100);
-    $('html, body').stop().animate({ scrollTop: new_position }, 500);
 
+    var link = $(this);
+    var section = link.data("section");
+    var path = link.attr("href");
+    
+    goToSection(section, path, true);
+    sendPageView(path);
 
-      history.pushState({
-          id: 'homepage'
-      }, null, jump == "#" ? '/' : jump);
-
-    var gaUrl = jump == "#" ? '/' : ('/' + jump); 
-    ga('set', 'page', gaUrl);
-    ga('send', 'pageview');
+    window.history.pushState({ section: section, path: path }, null, path);
   });
 
   $(".band-member").hover(function()

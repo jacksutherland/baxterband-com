@@ -15,7 +15,7 @@
 		<div class="container">
 			<h2 class="text-left">{{ entry.showsTitle }}</h2>
 			<p class="text-left mb-5 mr-5">
-				{{ events.eventText | replace({'contact us': '<a  href="#contact">contact us soon</a>'}) | raw }}
+				{{ events.eventText | replace({'contact us': '<a href="/sections/contact">contact us soon</a>'}) | raw }}
 			</p>
 			{% for show in shows %}
 				<div class="show">

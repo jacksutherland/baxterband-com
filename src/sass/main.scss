@@ -400,6 +400,12 @@ $bigLogoOpacity: 0.08;
 
 }
 
+section {
+    .container {
+        position: relative;
+        z-index: 200;
+    }
+}
 
 /*** ABOUT ***/
 

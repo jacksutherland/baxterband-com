@@ -309,6 +309,10 @@ $bigLogoOpacity: 0.08;
       font-size: .9rem;
       line-height: 1.2rem; }
 
+section .container {
+  position: relative;
+  z-index: 200; }
+
 /*** ABOUT ***/
 #about {
   padding: 0 0 80px 0; }
