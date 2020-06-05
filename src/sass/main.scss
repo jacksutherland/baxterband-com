@@ -588,6 +588,90 @@ section {
 
 /*** HERO - VINTAGE MOVIE EFFECT ***/
 
+@keyframes glitch {
+    1%{
+        transform: rotateX(10deg) skewX(90deg);
+    }
+    2%{
+        transform: rotateX(0deg) skewX(0deg);
+    }
+}
+
+$noise-steps: 90;
+
+@keyframes white-noise {
+    0% { opacity: 0; }
+    65% { opacity: 0; }
+    66% { opacity: 1; }
+    80% { opacity: 1; }
+    81% { opacity: 0; }
+    100% { opacity: 0; }
+    @for $i from 0 through $noise-steps {
+        #{percentage($i*(1/$noise-steps))} {
+            $top: random(100);
+            $bottom: random(101 - $top);
+            clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+    }
+}
+
+@keyframes black-noise {
+    0% { opacity: 1; }
+    10% { opacity: 1; }
+    11% { opacity: 0; }
+    50% { opacity: 0; }
+    51% { opacity: 1; }
+    80% { opacity: 1; }
+    81% { opacity: 0; }
+    100% { opacity: 0; }
+    @for $i from 0 through $noise-steps {
+        #{percentage($i*(1/$noise-steps))} {
+            $top: random(100);
+            $bottom: random(101 - $top);
+            clip-path: inset(#{$top}px 0 #{$bottom}px 0);
+        }
+    }
+}
+
+@keyframes hero-flicker {
+    0% { 
+        opacity: 0;
+    }
+    20% {
+        opacity: 0
+    }
+    20.1% {
+        opacity: 0.5;
+    }
+    20.9% {
+        opacity: 0.5;
+    }
+    21% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0;
+    }
+    26% {
+        opacity: 0.35;
+    }
+    30% {
+        opacity: 0.35;   
+    }
+    31% {
+        opacity: 0;
+    }
+    43.5% {
+        opacity: 0;
+    }
+    43.6% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .hero {
 	position: relative;
 	height: 700px;
@@ -652,20 +736,73 @@ section {
             min-height: 100%;
         }
     }
-    h1 {
+    .hero-text {
         position: absolute;
         z-index: 20;
-        bottom: 45%;
+        bottom: 100px;
         width: 100%;
-        text-align: center;
-        text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-             0px 8px 13px rgba(0,0,0,0.1),
-             0px 18px 23px rgba(0,0,0,0.1);
+        left: 0;
+        opacity: 0.77;
+        h1 {
+            text-align: center;
+            text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                0px 8px 13px rgba(0,0,0,0.1),
+                0px 18px 23px rgba(0,0,0,0.1);
+            &.glitch {
+                $glitch-color: lighten($section-gray, 80%);
+                $glitch-duration: 5;
+                $noise-duration: 10;
+                color: $glitch-color;
+                position: relative;
+                opacity: 1;
+                margin-top: 0;
+                animation: glitch ($glitch-duration + s) ($glitch-duration + s) infinite, hero-flicker 10s ease-in;
+
+                &:before {
+                    content: attr(data-text);
+                    position: absolute;
+                    left: -1px;
+                    text-shadow: -1px 0 $white;
+                    color: $glitch-color;
+                    overflow: hidden;
+                    top: 0;
+                    width: 100%;
+                    text-align: center;
+                    animation: white-noise ($noise-duration + s) linear infinite alternate-reverse, glitch ($glitch-duration + s) ($glitch-duration + .05s) infinite;
+                }
+
+                &:after {
+                    content: attr(data-text);
+                    position: absolute;
+                    left: 1px;
+                    text-shadow: -1px 0 $black;
+                    color: $glitch-color;
+                    overflow: hidden;
+                    top: 0;
+                    width: 100%;
+                    text-align: center;
+                    animation: black-noise ($noise-duration + s) linear infinite alternate-reverse, glitch ($glitch-duration + s) ($glitch-duration + s) infinite;
+                }
+            }
+        }
     }
 }
 
 
-// MOVIE EFFECTS tablets and desktop only
+/*** MEDIA QUERIES ***/
+
+@media (max-width: 480px) {
+    .hero {
+        .hero-video {
+            video {
+                margin-left: -200px;
+                height: 100%;
+            }
+        }
+    }
+}
+
+/*Phones (<768px)*/
 @media (min-width: 768px) {
     .band-bio {
         width: 75%;
@@ -680,6 +817,17 @@ section {
 
     }
     .hero {
+
+        h1 {
+            font-size: 3.75rem;
+        }
+
+        .hero-text {
+            bottom: 25%;
+            width: 80%;
+            left: 10%;
+        }
+
         &.animated {
         	-webkit-animation-duration: 2s;
             animation-duration: 2s;
@@ -986,37 +1134,6 @@ section {
     }
 }
 
-
-
-/*** MEDIA QUERIES ***/
-
-@media (min-width: 1800px) {
-    .hero {
-        height: 900px;
-        .hero-video {
-            height: 900px;
-        }
-        .hero-image {
-            height: 900px;
-        }
-    }
-}
-
-
-/* Tablets (>=768px)*/
-@media (min-width: 991px) {
-    .hero {
-        h1 {
-            font-size: 3.75rem;
-        }
-    }
-}
-
-/*Phones (<768px)*/
-@media (min-width: 768px) {
-    
-}
-
 @media (max-width: 767px) {
     header {
         text-align: center;
@@ -1035,6 +1152,9 @@ section {
 	.hero {
 		height: 400px;
 		margin: 0 !important;
+        // h1 {
+        //     font-size: 3.75rem;
+        // }
         .logo {
             top: auto;
             bottom: 10px;
@@ -1065,13 +1185,49 @@ section {
     }
 }
 
-@media (max-width: 480px) {
+/* Tablets (>=768px)*/
+@media (min-width: 991px) {
     .hero {
+        .hero-text {
+            bottom: 30%;
+        }
+    }
+}
+
+/* Tablets (>=768px)*/
+@media (min-width: 1200px) {
+    .hero {
+        .hero-text {
+            width: 60%;
+            left: 20%;
+        }
+    }
+}
+
+@media (min-width: 1400px) {
+    .hero {
+        .hero-text {
+            width: 50%;
+            left: 25%;
+        }
+    }
+}
+
+@media (min-width: 1800px) {
+    .hero {
+        height: 900px;
+        h1 {
+            font-size: 4.2rem;
+        }
+        .hero-text {
+            width: 40%;
+            left: 30%;
+        }
         .hero-video {
-            video {
-                margin-left: -200px;
-                height: 100%;
-            }
+            height: 900px;
+        }
+        .hero-image {
+            height: 900px;
         }
     }
 }

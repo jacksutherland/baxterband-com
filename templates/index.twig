@@ -33,6 +33,11 @@
 		{% else %}
 			<div class="hero-image{% if entry.heroGrayscale %} hero-grayscale{% endif %}" style="background-image: url(https://exiteightyfive.com/files/generic/images/exit85-ipa2.jpg);;"></div>
 		{% endif %}
+		{% if entry.heroText | length %}
+			<div class="hero-text">
+				<h1 class="glitch" data-text="{{ entry.heroText }}">{{ entry.heroText }}</h1>
+			</div>
+		{% endif %}
 	</div>
 
 	<section id="about" class="sneaky">
