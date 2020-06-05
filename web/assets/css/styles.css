@@ -809,4 +809,5 @@ section .container {
 
 @media (max-width: 480px) {
   .hero .hero-video video {
-    margin-left: -600px; } }
+    margin-left: -400px;
+    height: 100%; } }
