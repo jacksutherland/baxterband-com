@@ -23,8 +23,16 @@
 
 	<div class="sneaky hero{% if entry.heroAnimated %} animated{% endif %}{% if news.newsHtml | length %} has-alert{% endif %}">
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
-		{# <div class="hero-image{% if entry.heroGrayscale %} hero-grayscale{% endif %}" style="background-image: url({{ entry.hero.one().url }});"></div> #}
-		<div class="hero-image{% if entry.heroGrayscale %} hero-grayscale{% endif %}" style="background-image: url(https://exiteightyfive.com/files/generic/images/exit85-ipa2.jpg);;"></div>
+		{% if entry.showHeroVideo %}
+			<div class="hero-video{% if entry.heroGrayscale %} hero-grayscale{% endif %}">
+				<video playsinline="" autoplay="" muted="" loop="">
+				  	<source src="/videos/hero-video-mobile.mp4" type="video/mp4" media="all and (max-width:767x)">
+					<source src="/videos/hero-video.mp4" type="video/mp4">
+				</video>
+			</div>
+		{% else %}
+			<div class="hero-image{% if entry.heroGrayscale %} hero-grayscale{% endif %}" style="background-image: url(https://exiteightyfive.com/files/generic/images/exit85-ipa2.jpg);;"></div>
+		{% endif %}
 	</div>
 
 	<section id="about" class="sneaky">

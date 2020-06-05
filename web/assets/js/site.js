@@ -125,10 +125,10 @@ $(function()
   checkWinPos();
   contactForm();
 
-  if(document.getElementsByTagName("body")[0].id == "homepage")
-  {
-    startFire();
-  }
+  // if(document.getElementsByTagName("body")[0].id == "homepage")
+  // {
+  //   startFire();
+  // }
 
   if(window.location.pathname.indexOf("/sections/") !== -1)
   {
