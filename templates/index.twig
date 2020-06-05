@@ -43,7 +43,11 @@
 	<section id="about" class="sneaky">
 		<div class="container">
 			<div class="band-bio">
-				<h1>{{ entry.bandHeader }}</h1>
+				{% if entry.heroText | length %}
+					<h2>{{ entry.bandHeader }}</h2>
+				{% else %}
+					<h1>{{ entry.bandHeader }}</h1>
+				{% endif %}
 				<p>{{ entry.bandBio }}</p>
 			</div>
 			{% set vidlen = featuredVideos | length %}
