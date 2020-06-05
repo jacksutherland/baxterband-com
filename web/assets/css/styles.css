@@ -809,5 +809,5 @@ section .container {
 
 @media (max-width: 480px) {
   .hero .hero-video video {
-    margin-left: -400px;
+    margin-left: -200px;
     height: 100%; } }
