@@ -32,14 +32,6 @@ a {
 	text-decoration: none;
 }
 
-// h1 { 
-// 	top: 20px;
-// 	left: 30px;
-// 	margin: 0 0 30px 0;
-//     font-size: 70px;
-//     text-transform: uppercase;
-//     font-family: 'Monoton', cursive;
-// }
 h1, h2 {
 	font-family: 'Acme', sans-serif;
 	margin: 70px 0 30px 0;
@@ -55,7 +47,6 @@ h6 {
 }
 
 a, a:visited, a:hover {
-	//color: #2BB0EA;
     color: $link-color;
 }
 
@@ -87,9 +78,7 @@ header {
         }
     }
     &.not-at-top {
-        //border-bottom: solid 1px $black;
         box-shadow: 0 0 3px $black;
-        //background: rgba(112,182,110,0.95);
         background: rgba(38,38,38,0.95);
         animation: fadeInHeader 0.25s linear;
         -webkit-animation: fadeInHeader 0.25s linear;
@@ -97,7 +86,6 @@ header {
             display: none !important;
         }
         a, a:visited {
-            //color: $section-gray !important;
             transition: color 0.25s;
             &:hover {
                 color: $green !important;
@@ -134,11 +122,10 @@ header {
     .news-alert {
         padding: 8px 0;
         margin-bottom: 20px;
-        background-color: $black; //$section-gray;
+        background-color: $black;
         border-bottom: $thin-border;
         overflow: hidden;
         .news-alert-content {
-            //font-family: 'Trade Winds', cursive;
             font-family: 'Acme', sans-serif;
             font-size: 1.05rem;
             color: $green;
@@ -172,25 +159,17 @@ header {
 }
 @keyframes fadeInHeader {
   0% {
-    //background-color: rgba(0, 0, 0, 0)
-    //background: rgba(112,182,110,0.95);
     background: rgba(38,38,38,0);
   }
   100% {
-    //background-color: rgba(0, 0, 0, 0.7);
-    //background: rgba(112,182,110,0.95);
     background: rgba(38,38,38,0.95);
   }
 }
 @-webkit-keyframes fadeInHeader {
   0% {
-    //background-color: rgba(0, 0, 0, 0)
-    //background: rgba(112,182,110,0);
     background: rgba(38,38,38,0);
   }
   100% {
-    //background-color: rgba(0, 0, 0, 0.7);
-    //background: rgba(112,182,110,0.95);
     background: rgba(38,38,38,0.95);
   }
 }
@@ -588,6 +567,9 @@ section {
 
 /*** HERO - VINTAGE MOVIE EFFECT ***/
 
+$hero-intro-duration: 10s;
+$noise-steps: 90;
+
 @keyframes glitch {
     1%{
         transform: rotateX(10deg) skewX(90deg);
@@ -596,8 +578,6 @@ section {
         transform: rotateX(0deg) skewX(0deg);
     }
 }
-
-$noise-steps: 90;
 
 @keyframes white-noise {
     0% { opacity: 0; }
@@ -638,55 +618,42 @@ $noise-steps: 90;
         opacity: 0;
     }
     20% {
-        opacity: 0
-    }
-    20.1% {
-        opacity: 0.5;
-    }
-    20.9% {
-        opacity: 0.5;
-    }
-    21% {
         opacity: 0;
-    }
-    25% {
-        opacity: 0;
-    }
-    26% {
-        opacity: 0.35;
     }
     30% {
-        opacity: 0.35;   
-    }
-    31% {
-        opacity: 0;
-    }
-    44% {
-        opacity: 0;
-    }
-    44.1% {
         opacity: 1;
     }
-    100% {
-        opacity: 1;
-    }
+}
+
+@keyframes hero-cta {
+    0% { opacity: 0; }
+    70% { opacity: 0; }
+    75% { opacity: 1; }
+}
+
+@keyframes hero-video-cover {
+    0% { opacity: 0.10; }
+    70% { opacity: 0.10; }
+    75% { opacity: 0.35; }
 }
 
 .hero {
 	position: relative;
 	height: 700px;
-	margin: 20px;
+	//margin: 20px;
     &.has-alert {
         margin-top: 52px;
     }
     .logo {
         position: absolute;
-        top: 10px;
-        left: 10px;
+        top: 30px;
+        left: 30px;
         z-index: 20;
-        opacity: 0.75;
+        opacity: 0.67;
         height: 150px;
         width: 150px;
+        //-webkit-backface-visibility: hidden;
+        //transform: rotate(-5deg) translate3d( 0, 0, 0);
     }
 	.hero-image {
         &.hero-grayscale {
@@ -718,7 +685,7 @@ $noise-steps: 90;
 		background-size: cover;
 		height: 700px;
 		width: 100%;
-		border-radius: 10px;
+		//border-radius: 10px;
 	}
     .hero-video {
         position: absolute;
@@ -726,7 +693,7 @@ $noise-steps: 90;
         width: 100%;
         height: 700px;
         overflow: hidden;
-        border-radius: 10px;
+        //border-radius: 10px;
         &.hero-grayscale {
             -webkit-filter: grayscale(100%);
             filter: grayscale(100%);
@@ -735,6 +702,14 @@ $noise-steps: 90;
             min-width: 100%;
             min-height: 100%;
         }
+        .hero-video-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity: 0.35;
+            animation: hero-video-cover $hero-intro-duration linear;
+        }
     }
     .hero-text {
         position: absolute;
@@ -742,34 +717,36 @@ $noise-steps: 90;
         bottom: 100px;
         width: 100%;
         left: 0;
-        opacity: 0.77;
+        opacity: 0.75;
+        text-align: center; 
         h1 {
             text-align: center;
             text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                 0px 8px 13px rgba(0,0,0,0.1),
                 0px 18px 23px rgba(0,0,0,0.1);
             &.glitch {
-                $glitch-color: lighten($section-gray, 80%);
+                $glitch-color: $white;// lighten($section-gray, 80%);
                 $glitch-duration: 5;
                 $noise-duration: 10;
                 color: $glitch-color;
                 position: relative;
                 opacity: 1;
                 margin-top: 0;
-                animation: glitch ($glitch-duration + s) ($glitch-duration + s) infinite, hero-flicker 10s ease-in;
 
-                &:before {
-                    content: attr(data-text);
-                    position: absolute;
-                    left: -1px;
-                    text-shadow: -1px 0 $white;
-                    color: $glitch-color;
-                    overflow: hidden;
-                    top: 0;
-                    width: 100%;
-                    text-align: center;
-                    animation: white-noise ($noise-duration + s) linear infinite alternate-reverse, glitch ($glitch-duration + s) ($glitch-duration + .05s) infinite;
-                }
+                animation: glitch ($glitch-duration + s) ($glitch-duration + s) linear infinite, hero-flicker $hero-intro-duration ease-in;
+
+                // &:before {
+                //     content: attr(data-text);
+                //     position: absolute;
+                //     left: -1px;
+                //     text-shadow: -1px 0 $white;
+                //     color: $glitch-color;
+                //     overflow: hidden;
+                //     top: 0;
+                //     width: 100%;
+                //     text-align: center;
+                //     animation: white-noise ($noise-duration + s) linear infinite alternate-reverse, glitch ($glitch-duration + s) ($glitch-duration + .05s) infinite;
+                // }
 
                 &:after {
                     content: attr(data-text);
@@ -781,8 +758,22 @@ $noise-steps: 90;
                     top: 0;
                     width: 100%;
                     text-align: center;
-                    animation: black-noise ($noise-duration + s) linear infinite alternate-reverse, glitch ($glitch-duration + s) ($glitch-duration + s) infinite;
+                    animation: black-noise ($noise-duration + s) linear infinite alternate-reverse, glitch ($glitch-duration + s) ($glitch-duration + s) linear infinite;
                 }
+            }
+        }
+        .hero-cta {
+            font-family: 'Acme', sans-serif;
+            font-size: 2rem;
+            line-height: 2rem;
+            text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                0px 8px 13px rgba(0,0,0,0.1),
+                0px 18px 23px rgba(0,0,0,0.1);
+            text-decoration: none;
+            transition: color .25s;
+            animation: hero-cta $hero-intro-duration linear;
+            &:hover {
+                color: lighten($link-color, 10%);
             }
         }
     }
@@ -1152,16 +1143,21 @@ $noise-steps: 90;
 	.hero {
 		height: 400px;
 		margin: 0 !important;
-        // h1 {
-        //     font-size: 3.75rem;
-        // }
         .logo {
             top: auto;
-            bottom: 10px;
+            bottom: -25px;
             left: 10px;
             margin-left: 0;
             height: 100px;
             width: 100px;
+            opacity: 1;
+        }
+        .hero-text {
+            h1 {
+                &.glitch {
+                    margin-bottom: 20px;
+                }
+            }
         }
 		.hero-image {
 			height: 400px;

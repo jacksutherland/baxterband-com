@@ -77,6 +77,7 @@ function contactForm()
         {
           frm[0].reset();
           frm.find(".info").text("Message Sent. We will be in touch. Thank you.");
+          sendEvent("contact-form");
         }
         else
         {
@@ -114,7 +115,28 @@ function sendPageView(path)
 
   gtag('config', 'UA-139848868-1', {'page_path': path});
 
-  //console.log("GA: " + typeof(ga) + " " + path)
+}
+
+function sendEvent(eventType)
+{
+  console.log("sendEvent " + eventType);
+  switch(eventType)
+  {
+    case "hero-cta":
+      //ga('send', 'event', 'Video', 'play', 'cats.mp4');
+      ga("send", "event", "Contact", "CTA Link Clicked", "Hero CTA");
+      //console.log("hero CTA event sent");
+      // gtag('event', 'click', {
+      //   'event_category': 'link-clicked',
+      //   'event_label': 'Hero CTA'
+      // });
+      break;
+    case "contact-form":
+      //ga('send', 'event', 'Video', 'play', 'cats.mp4');
+      ga("send", "event", "Contact", "Form Submitted", "Contact Form");
+      //console.log("contact form event sent");
+      break;
+  }
 }
 
 $(function()
@@ -189,6 +211,11 @@ $(function()
     
     goToSection(section, path, true);
     sendPageView(path);
+
+    if(link.hasClass("hero-cta"))
+    {
+      sendEvent("hero-cta");
+    }
 
     window.history.pushState({ section: section, path: path }, null, path);
   });

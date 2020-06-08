@@ -25,6 +25,7 @@
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
 		{% if entry.showHeroVideo %}
 			<div class="hero-video{% if entry.heroGrayscale %} hero-grayscale{% endif %}">
+				<div class="hero-video-cover"></div>
 				<video playsinline="" autoplay="" muted="" loop="">
 				  	<source src="/videos/hero-video-mobile.mp4" type="video/mp4" media="all and (max-width:767x)">
 					<source src="/videos/hero-video.mp4" type="video/mp4">
@@ -36,6 +37,10 @@
 		{% if entry.heroText | length %}
 			<div class="hero-text">
 				<h1 class="glitch" data-text="{{ entry.heroText }}">{{ entry.heroText }}</h1>
+				<a href="/sections/contact" class="hero-cta jump-link" data-section="#contact">
+					<span class="d-inline d-md-none">Contact Us</span>
+					<span class="d-none d-md-inline">Contact us for booking or additional info</span>
+				</a>
 			</div>
 		{% endif %}
 	</div>
