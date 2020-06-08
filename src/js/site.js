@@ -120,22 +120,22 @@ function sendPageView(path)
 
 function sendEvent(eventType)
 {
-  console.log("sendEvent " + eventType);
+  gtag('config', 'UA-139848868-1');
   switch(eventType)
   {
     case "hero-cta":
-      //ga('send', 'event', 'Video', 'play', 'cats.mp4');
-      ga("send", "event", "Contact", "CTA Link Clicked", "Hero CTA");
-      //console.log("hero CTA event sent");
-      // gtag('event', 'click', {
-      //   'event_category': 'link-clicked',
-      //   'event_label': 'Hero CTA'
-      // });
+      //ga("send", "event", "Contact", "CTA Link Clicked", "Hero CTA");
+      gtag('event', 'CTA Link Clicked', {
+        'event_category' : 'Contact',
+        'event_label' : 'Hero CTA'
+      });
       break;
     case "contact-form":
-      //ga('send', 'event', 'Video', 'play', 'cats.mp4');
-      ga("send", "event", "Contact", "Form Submitted", "Contact Form");
-      //console.log("contact form event sent");
+      //ga("send", "event", "Contact", "Form Submitted", "Contact Form");
+      gtag('event', 'Form Submitted', {
+        'event_category' : 'Contact',
+        'event_label' : 'Contact Form'
+      });
       break;
   }
 }
