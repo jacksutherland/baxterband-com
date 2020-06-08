@@ -77,13 +77,14 @@ function contactForm()
         {
           frm[0].reset();
           frm.find(".info").text("Message Sent. We will be in touch. Thank you.");
-          sendEvent("contact-form");
         }
         else
         {
           frm.find(".info").addClass("is-error").text("Error encountered. Please call us at 704-996-3439.");
         }
       });
+
+      sendEvent("contact-form");
     }
     else
     {
