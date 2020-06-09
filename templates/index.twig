@@ -61,9 +61,7 @@
 					{% for video in featuredVideos.all() %}
 						<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 							<div class="mt-5">
-								<div class="embed-responsive embed-responsive-16by9">
-								  {{ video.youtubeEmbedCode | raw }}
-								</div>
+								<div id="featured-video-{{ video.id }}" class="embed-responsive embed-responsive-16by9" data-video="{{ video.youtubeVideoId | trim }}"></div>
 							</div>
 							{% if video.description | length %}
 								<div class="video-description">
@@ -171,9 +169,7 @@
 								{% for video in videos.all() %}
 									<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 										<div class="mt-5">
-											<div class="embed-responsive embed-responsive-16by9">
-											  {{ video.youtubeEmbedCode | raw }}
-											</div>
+											<div id="video-{{ video.id }}" class="embed-responsive embed-responsive-16by9" data-video="{{ video.youtubeVideoId | trim }}"></div>
 										</div>
 										{% if video.description | length %}
 											<div class="video-description">

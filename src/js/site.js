@@ -118,25 +118,74 @@ function sendPageView(path)
 
 }
 
-function sendEvent(eventType)
+function sendEvent(eventType, eventLabel)
 {
   gtag('config', 'UA-139848868-1');
   switch(eventType)
   {
     case "hero-cta":
-      //ga("send", "event", "Contact", "CTA Link Clicked", "Hero CTA");
       gtag('event', 'CTA Link Clicked', {
         'event_category' : 'Contact',
         'event_label' : 'Hero CTA'
       });
       break;
     case "contact-form":
-      //ga("send", "event", "Contact", "Form Submitted", "Contact Form");
       gtag('event', 'Form Submitted', {
         'event_category' : 'Contact',
         'event_label' : 'Contact Form'
       });
       break;
+    case "video-played":
+      gtag('event', 'Video Played', {
+        'event_category' : 'Media',
+        'event_label' : eventLabel
+      });
+      break;
+  }
+}
+
+var media = {
+  videos: {
+    player: function(id, videoId)
+    {
+      var played = false;
+
+      var ytPLayer = new YT.Player(id, {
+        playerVars: { 'rel' : 0 },
+        videoId: videoId,
+        events: {
+          'onStateChange': function(event)
+          {
+            if (event.data == YT.PlayerState.PLAYING)
+            {
+              if(!played) // only played once this session
+              {
+                played = true;
+                sendEvent("video-played", ytPLayer.getVideoUrl());
+              }
+            }
+          }
+        }
+      });
+    },
+    createVideos: function()
+    {
+
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      window.onYouTubeIframeAPIReady = function()
+      {
+        $("[data-video]").each(function()
+        {
+          var video = $(this);
+          var player = new media.videos.player(video[0].id, video.data("video"));
+        });
+      }
+    }
   }
 }
 
@@ -147,6 +196,7 @@ $(function()
 
   checkWinPos();
   contactForm();
+  media.videos.createVideos();
 
   // if(document.getElementsByTagName("body")[0].id == "homepage")
   // {
