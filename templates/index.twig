@@ -199,7 +199,7 @@
 					<div class="row">
 						{% for song in setlist90s.one().children.all() %}
 							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div class="cover-block">
+								<div class="cover-block artist-song">
 									{% if song.songImage.count %}
 										<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
 									{% endif %}
@@ -221,7 +221,7 @@
 					<div class="row">
 						{% for song in setlist80s.one().children.all() %}
 							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div class="cover-block">
+								<div class="cover-block artist-song">
 									{% if song.songImage.count %}
 										<div class="cover-block-image" style="background-image:url({{ song.songImage.one().url('songImage')  }})"></div>
 									{% endif %}

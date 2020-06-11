@@ -297,4 +297,11 @@ $(function()
     rockstar.find(".band-member-image").removeClass("fadeout-image");
   });
 
+  var songs = document.getElementsByClassName("artist-song");
+  for (var i = 0; i < songs.length; i++)
+  {
+      songs[i].addEventListener('mouseover', function(){ console.log("over") });
+      songs[i].addEventListener('touchstart', function(){ console.log("over") });
+  }
+
 });
