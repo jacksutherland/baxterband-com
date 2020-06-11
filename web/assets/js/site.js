@@ -151,6 +151,11 @@ function sendEvent(eventType, eventLabel)
   }
 }
 
+function sendObject(obj)
+{
+  dataLayer.push(obj);
+}
+
 var media = {
   videos: {
     player: function(id, videoId)
@@ -298,10 +303,31 @@ $(function()
   });
 
   var songs = document.getElementsByClassName("artist-song");
+  function overArtist()
+  {
+    this.isOver = true;
+    setTimeout(function()
+    {
+      if(this.isOver)
+      {
+        sendObject({
+          'artistHover': this.getAttribute("data-artist"),
+          'songHover': this.getAttribute("data-song")
+        });
+      }
+    }.bind(this), 1000);
+  }
+  function offArtist()
+  {
+    this.isOver = false;
+  }
   for (var i = 0; i < songs.length; i++)
   {
-      songs[i].addEventListener('mouseenter', function(){ console.log("over " + this.getAttribute("data-artist") + " - " + this.getAttribute("data-song")) });
-      songs[i].addEventListener('touchstart', function(){ console.log("over") });
+    songs[i].isOver = false;
+    songs[i].addEventListener('mouseenter', overArtist);
+    songs[i].addEventListener('mouseleave', offArtist);
+    songs[i].addEventListener('touchstart', overArtist);
+    songs[i].addEventListener('touchend', offArtist);
   }
 
 });
