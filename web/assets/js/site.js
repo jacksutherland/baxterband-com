@@ -300,7 +300,7 @@ $(function()
   var songs = document.getElementsByClassName("artist-song");
   for (var i = 0; i < songs.length; i++)
   {
-      songs[i].addEventListener('mouseover', function(){ console.log("over " + songs[i].getAttribute("data-artist") + " - " + songs[i].getAttribute("data-song")) });
+      songs[i].addEventListener('mouseenter', function(){ console.log("over " + this.getAttribute("data-artist") + " - " + this.getAttribute("data-song")) });
       songs[i].addEventListener('touchstart', function(){ console.log("over") });
   }
 
