@@ -111,11 +111,18 @@ function goToSection(section, path, animate)
 
 function sendPageView(path)
 {
-  //ga('set', 'page', path);
-  //ga('send', 'pageview');
+  // Universal Analytics Code
+  //gtag('config', 'UA-139848868-1', {'page_path': path});
 
-  gtag('config', 'UA-139848868-1', {'page_path': path});
+  // Google Tag Manager Code
+  // dataLayer.push({
+  //   event: 'virtualpageview',
+  //   page: {
+  //     path: path
+  //   }
+  // });
 
+  // This has been reconfigured in GTM to trigger on DOM History Change
 }
 
 function sendEvent(eventType, eventLabel)
