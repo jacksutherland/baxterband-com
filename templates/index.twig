@@ -16,9 +16,9 @@
 {% set featuredVideos = craft.categories.group('videos').isFeatured('1') %}
 
 {% set isUserOnMobile = false %}
-{% for item in browserValues %}
+{# {% for item in browserValues %}
     {% set isUserOnMobile = not isUserOnMobile ? item.agent in userAgent : isUserOnMobile %}
-{% endfor %}
+{% endfor %} #}
 
 {% block content %}
 
