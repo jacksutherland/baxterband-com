@@ -84,7 +84,7 @@ function contactForm()
         }
       });
 
-      sendEvent("contact-form");
+      //sendEvent("contact-form");
     }
     else
     {
@@ -109,51 +109,55 @@ function goToSection(section, path, animate)
   }
 }
 
-function sendPageView(path)
-{
-  // Universal Analytics Code
-  //gtag('config', 'UA-139848868-1', {'page_path': path});
+// DONT DELETE - Keep for reference of how to send GA virtual page view
+// function sendPageView(path)
+// {
+//   // Universal Analytics Code
+//   gtag('config', 'UA-139848868-1', {'page_path': path});
 
-  // Google Tag Manager Code
-  // dataLayer.push({
-  //   event: 'virtualpageview',
-  //   page: {
-  //     path: path
-  //   }
-  // });
+//   // This has been reconfigured in GTM to trigger on DOM History Change
+// }
 
-  // This has been reconfigured in GTM to trigger on DOM History Change
-}
 
-function sendEvent(eventType, eventLabel)
-{
-  // gtag('config', 'UA-139848868-1');
-  // switch(eventType)
-  // {
-  //   case "hero-cta":
-  //     gtag('event', 'CTA Link Clicked', {
-  //       'event_category' : 'Contact',
-  //       'event_label' : 'Hero CTA'
-  //     });
-  //     break;
-  //   case "contact-form":
-  //     gtag('event', 'Form Submitted', {
-  //       'event_category' : 'Contact',
-  //       'event_label' : 'Contact Form'
-  //     });
-  //     break;
-  //   case "video-played":
-  //     gtag('event', 'Video Played', {
-  //       'event_category' : 'Media',
-  //       'event_label' : eventLabel
-  //     });
-  //     break;
-  // }
-}
+// DONT DELETE - Keep for reference of how to send GA event
+// function sendEvent(eventType, eventLabel)
+// {
+//   gtag('config', 'UA-139848868-1');
+//   switch(eventType)
+//   {
+//     case "hero-cta":
+//       gtag('event', 'CTA Link Clicked', {
+//         'event_category' : 'Contact',
+//         'event_label' : 'Hero CTA'
+//       });
+//       break;
+//     case "contact-form":
+//       gtag('event', 'Form Submitted', {
+//         'event_category' : 'Contact',
+//         'event_label' : 'Contact Form'
+//       });
+//       break;
+//     case "video-played":
+//       gtag('event', 'Video Played', {
+//         'event_category' : 'Media',
+//         'event_label' : eventLabel
+//       });
+//       break;
+//   }
+// }
 
-function sendObject(obj)
-{
-  dataLayer.push(obj);
+var analytics = {
+  sendObject: function(obj)
+  {
+    dataLayer.push(obj);
+  },
+  sendArtist: function(artist, song)
+  {
+    analytics.sendObject({
+      'artistHover': this.getAttribute("data-artist"),
+      'songHover': this.getAttribute("data-song")
+    });
+  }
 }
 
 var media = {
@@ -173,7 +177,6 @@ var media = {
               if(!played) // only played once this session
               {
                 played = true;
-                sendEvent("video-played", ytPLayer.getVideoUrl());
               }
             }
           }
@@ -215,6 +218,8 @@ $(function()
   //   startFire();
   // }
 
+  /********** SPA URL Jump **********/
+
   if(window.location.pathname.indexOf("/sections/") !== -1)
   {
     var path = window.location.pathname;
@@ -230,39 +235,25 @@ $(function()
     goToSection(section, path);
   }
 
+  /********** Window Events **********/
 
   win.scroll(function()
   {
     checkWinPos(true);
   });
 
-/*
-  if(window.location.hash || win.scrollTop() > 50)
-  {
-    $(".sneaky").removeClass("sneaky");
-  }
-  else
-  {
-    var sneakyCounter = 0;
-    $(".sneaky").each(function()
-    {
-      var sneaky = $(this);
-      setTimeout(function()
-      {
-        sneaky.addClass("sneaky-show");
-      }, (650 * sneakyCounter++));
-    });
-  }
-*/
+  /********** DOM History **********/
 
   window.onpopstate = function(event)
   {
     if(event.state != null && event.state.section != null && event.state.path != null)
     {
       goToSection(event.state.section, event.state.path);
-      sendPageView(event.state.path);
+      //sendPageView(event.state.path);
     }
   }
+
+  /********** Navigation Link Events **********/
 
   $("a.jump-link").click(function(e)
   {
@@ -273,15 +264,17 @@ $(function()
     var path = link.attr("href");
     
     goToSection(section, path, true);
-    sendPageView(path);
+    //sendPageView(path);
 
-    if(link.hasClass("hero-cta"))
-    {
-      sendEvent("hero-cta");
-    }
+    // if(link.hasClass("hero-cta"))
+    // {
+    //   sendEvent("hero-cta");
+    // }
 
     window.history.pushState({ section: section, path: path }, null, path);
   });
+
+  /********** Band Member Events **********/
 
   $(".band-member").hover(function()
   {
@@ -302,6 +295,8 @@ $(function()
     rockstar.find(".band-member-image").removeClass("fadeout-image");
   });
 
+  /********** Artist Song Events **********/
+
   var songs = document.getElementsByClassName("artist-song");
   function overArtist()
   {
@@ -310,10 +305,7 @@ $(function()
     {
       if(this.isOver)
       {
-        sendObject({
-          'artistHover': this.getAttribute("data-artist"),
-          'songHover': this.getAttribute("data-song")
-        });
+        analytics.sendArtist(this.getAttribute("data-artist"), this.getAttribute("data-song"));
       }
     }.bind(this), 1000);
   }
