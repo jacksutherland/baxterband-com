@@ -65,7 +65,7 @@ function contactForm()
     }
     else if($.trim(frm.find("[name=phone]").val()) == "" && !frm.find("[name=email]").val().includes("@"))
     {
-      error = "A valid phone number of email address is required";
+      error = "A valid phone number or email address is required";
     }
 
     if (error == "")
@@ -84,7 +84,7 @@ function contactForm()
         }
       });
 
-      //sendEvent("contact-form");
+      sendContact();
     }
     else
     {
@@ -137,19 +137,13 @@ function goToSection(section, path, animate)
 //         'event_label' : 'Contact Form'
 //       });
 //       break;
-//     case "video-played":
-//       gtag('event', 'Video Played', {
-//         'event_category' : 'Media',
-//         'event_label' : eventLabel
-//       });
-//       break;
 //   }
 // }
 
 var analytics = {
   sendEvent: function(eventName, values)
   {
-    var obj = Object.assign({'event': eventName}, values);
+    var obj = (typeof(values) == "object") ? Object.assign({'event': eventName}, values) : {'event': eventName};
     dataLayer.push(obj);
   },
   sendArtist: function(artist, song)
@@ -162,6 +156,10 @@ var analytics = {
       'artist': artist,
       'song': song
     });
+  },
+  sendContact: function()
+  {
+    analytics.sendEvent("contactFormSubmitted");
   }
 }
 
@@ -271,10 +269,10 @@ $(function()
     goToSection(section, path, true);
     //sendPageView(path);
 
-    // if(link.hasClass("hero-cta"))
-    // {
-    //   sendEvent("hero-cta");
-    // }
+    if(link.hasClass("hero-cta"))
+    {
+      sendEvent("hero-cta");
+    }
 
     window.history.pushState({ section: section, path: path }, null, path);
   });
