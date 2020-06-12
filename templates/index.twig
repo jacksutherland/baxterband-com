@@ -92,22 +92,27 @@
 								<div class="date">{{ show.showDate | date('d') }}</div>
 								<div class="weekday">{{ show.showDate | date('l') }} @ {{ show.showDate | date('h:ia') }}</div>
 								{% if show.facebookEventLink | length %}
-									<a href="{{ show.facebookEventLink }}" target="_blank" class="facebook-event-link"><i class="fab fa-facebook-square"></i></a>
+									<a href="{{ show.facebookEventLink }}" target="_blank" class="facebook-event-link" onclick="analytics.sendShowDetails('{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
+										<i class="fab fa-facebook-square"></i>
+									</a>
 								{% endif %}
 							</div>
 						</div>
 						<div class="col-md-8 col-lg-9">
 							{% if show.venueName | length %}
-								<a class="venue" target="_blank" href="https://www.google.com/maps/search/{{ show.venueAddress }}">
+								<a class="venue" target="_blank" href="https://www.google.com/maps/search/{{ show.venueAddress }}" onclick="analytics.sendShowDetails('{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
 									<i class="fas fa-map-marker-alt"></i> 
 									{{ show.venueName }}
 								</a>
 							{% endif %}
 							{% if show.showLink | length %}
-								<a href="{{ show.showLink }}" target="_blank" class="show-link"><h5>{{ show.title }}</h5></a>
+								<a href="{{ show.showLink }}" target="_blank" class="show-link" onclick="analytics.sendShowDetails('{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
+									<h5>{{ show.title }}</h5>
+								</a>
 							{% else %}
-								{# <h5>{{ show.title }}</h5> #}
-								<a href="{{ show.url }}" class="show-link"><h5>{{ show.title }}</h5></a>
+								<a href="{{ show.url }}" class="show-link" onclick="analytics.sendShowDetails('{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
+									<h5>{{ show.title }}</h5>
+								</a>
 							{% endif %}
 							<p>{{ show.showDetails }}</p>
 						</div>

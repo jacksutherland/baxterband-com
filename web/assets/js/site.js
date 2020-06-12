@@ -160,6 +160,13 @@ var analytics = {
   sendContact: function()
   {
     analytics.sendEvent("contactFormSubmitted");
+  },
+  sendShowDetails: function(title, date)
+  {
+    analytics.sendEvent("showDetails", {
+      'showTitle': title,
+      'showDate': date
+    });
   }
 }
 
