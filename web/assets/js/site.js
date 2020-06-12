@@ -84,7 +84,7 @@ function contactForm()
         }
       });
 
-      sendContact();
+      analytics.sendContact();
     }
     else
     {
