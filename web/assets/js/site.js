@@ -301,13 +301,14 @@ $(function()
   function overArtist()
   {
     this.isOver = true;
+    // Delay 500ms to prevent sending incidental hovers
     setTimeout(function()
     {
       if(this.isOver)
       {
         analytics.sendArtist(this.getAttribute("data-artist"), this.getAttribute("data-song"));
       }
-    }.bind(this), 1000);
+    }.bind(this), 500);
   }
   function offArtist()
   {
