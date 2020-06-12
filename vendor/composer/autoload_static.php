@@ -98,6 +98,10 @@ class ComposerStaticInit4c04ad6d28a206edeaf722b12ccee884
             'yii\\' => 4,
             'yii2tech\\ar\\softdelete\\' => 23,
         ),
+        's' => 
+        array (
+            'superbig\\mobiledetect\\' => 22,
+        ),
         'm' => 
         array (
             'modules\\' => 8,
@@ -257,6 +261,10 @@ class ComposerStaticInit4c04ad6d28a206edeaf722b12ccee884
         'yii2tech\\ar\\softdelete\\' => 
         array (
             0 => __DIR__ . '/..' . '/yii2tech/ar-softdelete/src',
+        ),
+        'superbig\\mobiledetect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/superbig/craft3-mobiledetect/src',
         ),
         'modules\\' => 
         array (
@@ -499,6 +507,13 @@ class ComposerStaticInit4c04ad6d28a206edeaf722b12ccee884
             'HTMLPurifier' => 
             array (
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
+            ),
+        ),
+        'D' => 
+        array (
+            'Detection' => 
+            array (
+                0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced',
             ),
         ),
     );
@@ -756,6 +771,7 @@ class ComposerStaticInit4c04ad6d28a206edeaf722b12ccee884
         'Composer\\Util\\Url' => __DIR__ . '/..' . '/composer/composer/src/Composer/Util/Url.php',
         'Composer\\XdebugHandler' => __DIR__ . '/..' . '/composer/composer/src/Composer/XdebugHandler.php',
         'Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'Detection\\MobileDetect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced/Detection/MobileDetect.php',
         'Doctrine\\Common\\Lexer\\AbstractLexer' => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
         'Dompdf\\Adapter\\CPDF' => __DIR__ . '/..' . '/dompdf/dompdf/src/Adapter/CPDF.php',
         'Dompdf\\Adapter\\GD' => __DIR__ . '/..' . '/dompdf/dompdf/src/Adapter/GD.php',
@@ -1464,6 +1480,7 @@ class ComposerStaticInit4c04ad6d28a206edeaf722b12ccee884
         'Matrix\\Operators\\Multiplication' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Multiplication.php',
         'Matrix\\Operators\\Operator' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Operator.php',
         'Matrix\\Operators\\Subtraction' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Subtraction.php',
+        'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'Money\\Calculator' => __DIR__ . '/..' . '/moneyphp/money/src/Calculator.php',
         'Money\\Calculator\\BcMathCalculator' => __DIR__ . '/..' . '/moneyphp/money/src/Calculator/BcMathCalculator.php',
         'Money\\Calculator\\GmpCalculator' => __DIR__ . '/..' . '/moneyphp/money/src/Calculator/GmpCalculator.php',
@@ -3394,6 +3411,9 @@ class ComposerStaticInit4c04ad6d28a206edeaf722b12ccee884
         'enshrined\\svgSanitize\\data\\TagInterface' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/data/TagInterface.php',
         'mikehaertl\\shellcommand\\Command' => __DIR__ . '/..' . '/mikehaertl/php-shellcommand/src/Command.php',
         'modules\\Module' => __DIR__ . '/../..' . '/modules/Module.php',
+        'superbig\\mobiledetect\\MobileDetect' => __DIR__ . '/..' . '/superbig/craft3-mobiledetect/src/MobileDetect.php',
+        'superbig\\mobiledetect\\services\\MobileDetectService' => __DIR__ . '/..' . '/superbig/craft3-mobiledetect/src/services/MobileDetectService.php',
+        'superbig\\mobiledetect\\variables\\MobileDetectVariable' => __DIR__ . '/..' . '/superbig/craft3-mobiledetect/src/variables/MobileDetectVariable.php',
         'yii2tech\\ar\\softdelete\\SoftDeleteBehavior' => __DIR__ . '/..' . '/yii2tech/ar-softdelete/src/SoftDeleteBehavior.php',
         'yii2tech\\ar\\softdelete\\SoftDeleteQueryBehavior' => __DIR__ . '/..' . '/yii2tech/ar-softdelete/src/SoftDeleteQueryBehavior.php',
         'yii\\BaseYii' => __DIR__ . '/..' . '/yiisoft/yii2/BaseYii.php',

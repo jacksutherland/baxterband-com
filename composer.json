@@ -20,7 +20,8 @@
   },
   "require": {
     "craftcms/cms": "3.2.1",
-    "vlucas/phpdotenv": "^2.4.0"
+    "vlucas/phpdotenv": "^2.4.0",
+    "superbig/craft3-mobiledetect": "1.0.2"
   },
   "autoload": {
     "psr-4": {

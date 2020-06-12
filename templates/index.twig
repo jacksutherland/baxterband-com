@@ -15,7 +15,9 @@
 {% set videos = craft.categories.group('videos') %}
 {% set featuredVideos = craft.categories.group('videos').isFeatured('1') %}
 
+{% set browserValues = [ { agent: 'android'}, { agent: 'iemobile'}] %}
 {% set isUserOnMobile = false %}
+{% set userAgent = craft.request.getUserAgent()|lower %}
 {# {% for item in browserValues %}
     {% set isUserOnMobile = not isUserOnMobile ? item.agent in userAgent : isUserOnMobile %}
 {% endfor %} #}
@@ -28,8 +30,11 @@
 			<div class="hero-video{% if entry.heroGrayscale %} hero-grayscale{% endif %}">
 				<div class="hero-video-cover"></div>
 				<video playsinline="" autoplay="" muted="" loop="">
-				  	<source src="/videos/hero-video-mobile.mp4" type="video/mp4" media="all and (max-width:767x)">
-					<source src="/videos/hero-video.mp4" type="video/mp4">
+					{% if craft.mobileDetect.isMobile %}
+				  		<source src="/videos/hero-video-mobile.mp4" type="video/mp4">
+				  	{% else %}
+						<source src="/videos/hero-video.mp4" type="video/mp4">
+					{% endif %}
 				</video>
 			</div>
 		{% else %}
