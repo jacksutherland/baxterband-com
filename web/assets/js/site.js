@@ -147,15 +147,20 @@ function goToSection(section, path, animate)
 // }
 
 var analytics = {
-  sendObject: function(obj)
+  sendEvent: function(eventName, values)
   {
+    var obj = Object.assign({'event': eventName}, values);
     dataLayer.push(obj);
   },
   sendArtist: function(artist, song)
   {
-    analytics.sendObject({
-      'artistHover': this.getAttribute("data-artist"),
-      'songHover': this.getAttribute("data-song")
+    /*
+      GTM Trigger Event Name: artistHover
+      GTM Variables: artist, song
+    */
+    analytics.sendEvent("artistHover", {
+      'artist': artist,
+      'song': song
     });
   }
 }
