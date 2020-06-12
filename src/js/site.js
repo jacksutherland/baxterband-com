@@ -161,9 +161,10 @@ var analytics = {
   {
     analytics.sendEvent("contactFormSubmitted");
   },
-  sendShowDetails: function(title, date)
+  sendShowDetails: function(source, title, date)
   {
     analytics.sendEvent("showDetails", {
+      'showSource': source,
       'showTitle': title,
       'showDate': date
     });
