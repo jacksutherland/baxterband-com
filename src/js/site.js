@@ -127,28 +127,28 @@ function sendPageView(path)
 
 function sendEvent(eventType, eventLabel)
 {
-  gtag('config', 'UA-139848868-1');
-  switch(eventType)
-  {
-    case "hero-cta":
-      gtag('event', 'CTA Link Clicked', {
-        'event_category' : 'Contact',
-        'event_label' : 'Hero CTA'
-      });
-      break;
-    case "contact-form":
-      gtag('event', 'Form Submitted', {
-        'event_category' : 'Contact',
-        'event_label' : 'Contact Form'
-      });
-      break;
-    case "video-played":
-      gtag('event', 'Video Played', {
-        'event_category' : 'Media',
-        'event_label' : eventLabel
-      });
-      break;
-  }
+  // gtag('config', 'UA-139848868-1');
+  // switch(eventType)
+  // {
+  //   case "hero-cta":
+  //     gtag('event', 'CTA Link Clicked', {
+  //       'event_category' : 'Contact',
+  //       'event_label' : 'Hero CTA'
+  //     });
+  //     break;
+  //   case "contact-form":
+  //     gtag('event', 'Form Submitted', {
+  //       'event_category' : 'Contact',
+  //       'event_label' : 'Contact Form'
+  //     });
+  //     break;
+  //   case "video-played":
+  //     gtag('event', 'Video Played', {
+  //       'event_category' : 'Media',
+  //       'event_label' : eventLabel
+  //     });
+  //     break;
+  // }
 }
 
 function sendObject(obj)
