@@ -640,9 +640,14 @@ $noise-steps: 90;
 .hero {
 	position: relative;
 	height: 700px;
-	//margin: 20px;
     &.has-alert {
         margin-top: 52px;
+    }
+    &.small-hero {
+        height: 600px;
+        .hero-image {
+            height: 600px;
+        }
     }
     .logo {
         position: absolute;
@@ -652,8 +657,6 @@ $noise-steps: 90;
         opacity: 0.67;
         height: 150px;
         width: 150px;
-        //-webkit-backface-visibility: hidden;
-        //transform: rotate(-5deg) translate3d( 0, 0, 0);
     }
 	.hero-image {
         &.hero-grayscale {

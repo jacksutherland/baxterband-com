@@ -2,10 +2,12 @@
 
 {% block content %}
 
-	<div class="hero">
+	<div class="hero small-hero">
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
-		<div class="hero-image hero-band hero-darker" style="background-image: url({{ entry.hero.count ? entry.hero.one().url : '/images/corkscrew1.jpg' }});"></div>
-		<h1>{{ entry.title }}</h1>
+		<div class="hero-image hero-darker" style="background-image: url({{ entry.hero.count ? entry.hero.one().url : '/images/corkscrew1.jpg' }});"></div>
+		<div class="hero-text">
+			<h1>{{ entry.title }}</h1>
+		</div>
 	</div>
 
 	<div id="shows" class="section-style1 pt-4 pb-4">
