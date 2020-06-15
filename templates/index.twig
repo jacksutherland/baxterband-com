@@ -125,7 +125,22 @@
 	<section id="members" class="sneaky">
 		<div class="container">
 			<h2>{{ entry.membersHeader }}</h2>
-			{% if members.count() > 0 %}
+			{% if entry.bandHistory %}
+				<p>{{ entry.bandHistory | replace('Jack Sutherland', '<a href="https://www.jacksutherland.com" target="_blank">Jack Sutherland</a>') | raw }}</p>
+			{% endif %}
+			{% if entry.bandImages.count() > 0 %}
+				<div class="mt-5">
+					<div class="row m-0">
+						{% set colCount = 0 %}
+						{% for img in entry.bandImages.all() %}
+							<div class="col-12 {% if loop.index in [1,4,5,8,9,12,13,16,17] %}col-md-7{% else %}col-md-5{% endif %} band-image" style="background-image:url({{ img.url('bandImage') }})" alt="{{ img.title }}" title="{{ img.title }}">
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+
+			{# {% if members.count() > 0 %}
 				<div class="row">
 					{% for member in members.all() %}
 						<div class="col-lg-6 m-auto">
@@ -148,7 +163,7 @@
 						</div>
 					{% endfor %}
 				</div>
-			{% endif %}
+			{% endif %} #}
 		</div>
 	</section>
 

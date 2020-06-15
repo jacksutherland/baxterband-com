@@ -313,6 +313,14 @@ $bigLogoOpacity: 0.08;
 	width: 100%;
 }
 
+.band-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    outline: solid 5px $white;
+    height: 300px;
+}
+
 .band-member {
 	position: relative;
 	height: 450px;
@@ -1155,6 +1163,7 @@ $noise-steps: 90;
         width: 70%;
         height: auto;
     }
+
 	.hero {
 		height: 400px;
 		margin: 0 !important;
@@ -1214,6 +1223,9 @@ $noise-steps: 90;
         .hero-text {
             bottom: 30%;
         }
+    }
+    .band-image {
+        height: 400px;
     }
 }
 
