@@ -17,7 +17,7 @@
 
 {% block content %}
 
-	<div class="sneaky hero{% if entry.heroAnimated %} animated{% endif %}{% if news.newsHtml | length %} has-alert{% endif %}">
+	<div class="sneaky hero{% if entry.heroAnimated %} animated{% endif %}{% if craft.app.request.getParam('src') is not null or news.newsHtml | length %} has-alert{% endif %}">
 		<img class="logo" src="/images/logo-sign-small.png" alt="">
 		{% if entry.showHeroVideo and not craft.mobileDetect.isMobile  %}
 			<div class="hero-video{% if entry.heroGrayscale %} hero-grayscale{% endif %}">
@@ -58,7 +58,9 @@
 					{% for video in featuredVideos.all() %}
 						<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 							<div class="mt-5">
-								<div id="featured-video-{{ video.id }}" class="embed-responsive embed-responsive-16by9" data-video="{{ video.youtubeVideoId | trim }}"></div>
+								<div class="embed-responsive embed-responsive-16by9">
+									<div id="featured-video-{{ video.id }}" data-video="{{ video.youtubeVideoId | trim }}"></div>
+								</div>
 							</div>
 							{% if video.description | length %}
 								<div class="video-description">
@@ -171,7 +173,9 @@
 								{% for video in videos.all() %}
 									<div class="col-12 col-lg-8 {% if vidlen > 1 %}col-xl-6 {% endif %}m-auto">
 										<div class="mt-5">
-											<div id="video-{{ video.id }}" class="embed-responsive embed-responsive-16by9" data-video="{{ video.youtubeVideoId | trim }}"></div>
+											<div class="embed-responsive embed-responsive-16by9">
+												<div id="video-{{ video.id }}" data-video="{{ video.youtubeVideoId | trim }}"></div>
+											</div>
 										</div>
 										{% if video.description | length %}
 											<div class="video-description">

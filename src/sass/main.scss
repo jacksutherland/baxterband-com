@@ -641,7 +641,10 @@ $noise-steps: 90;
 	position: relative;
 	height: 700px;
     &.has-alert {
-        margin-top: 52px;
+        margin-top: 43px;
+        // .logo {
+        //     top: 50px;
+        // }
     }
     &.small-hero {
         height: 600px;
@@ -1132,6 +1135,15 @@ $noise-steps: 90;
     header {
         text-align: center;
         padding: 10px 0 !important;
+        
+        &.at-top {
+            box-shadow: 0 0 3px $black;
+            background: rgba(38,38,38,0.95);
+        }
+        &.not-at-top {
+            animation: none;
+            -webkit-animation: none;
+        }
         a:first-child {
             margin-left: 0;
         }
@@ -1156,10 +1168,22 @@ $noise-steps: 90;
             opacity: 1;
         }
         .hero-text {
+            opacity: 1;
             h1 {
                 &.glitch {
                     margin-bottom: 20px;
+                    animation: none;
+                    -webkit-animation: none;
+                    &:after {
+                        display: none;
+                        animation: none;
+                        -webkit-animation: none;
+                    }
                 }
+            }
+            .hero-cta {
+                animation: none;
+                -webkit-animation: none;
             }
         }
 		.hero-image {
