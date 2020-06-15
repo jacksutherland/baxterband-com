@@ -79,7 +79,8 @@
             {% if craft.app.request.getParam('src') is not null %}
                 <div class="news-alert d-none d-md-block">
                     <div class="news-alert-content">
-                        <a href="{{ navUrl }}#contact" class="jump-link">Book your venue, party or event today!</a>
+                        {# <a href="{{ navUrl }}#contact" class="jump-link">Book your venue, party or event today!</a> #}
+                        <a href="/sections/contact" class="{{ jumpLink }}" data-section="#contact">Book your venue, party or event today!</a>
                     </div>
                 </div>
             {% elseif news.newsHtml | length %}
