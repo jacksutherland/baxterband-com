@@ -133,13 +133,10 @@
 					<div class="row m-0">
 						{% set colCount = 0 %}
 						{% for img in entry.bandImages.all() %}
-							<div class="col-12 {% if loop.index in [1,4,5,8,9,12,13,16,17] %}col-md-7{% else %}col-md-5{% endif %} band-image" 
-								style="background-image:url({{ img.url('bandImage') }})" alt="{{ img.title }}" title="{{ img.title }}">
-							</div>
-							{# <div class="col-12 {% if loop.index in [1,4,5,8,9,12,13,16,17] %}col-md-7{% else %}col-md-5{% endif %} band-image-container">
-								<div class="band-image" style="background-image:url({{ members[0].profilePicture.one().url() }})" alt="{{ img.title }}" title="{{ img.title }}">
+							<div class="col-12 {% if loop.index in [1,4,5,8,9,12,13,16,17] %}col-md-7{% else %}col-md-5{% endif %} band-image-container">
+								<div class="band-image" style="background-image:url({{ img.url('bandImage') }})" alt="{{ img.title }}" title="{{ img.title }}">
 								</div>
-							</div> #}
+							</div>
 						{% endfor %}
 					</div>
 				</div>
