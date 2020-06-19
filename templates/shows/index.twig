@@ -2,6 +2,10 @@
 
 {% set shows = craft.entries().section('shows').orderBy('showDate desc').all() %}
 
+{% block title %}
+    {{ entry.showsTitle }}
+{% endblock %}
+
 {% block hero %}
 	<div class="hero small-hero">
 		<div class="hero-image hero-band hero-grayscale"></div>
