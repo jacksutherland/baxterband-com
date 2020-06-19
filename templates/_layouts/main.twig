@@ -77,10 +77,10 @@
         })(window,document,'script','dataLayer','GTM-5VQ4P6P');</script>
         <!-- End Google Tag Manager -->
 
-        {# <!-- Facebook SDK -->
+        <!-- Facebook SDK -->
         <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=101190826639926&autoLogAppEvents=1" nonce="MASbJ8r0"></script>
-        <!-- End Facebook SDK --> #}
+        <!-- End Facebook SDK -->
 
         <header class="at-top {{ alertClass }}">
             {% if craft.app.request.getParam('src') is not null %}
@@ -110,13 +110,13 @@
             </div>
         </header>
 
-        {# <div class="page-header {{ alertClass }}">
+        <div class="page-header {{ alertClass }}">
             <a href="/" class="logo {{ jumpLink }}">
                 <img src="/images/logo-sign-small.png" alt="">
             </a>
             <div class="fb-like" data-href="https://www.facebook.com/exiteightyfive" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
             {% block hero %} {% endblock %}
-        </div> #}
+        </div>
 
         {% block content %} {% endblock %}
 
