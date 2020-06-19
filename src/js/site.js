@@ -263,10 +263,10 @@ $(function()
 
   /********** Window Events **********/
 
-  win.scroll(function()
-  {
-    checkWinPos(true);
-  });
+  // win.scroll(function()
+  // {
+  //   checkWinPos(true);
+  // });
 
   /********** DOM History **********/
 
