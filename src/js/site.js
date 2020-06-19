@@ -354,7 +354,7 @@ $(function()
   var isScrolling = false;
   var scrollCount = 0;
   var previousScrollCount = 0;
-  var scrollCheckDuration = 1000;
+  var scrollCheckDuration = 2000;
 
   var waitForScrollStop = function(returnFunc)
   {
