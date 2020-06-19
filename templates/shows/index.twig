@@ -2,19 +2,20 @@
 
 {% set shows = craft.entries().section('shows').orderBy('showDate desc').all() %}
 
-{% block content %}
-
-	<div class="hero">
-		<img class="logo" src="/images/logo-sign-small.png" alt="">
+{% block hero %}
+	<div class="hero small-hero">
 		<div class="hero-image hero-band hero-grayscale"></div>
-		<h1>{{ entry.showsTitle }}</h1>
-	</div>
+		<div class="hero-text">
+			<h1>{{ entry.showsTitle }}</h1>
+		</div>
+	</div> 
+{% endblock %}
 
+{% block content %}
 	<div id="shows" class="section-style1">
-		
 		<div class="container">
-			<h2 class="text-left">{{ entry.showsTitle }}</h2>
-			<p class="text-left mb-5 mr-5">
+			{# <h2 class="text-left">{{ entry.showsTitle }}</h2> #}
+			<p class="text-left mt-5 mb-5 mr-5">
 				{{ events.eventText | replace({'contact us': '<a href="/sections/contact">contact us soon</a>'}) | raw }}
 			</p>
 			{% for show in shows %}
@@ -49,7 +50,5 @@
 				</div>
 			{% endfor %}
 		</div>
-
 	</div>
-
 {% endblock %}

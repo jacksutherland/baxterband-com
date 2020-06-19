@@ -215,6 +215,21 @@ var media = {
   }
 }
 
+console.log("JS");
+var maps =
+{
+  map: null,
+  init: function()
+  {
+    console.log("init");
+    maps.map = new google.maps.Map(document.getElementById("map"),
+    {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: 8
+    });
+  }
+}
+
 $(function()
 {
   win = $(window);

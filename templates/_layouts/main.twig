@@ -1,4 +1,4 @@
-{% set resourceVersion = '1.38' %}
+{% set resourceVersion = '1.39' %}
 {% if entry is not defined or entry.section.handle == 'homepage' %}
     {% set jumpLink = 'jump-link' %}
     {% set navUrl = '' %}
@@ -6,6 +6,8 @@
     {% set jumpLink = '' %}
     {% set navUrl = '/' %}
 {% endif %}
+
+{% set alertClass = craft.app.request.getParam('src') is not null or news.newsHtml | length ? "has-alert" : "" %}
 
 <!DOCTYPE html>
 <html>
@@ -75,11 +77,15 @@
         })(window,document,'script','dataLayer','GTM-5VQ4P6P');</script>
         <!-- End Google Tag Manager -->
 
-        <header class="at-top{% if craft.app.request.getParam('src') is not null or news.newsHtml | length %} has-alert{% endif %}">
+        <!-- Facebook SDK -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=101190826639926&autoLogAppEvents=1" nonce="MASbJ8r0"></script>
+        <!-- End Facebook SDK -->
+
+        <header class="at-top {{ alertClass }}">
             {% if craft.app.request.getParam('src') is not null %}
                 <div class="news-alert d-none d-md-block">
                     <div class="news-alert-content">
-                        {# <a href="{{ navUrl }}#contact" class="jump-link">Book your venue, party or event today!</a> #}
                         <a href="/sections/contact" class="{{ jumpLink }}" data-section="#contact">Book your venue, party or event today!</a>
                     </div>
                 </div>
@@ -104,7 +110,13 @@
             </div>
         </header>
 
-        {# {% block header %} {% endblock %} #}
+        <div class="page-header {{ alertClass }}">
+            <a href="/" class="logo {{ jumpLink }}">
+                <img src="/images/logo-sign-small.png" alt="">
+            </a>
+            <div class="fb-like" data-href="https://www.facebook.com/exiteightyfive" data-width="" data-layout="button_count" data-action="like" data-size="small" data-share="true"></div>
+            {% block hero %} {% endblock %}
+        </div>
 
         {% block content %} {% endblock %}
 
@@ -171,6 +183,7 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
         <script src="/assets/js/site.js?v={{ resourceVersion }}"></script>
+        {% block scripts %} {% endblock %}
     </body>
 
 </html>
