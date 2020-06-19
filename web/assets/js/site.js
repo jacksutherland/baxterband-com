@@ -215,20 +215,38 @@ var media = {
   }
 }
 
-console.log("JS");
-var maps =
-{
-  map: null,
-  init: function()
+var cookie = {
+  set: function(cname, cvalue, exdays)
   {
-    console.log("init");
-    maps.map = new google.maps.Map(document.getElementById("map"),
+    if(typeof(exdays) == "undefined")
     {
-      center: { lat: -34.397, lng: 150.644 },
-      zoom: 8
-    });
+      exdays = 365; // 1 year default
+    }
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  },
+  get: function(cname)
+  {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++)
+    {
+      var c = ca[i];
+      while (c.charAt(0) == ' ')
+      {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0)
+      {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
-}
+};
+
 
 $(function()
 {
@@ -323,6 +341,80 @@ $(function()
 
   /********** Artist Song Events **********/
 
+  // Auto select cookie'd songs
+  var cookiesongs = cookie.get("exit85songs").split(",");
+  for (var i = 0; i < cookiesongs.length; i++)
+  {
+    var song = document.getElementById(cookiesongs[i]);
+    if (song != null)
+    {
+      song.classList.add("selected");
+    }
+  }
+
+  function selectArtist(songId)
+  {
+    var song = document.getElementById(songId);
+
+    if(song == null) return false;
+
+    // delay selection in case user changes mind
+    setTimeout(function()
+    {
+      if(song.classList.contains("selected"))
+      {
+        // Send result to analytics
+        analytics.sendArtist(song.getAttribute("data-artist"), song.getAttribute("data-song"));
+
+        // Add result to cookie
+        var cookiesongs = cookie.get("exit85songs").split(",");
+        if(!cookiesongs.includes(songId))
+        {
+          cookiesongs.push(songId);
+          cookie.set("exit85songs", cookiesongs.join(","));
+        }
+      }
+    }.bind(this), 3000);
+  }
+
+  function removeArtist(songId)
+  {
+    var song = document.getElementById(songId);
+
+    if(song == null) return false;
+
+    // Remove result from cookie
+    var cookiesongs = cookie.get("exit85songs").split(",");
+    if(cookiesongs.includes(songId))
+    {
+      var songIdx = cookiesongs.indexOf(songId);
+      if(songIdx >= 0)
+      {
+        cookiesongs.splice(songIdx, 1);
+        cookie.set("exit85songs", cookiesongs.join(","));
+      }
+    }
+  }
+
+  $(".cover-block").click(function(e)
+  {
+    e.preventDefault();
+
+    var block = $(this).toggleClass("selected");
+
+    if(block.hasClass("selected"))
+    {
+      selectArtist(block[0].id);
+    }
+    else
+    {
+      removeArtist(block[0].id);
+    }
+
+    return false;
+  });
+
+  /*
   var songs = document.getElementsByClassName("artist-song");
   function overArtist()
   {
@@ -348,5 +440,6 @@ $(function()
     songs[i].addEventListener('touchstart', overArtist);
     songs[i].addEventListener('touchend', offArtist);
   }
+  */
 
 });

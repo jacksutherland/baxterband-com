@@ -451,6 +451,57 @@
         ]
     },
     {
+        "name": "craftcms/redactor",
+        "version": "2.4.0",
+        "version_normalized": "2.4.0.0",
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/craftcms/redactor/zipball/8fd0daca685309ad8635f28dca8c9ab2b3f228d4",
+            "reference": "8fd0daca685309ad8635f28dca8c9ab2b3f228d4",
+            "shasum": ""
+        },
+        "require": {
+            "craftcms/cms": "^3.2.0"
+        },
+        "time": "2019-09-13T11:02:32+00:00",
+        "type": "craft-plugin",
+        "extra": {
+            "name": "Redactor",
+            "handle": "redactor",
+            "documentationUrl": "https://github.com/craftcms/redactor/blob/v2/README.md"
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "craft\\redactor\\": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Pixel & Tonic",
+                "homepage": "https://pixelandtonic.com/"
+            }
+        ],
+        "description": "Edit rich text content in Craft CMS using Redactor by Imperavi.",
+        "keywords": [
+            "cms",
+            "craftcms",
+            "html",
+            "redactor",
+            "yii2"
+        ],
+        "support": {
+            "email": "support@craftcms.com",
+            "issues": "https://github.com/craftcms/redactor/issues?state=open",
+            "source": "https://github.com/craftcms/redactor",
+            "docs": "https://github.com/craftcms/redactor/blob/v2/README.md",
+            "rss": "https://github.com/craftcms/redactor/commits/v2.atom"
+        }
+    },
+    {
         "name": "craftcms/server-check",
         "version": "1.1.7",
         "version_normalized": "1.1.7.0",

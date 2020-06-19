@@ -216,8 +216,8 @@
 			<div id="songs" >
 
 				<h2>{{ entry.coversTitle }}</h2>
-				{% if entry.coversText %}
-					<p>{{ entry.coversText }}</p>
+				{% if entry.coversText | length %}
+					{{ entry.coversText | raw }}
 				{% endif %}
 
 				{% if setlist90s.count() > 0 %}
@@ -225,10 +225,9 @@
 					<div class="row">
 						{% for song in setlist90s.one().children.all() %}
 							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div class="cover-block">
+								<div id="song-{{ song.id }}" class="cover-block" data-artist="{{ song.songArtist }}" data-song="{{ song.title }}">
 									{% if song.songImage.count %}
-										<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"
-											 data-artist="{{ song.songArtist }}" data-song="{{ song.title }}"></div>
+										<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"></div>
 									{% endif %}
 									<div class="cover-block-content">
 										<div class="cover-block-inner-content">
@@ -248,10 +247,9 @@
 					<div class="row">
 						{% for song in setlist80s.one().children.all() %}
 							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div class="cover-block">
+								<div id="song-{{ song.id }}" class="cover-block" data-artist="{{ song.songArtist }}" data-song="{{ song.title }}">
 									{% if song.songImage.count %}
-										<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"
-											 data-artist="{{ song.songArtist }}" data-song="{{ song.title }}"></div>
+										<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"></div>
 									{% endif %}
 									<div class="cover-block-content">
 										<div class="cover-block-inner-content">

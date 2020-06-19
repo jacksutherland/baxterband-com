@@ -424,8 +424,8 @@ section {
     margin: 15px 0;
     background-color: lighten($section-gray, 3%);
     position: relative;
-    // &:hover, &.hover {
-    &:hover {
+    cursor: pointer;
+    &:hover, &.selected {
         .cover-block-image {
             opacity: 0.75;
             -webkit-filter: grayscale(0%);
@@ -451,6 +451,31 @@ section {
                 }
             }
         }
+    }
+    &.selected {
+        &:after {
+            font-family: "Font Awesome 5 Free";
+            content: "\f164";
+            webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            font-weight: 900;
+
+            position: absolute;
+            font-size: 36px;
+            z-index: 10;
+            right: -5px;
+            top: -13px;
+            transform: rotate(-15deg);
+            color: $green;
+            text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+        }
+    }
+    .thumbs-up {
+        
     }
     .cover-block-image {
         position: absolute;
@@ -479,7 +504,7 @@ section {
             padding: 0 10px;
             font-size: 1.1rem;
             transition: transform 0.25s ease-in-out;
-            cursor: default;
+            //cursor: default;
             i {
                 color: lighten($section-gray, 50%);
                 display: block;
