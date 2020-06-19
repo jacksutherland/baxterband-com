@@ -129,7 +129,7 @@
 		<div class="container">
 			<h2>{{ entry.membersHeader }}</h2>
 			{% if entry.bandHistory %}
-				<p>{{ entry.bandHistory | replace('Jack Sutherland', '<a href="https://www.jacksutherland.com" target="_blank">Jack Sutherland</a>') | raw }}</p>
+				<p>{{ entry.bandHistory | raw }}</p>
 			{% endif %}
 			{% if entry.bandImages.count() > 0 %}
 				<div class="mt-5">
@@ -178,7 +178,7 @@
 
 			<h2>{{ entry.songsHeader }}</h2>
 			{% if entry.songsText %}
-				<p>{{ entry.songsText }}</p>
+				{{ entry.songsText | raw}}
 			{% endif %}
 
 			<div class="mb-5">
