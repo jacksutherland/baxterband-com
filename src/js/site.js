@@ -20,7 +20,6 @@ function startFire()
       //var smokeLeft = (browserWidth < 700 ? randomNumber(5, 95) : randomNumber(25, 75)) + "%";
       var smokeLeft = (browserWidth < 700 ? 50 : randomNumber(25, 75)) + "%";
       var smokeTop = win.scrollTop() + win.height();
-      //console.log(smokeTop);
       if(smokeTop < 2200)
       {
         var newSmoke = smoke.clone();
@@ -72,7 +71,6 @@ function contactForm()
     {
       $.post("/php/mailer.php", frm.serialize()).done(function(data)
       {
-        //console.log("done " + data + " " + (data == "success"));
         if(data == "success")
         {
           frm[0].reset();
@@ -95,17 +93,69 @@ function contactForm()
   });
 }
 
-function goToSection(section, path, animate)
-{
-  var scrollTop = path == "/" ? 0 : ($(section).offset().top - 100);
 
-  if(animate)
+var sections = {
+
+  activeSection: "",
+
+  jumping: false,
+
+  goTo: function(sectionSelector, path, animate)
   {
-    $('html, body').stop().animate({ scrollTop: scrollTop }, 500);
-  }
-  else
+    if(sections.activeSection == sectionSelector) return false;
+
+    var section, scrollTop;
+
+    sections.jumping = true;
+
+    section = $(sectionSelector);
+    sections.activeSection = sectionSelector;
+    scrollTop = path == "/" ? 0 : (section.offset().top - 100);
+
+    if(animate)
+    {
+      $('html, body').stop().animate({ scrollTop: scrollTop }, (animate ? 500 : 0), function()
+      {
+        sections.jumping = false;
+      });
+    }
+    else
+    {
+      $('html, body').scrollTop(scrollTop);
+      sections.jumping = false;
+    }
+  },
+  
+  inViewCheck: function(isTop)
   {
-    $('html, body').scrollTop(scrollTop);
+    var section = "", path = "/";
+
+    if(sections.jumping) return false;
+
+    if(!isTop)
+    {
+      var sectionSelectors = $("#main-menu .jump-link:visible").map(function ()
+      {
+        return this.getAttribute("data-section");
+      });
+
+      for(i = 0; i <= sectionSelectors.length; i++)
+      {
+        if(isScrolledIntoView(sectionSelectors[i]))
+        {
+          section = sectionSelectors[i];
+          path = $('#main-menu .jump-link[data-section="' + sectionSelectors[i] + '"]').attr("href");
+          i = sectionSelectors.length + 1;
+        }
+      }
+    }
+
+    if(section != sections.activeSection)
+    {
+      sections.activeSection = section;
+      window.history.pushState({ section: section, path: path }, null, path);
+    }
+
   }
 }
 
@@ -247,6 +297,26 @@ var cookie = {
   }
 };
 
+function isScrolledIntoView(elemSelector)
+{
+    var scrollTop = $(window).scrollTop();
+    var elem = $(elemSelector);
+
+    if(elem.length == 0) return false;
+
+    var elemTop = elem.offset().top;
+    var elemHalfHeight = elem.height() / 2;
+    var elemMiddle = elemTop + elemHalfHeight;
+
+    var docViewTop = scrollTop;
+    var docMiddle = docViewTop + ($(window).height() / 2);
+    var docStartRange = (docMiddle - elemHalfHeight) - 25;
+    var docEndRange = (docMiddle + elemHalfHeight)  + 25;
+
+    return ((elemMiddle > docStartRange) && (elemMiddle < docEndRange));
+}
+
+
 
 $(function()
 {
@@ -276,46 +346,96 @@ $(function()
     var link = $('a[href="' + path + '"]');
     var section = link.data("section");
 
-    goToSection(section, path);
+    sections.goTo(section, path);
   }
 
   /********** Window Events **********/
 
+  var isScrolling = false;
+  var scrollCount = 0;
+  var previousScrollCount = 0;
+  var scrollCheckDuration = 1000;
+
+  var waitForScrollStop = function(returnFunc)
+  {
+    if(previousScrollCount === scrollCount)
+    {
+      // Scrolling has stopped!!!
+
+      scrollCount = previousScrollCount = 0;
+
+      if(typeof(returnFunc) == "function")
+      {
+        returnFunc();
+      }
+    }
+    else
+    {
+      // Still scrolling, wait and check againg
+
+      setTimeout(function()
+      {
+        previousScrollCount = scrollCount;
+        setTimeout(function()
+        {
+          waitForScrollStop(returnFunc);
+        }, (scrollCheckDuration / 2));
+      }, (scrollCheckDuration / 2));
+    }
+  }
+
   win.scroll(function()
   {
     checkWinPos(true);
+
+    scrollCount++;
+
+    if(!isScrolling)
+    {
+      isScrolling = true;
+      waitForScrollStop(function()
+      {
+        isScrolling = false;
+        sections.inViewCheck(win.scrollTop() === 0);
+      });
+    }
   });
 
   /********** DOM History **********/
 
   window.onpopstate = function(event)
   {
-    if(event.state != null && event.state.section != null && event.state.path != null)
+    if(event.state != null && event.state.path != null)
     {
-      goToSection(event.state.section, event.state.path);
-      //sendPageView(event.state.path);
+      sections.goTo((event.state.path == "/" ? "" : event.state.section), event.state.path);
     }
   }
 
   /********** Navigation Link Events **********/
 
-  $("a.jump-link").click(function(e)
+  window.history.scrollRestoration = "manual"; // without this, scroll position is jacked up on back button
+
+  $(".jump-link").click(function(e)
   {
     e.preventDefault();
 
     var link = $(this);
     var section = link.data("section");
-    var path = link.attr("href");
-    
-    goToSection(section, path, true);
-    //sendPageView(path);
+
+    if(section != sections.activeSection)
+    {
+      var path = link.attr("href");
+      sections.goTo(section, path, true);
+      
+      window.history.pushState({ section: section, path: path }, null, path);
+    }
 
     if(link.hasClass("hero-cta"))
     {
       sendEvent("hero-cta");
     }
 
-    window.history.pushState({ section: section, path: path }, null, path);
+    
   });
 
   /********** Band Member Events **********/
@@ -413,33 +533,5 @@ $(function()
 
     return false;
   });
-
-  /*
-  var songs = document.getElementsByClassName("artist-song");
-  function overArtist()
-  {
-    this.isOver = true;
-    // Delay 500ms to prevent sending incidental hovers
-    setTimeout(function()
-    {
-      if(this.isOver)
-      {
-        analytics.sendArtist(this.getAttribute("data-artist"), this.getAttribute("data-song"));
-      }
-    }.bind(this), 500);
-  }
-  function offArtist()
-  {
-    this.isOver = false;
-  }
-  for (var i = 0; i < songs.length; i++)
-  {
-    songs[i].isOver = false;
-    songs[i].addEventListener('mouseenter', overArtist);
-    songs[i].addEventListener('mouseleave', offArtist);
-    songs[i].addEventListener('touchstart', overArtist);
-    songs[i].addEventListener('touchend', offArtist);
-  }
-  */
 
 });

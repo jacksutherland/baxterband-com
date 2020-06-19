@@ -34,7 +34,7 @@
             {% block title %}
                 {{ seo.seoTitle }} 
             {% endblock %}
-            {{ seo.seoSuffix }}
+           {#  {{ seo.seoSuffix }} #}
         </title>
         <meta name="description" content="{{ seo.seoDescription }}">
 
@@ -102,14 +102,30 @@
                 </div>
             {% endif %}
             <div id="main-menu" class="container" itemscope itemtype="http://schema.org/SiteNavigationElement">
-                <a href="/" class="{{ jumpLink }}"><span itemprop="name" class="d-none d-md-inline">HOME</span><i class="fas fa-home d-inline d-md-none"></i></a>
-                <a itemprop="url" href="/sections/about" class="{{ jumpLink }} d-none d-md-inline" data-section="#about"><span itemprop="name">ABOUT</span></a>
-                <a itemprop="url" href="/sections/shows" class="{{ jumpLink }}" data-section="#shows"><span itemprop="name">SHOWS</span></a>
-                <a itemprop="url" href="/sections/members" class="{{ jumpLink }}" data-section="#members"><span itemprop="name">BAND</span></a>
-                <a itemprop="url" href="/sections/music" class="{{ jumpLink }} d-inline d-md-none" data-section="#music"><span itemprop="name">MUSIC</span></a>
-                <a itemprop="url" href="/sections/music" class="{{ jumpLink }} d-none d-md-inline" data-section="#music"><span itemprop="name">VIDEOS</span></a>
-                <a itemprop="url" href="/sections/songs" class="{{ jumpLink }} d-none d-md-inline" data-section="#songs"><span itemprop="name">SONGS</span></a>
-                <a itemprop="url" href="/sections/contact" class="{{ jumpLink }}" data-section="#contact"><span itemprop="name">CONTACT</span></a>
+                <a href="/" class="{{ jumpLink }}">
+                    <span itemprop="name" class="d-none d-md-inline">HOME</span><i class="fas fa-home d-inline d-md-none"></i>
+                </a>
+                <a itemprop="url" href="/sections/about" class="{{ jumpLink }} d-none d-md-inline" data-section="#about" title="About Us">
+                    <span itemprop="name">ABOUT</span>
+                </a>
+                <a itemprop="url" href="/sections/shows" class="{{ jumpLink }}" data-section="#shows" title="Upcoming Shows">
+                    <span itemprop="name">SHOWS</span>
+                </a>
+                <a itemprop="url" href="/sections/members" class="{{ jumpLink }}" data-section="#members" title="Meet the Band">
+                    <span itemprop="name">BAND</span>
+                </a>
+                <a itemprop="url" href="/sections/music" class="{{ jumpLink }} d-inline d-md-none" data-section="#music" title="Videos and Performances">
+                    <span itemprop="name">MUSIC</span>
+                </a>
+                <a itemprop="url" href="/sections/music" class="{{ jumpLink }} d-none d-md-inline" data-section="#music" title="Videos and Performances">
+                    <span itemprop="name">VIDEOS</span>
+                </a>
+                <a itemprop="url" href="/sections/songs" class="{{ jumpLink }} d-none d-md-inline" data-section="#songs" title="The Songs we Cover">
+                    <span itemprop="name">SONGS</span>
+                </a>
+                <a itemprop="url" href="/sections/contact" class="{{ jumpLink }}" data-section="#contact" title="Let's Connect">
+                    <span itemprop="name">CONTACT</span>
+                </a>
                 <a href="https://www.youtube.com/channel/UCiT2sGOUicZ7FbLLcTRvXjg/" target="_blank" class="d-none d-md-inline"><i class="fab fa-youtube"></i></a>
                 <a href="https://www.facebook.com/exiteightyfive" target="_blank"><i class="fab fa-facebook"></i></a>
             </div>
@@ -125,9 +141,9 @@
 
         {% block content %} {% endblock %}
 
-        <section class="ux-form">
+        <section id="contact" class="ux-form">
             <div class="container">
-                <h2 id="contact">{{ contactForm.contactHeader }}</h2>
+                <h2>{{ contactForm.contactHeader }}</h2>
                 {% if contactForm.contactText %}
                     <p class="mb-4">{{ contactForm.contactText }}</p>
                 {% endif %}

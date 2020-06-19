@@ -210,62 +210,63 @@
 					</div>
 				</div>
 			</div>
+		</div>
 
 			{# <h5><a href="https://open.spotify.com/user/jacksutherl/playlist/5nb0dSo3jylpT5r7v9m1C1?si=eaAwGGeZTvmgj1UpjyEAVQ" target="_blank">Spotify Playlist <i class="fas fa-volume-down"></i></a></h5> #}
 
-			<div id="songs" >
+		<div id="songs" class="container">
 
-				<h2>{{ entry.coversTitle }}</h2>
-				{% if entry.coversText | length %}
-					{{ entry.coversText | raw }}
-				{% endif %}
+			<h2>{{ entry.coversTitle }}</h2>
+			{% if entry.coversText | length %}
+				{{ entry.coversText | raw }}
+			{% endif %}
 
-				{% if setlist90s.count() > 0 %}
-					<h5>{{ setlist90s.one().title }}</h5>
-					<div class="row">
-						{% for song in setlist90s.one().children.all() %}
-							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div id="song-{{ song.id }}" class="cover-block" data-artist="{{ song.songArtist }}" data-song="{{ song.title }}" title="If you like this song or artist, then click it to let us know!">
-									{% if song.songImage.count %}
-										<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"></div>
-									{% endif %}
-									<div class="cover-block-content">
-										<div class="cover-block-inner-content">
-											{{ song.title }} 
-											<br />
-											<i>{{ song.songArtist }}</i>
-										</div>
+			{% if setlist90s.count() > 0 %}
+				<h5>{{ setlist90s.one().title }}</h5>
+				<div class="row">
+					{% for song in setlist90s.one().children.all() %}
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div id="song-{{ song.id }}" class="cover-block" data-artist="{{ song.songArtist }}" data-song="{{ song.title }}" title="If you like this song or artist, then click it to let us know!">
+								{% if song.songImage.count %}
+									<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"></div>
+								{% endif %}
+								<div class="cover-block-content">
+									<div class="cover-block-inner-content">
+										{{ song.title }} 
+										<br />
+										<i>{{ song.songArtist }}</i>
 									</div>
 								</div>
 							</div>
-						{% endfor %}
-					</div>
-				{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
 
-				{% if setlist80s.count() > 0 %}
-					<h5>{{ setlist80s.one().title }}</h5>
-					<div class="row">
-						{% for song in setlist80s.one().children.all() %}
-							<div class="col-sm-6 col-md-4 col-lg-3">
-								<div id="song-{{ song.id }}" class="cover-block" data-artist="{{ song.songArtist }}" data-song="{{ song.title }}" title="If you like this song or artist, then click it to let us know!">
-									{% if song.songImage.count %}
-										<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"></div>
-									{% endif %}
-									<div class="cover-block-content">
-										<div class="cover-block-inner-content">
-											{{ song.title }} 
-											<br />
-											<i>{{ song.songArtist }}</i>
-										</div>
+			{% if setlist80s.count() > 0 %}
+				<h5>{{ setlist80s.one().title }}</h5>
+				<div class="row">
+					{% for song in setlist80s.one().children.all() %}
+						<div class="col-sm-6 col-md-4 col-lg-3">
+							<div id="song-{{ song.id }}" class="cover-block" data-artist="{{ song.songArtist }}" data-song="{{ song.title }}" title="If you like this song or artist, then click it to let us know!">
+								{% if song.songImage.count %}
+									<div class="cover-block-image artist-song" style="background-image:url({{ song.songImage.one().url('songImage') }})"></div>
+								{% endif %}
+								<div class="cover-block-content">
+									<div class="cover-block-inner-content">
+										{{ song.title }} 
+										<br />
+										<i>{{ song.songArtist }}</i>
 									</div>
 								</div>
 							</div>
-						{% endfor %}
-					</div>
-				{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
 
-			</div>
 		</div>
+		
 	</section>
 	
 
