@@ -23,7 +23,8 @@
 				{{ events.eventText | replace({'contact us': '<a href="/sections/contact">contact us soon</a>'}) | raw }}
 			</p>
 			{% for show in shows %}
-				<div class="show">
+				{% include 'shows/_show' with { show: show, showtype: ((show.showDate | atom) < (now | date | atom) ? 'past' : 'upcoming') } %}
+				{# <div class="show">
 					<div class="row">
 						<div class="col-md-4 col-lg-3 text-center">
 							<div class="date-box mb-3 mb-md-0">
@@ -46,12 +47,11 @@
 								<a href="{{ show.showLink }}" target="_blank" class="show-link"><h5>{{ show.title }}</h5></a>
 							{% else %}
 								<a href="{{ show.url }}" class="show-link"><h5>{{ show.title }}</h5></a>
-								{# <h5>{{ show.title }}</h5> #}
 							{% endif %}
 							<p>{{ show.showDetails }}</p>
 						</div>
 					</div>
-				</div>
+				</div> #}
 			{% endfor %}
 		</div>
 	</div>
