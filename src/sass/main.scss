@@ -537,7 +537,7 @@ section {
             border-style: none;
             border-width: 2px;
             border-color: $black;
-            padding: 20px 0 15px 0;
+            padding: 18px 0 10px 0;
             &:not(:last-child) {
                 margin: 0 0 0 0;
             }
@@ -552,9 +552,6 @@ section {
                     padding: 0;
                 }
             }
-            // .show-details {
-            //     padding-top: 5px;
-            // }
         }
         .venue {
             color: lighten($section-gray, 30%);
