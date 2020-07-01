@@ -533,6 +533,29 @@ section {
     }
     .show {
         margin: 0 0 50px 0;
+        &.past-show {
+            border-style: none;
+            border-width: 2px;
+            border-color: $black;
+            padding: 20px 0 15px 0;
+            &:not(:last-child) {
+                margin: 0 0 0 0;
+            }
+            &:nth-child(odd) {
+                background-color: lighten($section-gray, 2%);
+            }
+            .date-box {
+                border: none;
+                .month {
+                    background: none;
+                    margin: 0;
+                    padding: 0;
+                }
+            }
+            // .show-details {
+            //     padding-top: 5px;
+            // }
+        }
         .venue {
             color: lighten($section-gray, 30%);
         }
@@ -545,7 +568,6 @@ section {
 .date-box {
     border: 2px solid $black; //$section-gray;
     height: 100%;
-    //margin: 0 0 20px 0;
     .month {
         background: $black; //$section-gray;
         padding: 5px 0;

@@ -80,19 +80,21 @@
 
 	<section id="shows" class="section-style1 sneaky">
 		<div class="container">
-			<h2 class="text-left">{{ events.showsTitle }}</h2>
-			<p class="text-left mb-5 mr-5">
-				{{ events.eventText | replace({'contact us': '<a href="/sections/contact" data-section="#contact" class="jump-link">contact us soon</a>'}) | raw }}
-				<br><br>
-				<a href="/calendar"><i class="fas fa-calendar-alt"></i> <span>View All Dates</span></a>
-			</p>
-			{% for us in upcomingShows %}
-				{% include 'shows/_show' with { show: us } %}
-			{% endfor %}
-			<h2>Past Shows</h2>
-			{% for ps in pastShows %}
-				{% include 'shows/_show' with { show: ps } %}
-			{% endfor %}
+			<div>
+				<h2 class="text-left">{{ events.showsTitle }}</h2>
+				<p class="text-left mb-5 mr-5">
+					{{ events.eventText | replace({'contact us': '<a href="/sections/contact" data-section="#contact" class="jump-link">contact us soon</a>'}) | raw }}
+					<br><br>
+					<a href="/calendar"><i class="fas fa-calendar-alt"></i> <span>View All Dates</span></a>
+				</p>
+				{% for us in upcomingShows %}
+					{% include 'shows/_show' with { show: us, showtype: 'upcoming' } %}
+				{% endfor %}
+				<h2>Past Shows</h2>
+				{% for ps in pastShows %}
+					{% include 'shows/_show' with { show: ps, showtype: 'past' } %}
+				{% endfor %}
+			</div>
 			<a itemprop="url" href="/calendar"><i class="fas fa-calendar-alt"></i> <span itemprop="name">View Our Entire Calendar</span></a>
 		</div>
 	</section>
