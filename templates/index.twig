@@ -11,7 +11,8 @@
 {% set setlist90s = craft.categories.group('songs').slug('setlist90s') %}
 {% set setlist80s = craft.categories.group('songs').slug('setlist80s') %}
 {# {% set members = craft.entries.section('members').orderBy('postDate') %} #}
-{% set shows = craft.entries().section('shows').showDate('>=' ~ now|date_modify('-5 months')|atom).orderBy('showDate asc').all() %}
+{% set upcomingShows = craft.entries().section('shows').showDate('>=' ~ now | date | atom).orderBy('showDate asc').all() %}
+{% set pastShows = craft.entries().section('shows').showDate('<' ~ now | date_modify('-1 year') | atom).orderBy('showDate asc').all() %}
 {% set videos = craft.categories.group('videos') %}
 {% set featuredVideos = craft.categories.group('videos').isFeatured('1') %}
 
@@ -85,41 +86,13 @@
 				<br><br>
 				<a href="/calendar"><i class="fas fa-calendar-alt"></i> <span>View All Dates</span></a>
 			</p>
-			{% for show in shows %}
-				<div class="show">
-					<div class="row">
-						<div class="col-md-4 col-lg-3 text-center">
-							<div class="date-box mb-3 mb-md-0">
-								<div class="month">{{ show.showDate | date('mm Y') }}</div>
-								<div class="date">{{ show.showDate | date('d') }}</div>
-								<div class="weekday">{{ show.showDate | date('l') }} @ {{ show.showDate | date('h:ia') }}</div>
-								{% if show.facebookEventLink | length %}
-									<a href="{{ show.facebookEventLink }}" target="_blank" class="facebook-event-link" onclick="analytics.sendShowDetails('Facebook', '{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
-										<i class="fab fa-facebook-square"></i>
-									</a>
-								{% endif %}
-							</div>
-						</div>
-						<div class="col-md-8 col-lg-9">
-							{% if show.venueName | length %}
-								<a class="venue" target="_blank" href="https://www.google.com/maps/search/{{ show.venueAddress }}" onclick="analytics.sendShowDetails('Google Maps', '{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
-									<i class="fas fa-map-marker-alt"></i> 
-									{{ show.venueName }}
-								</a>
-							{% endif %}
-							{% if show.showLink | length %}
-								<a href="{{ show.showLink }}" target="_blank" class="show-link" onclick="analytics.sendShowDetails('Detail Page', '{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
-									<h5>{{ show.title }}</h5>
-								</a>
-							{% else %}
-								<a href="{{ show.url }}" class="show-link" onclick="analytics.sendShowDetails('Detail Page', '{{ show.title }}', '{{ show.showDate | date('mm d Y') }}')">
-									<h5>{{ show.title }}</h5>
-								</a>
-							{% endif %}
-							<p>{{ show.showDetails }}</p>
-						</div>
-					</div>
-				</div>
+			<h3 class="mb-5">Upcoming Shows</h3>
+			{% for us in upcomingShows %}
+				{% include 'shows/_show' with { show: us } %}
+			{% endfor %}
+			<h3 class="mb-5">Recent Past Shows</h3>
+			{% for ps in pastShows %}
+				{% include 'shows/_show' with { show: ps } %}
 			{% endfor %}
 			<a itemprop="url" href="/calendar"><i class="fas fa-calendar-alt"></i> <span itemprop="name">View Our Entire Calendar</span></a>
 		</div>
