@@ -31,7 +31,7 @@ else
 // send email
 if(!mail("jack@exiteightyfive.com", "Exit 85 Website Contact", $msg, $fromEmail))
 {
-	mail("jacksutherl@gmail.com", "Exit 85 Website Failed to Send Contact", $msg, 'From: "Exit 85" <jack@exiteightyfive.com>')
+	mail("jacksutherl@gmail.com", "Exit 85 Website Failed to Send Contact", $msg, 'From: "Exit 85" <jack@exiteightyfive.com>');
 }
 //mail("jack@jacksutherland.com", "Band Contact", $msg, 'From: "Exit 85" <booking@exiteightyfive.com>');
 //mail("exit85160@gmail.com", "Band Contact", $msg, 'From: "Exit 85" <booking@exiteightyfive.com>');
