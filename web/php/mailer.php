@@ -6,7 +6,9 @@ if ($_POST['soulgem'] !== '')
 	exit();
 }
 
-$msg = "Name: " . $_POST["first"] . " " . $_POST["last"] . "\n";
+$name = $_POST["first"] . " " . $_POST["last"];
+
+$msg = "Name: " . $name . "\n";
 $msg .= "Email: " . $_POST["email"] . "\n";
 $msg .= "Phone: " . $_POST["phone"] . "\n";
 $msg .= "Venue: " . $_POST["venue"] . "\n";
@@ -16,9 +18,20 @@ $msg .= $_POST["message"] . "\n";
 // use wordwrap() if lines are longer than 70 characters
 //$msg = wordwrap($msg,70);
 
+$fromEmail = test_input($_POST["email"]);
+if (filter_var($fromEmail, FILTER_VALIDATE_EMAIL))
+{
+	$fromEmail = 'From: "' . $name . '" <' . $_POST["email"] . '>';
+}
+else
+{
+	$fromEmail = 'From: "Exit 85" <no-reply@exiteightyfive.com>';
+}
+
 // send email
-mail("jack@jacksutherland.com", "Band Contact", $msg, 'From: "Exit 85" <booking@exiteightyfive.com>');
-mail("exit85160@gmail.com", "Band Contact", $msg, 'From: "Exit 85" <booking@exiteightyfive.com>');
+mail("jack@exiteightyfive.com", "Exit 85 Website Contact", $msg, $fromEmail);
+//mail("jack@jacksutherland.com", "Band Contact", $msg, 'From: "Exit 85" <booking@exiteightyfive.com>');
+//mail("exit85160@gmail.com", "Band Contact", $msg, 'From: "Exit 85" <booking@exiteightyfive.com>');
 //mail("maxer28@yahoo.com", "Band Contact", $msg, 'From: "Exit 85" <no-reply@exiteightyfive.com>');
 
 echo "success";
