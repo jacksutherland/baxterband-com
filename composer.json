@@ -19,7 +19,7 @@
     "rss": "https://craftcms.com/changelog.rss"
   },
   "require": {
-    "craftcms/cms": "3.2.1",
+    "craftcms/cms": "3.5.19.1",
     "vlucas/phpdotenv": "^2.4.0",
     "superbig/craft3-mobiledetect": "1.0.2",
     "craftcms/redactor": "2.4.0"
